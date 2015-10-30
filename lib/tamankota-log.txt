@@ -1,0 +1,78 @@
+[2014-11-11 18:05:00]Added lokasi 0  by superadmin 1
+[2014-11-11 19:14:26]Added lokasi 0  by superadmin 1
+[2014-11-11 19:14:40]Added lokasi 0  by superadmin 1
+[2014-11-11 19:15:13]Added lokasi 2  by superadmin 1
+[2014-11-11 20:01:22]Update data lokasi 1 by superadmin 1
+[2014-11-11 20:01:45]Update data lokasi 1 by superadmin 1
+[2014-11-11 20:02:12]Update data lokasi 1 by superadmin 1
+[2014-11-11 20:23:38]Update data lokasi 1 by superadmin 1
+[2014-11-11 20:31:10]Update data lokasi 2 by superadmin 1
+[2014-11-16 23:07:56]Added lokasi 3  by superadmin 1
+[2014-11-16 23:09:57]Added lokasi 4  by superadmin 1
+[2014-11-16 23:19:32]Added lokasi 5  by superadmin 1
+[2014-11-16 23:26:25]Update data lokasi 5 by superadmin 1
+[2014-11-16 23:26:35]Update data lokasi 5 by superadmin 1
+[2014-11-16 23:30:07]Update data lokasi 5 by superadmin 1
+[2014-11-16 23:54:31]Update data lokasi 5 by superadmin 1
+[2014-11-16 23:57:16]Update data lokasi 5 by superadmin 1
+[2014-11-16 23:57:22]Update data fasilitas lokasi 5 by superadmin 1
+[2014-11-16 23:57:32]Update data fasilitas lokasi 5 by superadmin 1
+[2014-11-16 23:58:02]Update data fasilitas lokasi 4 by superadmin 1
+[2014-11-16 23:59:16]Update data fasilitas lokasi 5 by superadmin 1
+[2014-11-16 23:59:25]Update data fasilitas lokasi 5 by superadmin 1
+[2014-11-17 00:00:01]Update data fasilitas lokasi 5 by superadmin 1
+[2014-11-17 00:00:13]Update data fasilitas lokasi 5 by superadmin 1
+[2014-11-17 00:01:24]Update data fasilitas lokasi 5 by superadmin 1
+[2014-11-17 00:01:54]Update data fasilitas lokasi 5 by superadmin 1
+[2014-11-17 00:02:24]Update data fasilitas lokasi 5 by superadmin 1
+[2014-11-17 00:20:37]Update data lokasi 5 by superadmin 1
+[2014-11-17 00:20:50]Update data lokasi 5 by superadmin 1
+[2014-11-17 00:26:55]Added lokasi 6  by superadmin 1
+[2014-11-17 00:33:55]Update data fasilitas lokasi 6 by superadmin 1
+[2014-11-17 00:36:27]Added lokasi 7  by superadmin 1
+[2014-11-17 00:37:55]Added lokasi 8  by superadmin 1
+[2014-11-17 00:39:30]Added lokasi 9  by superadmin 1
+[2014-11-17 00:40:26]Update data lokasi 1 by superadmin 1
+[2014-11-17 00:40:33]Update data fasilitas lokasi 1 by superadmin 1
+[2014-11-17 00:41:52]Added lokasi 10  by superadmin 1
+[2014-11-17 00:43:11]Added lokasi 11  by superadmin 1
+[2014-11-17 00:46:26]Added lokasi 12  by superadmin 1
+[2014-11-17 00:47:34]Added lokasi 13  by superadmin 1
+[2014-11-17 00:48:20]Update data lokasi 13 by superadmin 1
+[2014-11-17 00:50:23]Update data lokasi 13 by superadmin 1
+[2014-11-17 00:50:54]Update data lokasi 13 by superadmin 1
+[2014-11-17 00:54:22]Update data lokasi 13 by superadmin 1
+[2014-11-17 00:56:19]Added lokasi 14  by superadmin 1
+[2014-11-17 00:58:36]Update data lokasi 10 by superadmin 1
+[2014-11-17 00:59:20]Update data lokasi 5 by superadmin 1
+[2014-11-17 00:59:36]Update data lokasi 5 by superadmin 1
+[2014-11-17 01:01:27]Update data lokasi 5 by superadmin 1
+[2014-11-17 01:01:32]Update data lokasi 5 by superadmin 1
+[2014-11-17 01:02:06]Update data lokasi 5 by superadmin 1
+[2014-11-17 01:02:53]Update data lokasi 10 by superadmin 1
+[2014-11-17 01:03:24]Update data lokasi 5 by superadmin 1
+[2014-11-17 01:04:32]Update data lokasi 11 by superadmin 1
+[2014-11-17 01:05:51]Update data lokasi 7 by superadmin 1
+[2014-11-28 13:07:04]logged in admin 1
+[2014-11-28 13:11:47]Update data lokasi 5 by admin 1
+[2014-11-28 13:12:18]Update data lokasi 6 by admin 1
+[2014-12-02 17:19:46]logged in admin 1
+[2014-12-02 18:52:53]logged in admin 1
+[2014-12-02 19:05:11]Update data petugas 6 by 1
+[2014-12-02 19:06:13]Update data petugas 6 by 1
+[2014-12-02 19:06:25]Update data petugas 6 by 1
+[2014-12-02 19:06:42]Update data petugas 6 by 1
+[2014-12-02 19:06:52]Update data petugas 6 by 1
+[2014-12-02 19:07:06]Update data petugas 6 by 1
+[2014-12-02 19:07:16]Update data petugas 6 by 1
+[2014-12-02 19:07:51]Update data petugas 1 by 1
+[2014-12-02 19:53:56]Tambah data event 1 oleh 1
+[2014-12-02 20:17:02]Update data lokasi 1 by admin 1
+[2014-12-02 20:17:47]Update data event 1 by 1
+[2014-12-02 20:18:51]Update data event 1 by 1
+[2014-12-02 20:19:03]Update data event 1 by 1
+[2014-12-03 16:16:10]logged in admin 1
+[2015-02-08 21:06:29]logged in admin 1
+[2015-03-03 23:34:51]logged in admin 1
+[2015-03-04 20:43:19]logged in admin 1
+[2015-03-07 07:39:08]logged in admin 1

@@ -1,0 +1,83 @@
+
+#login-box .header {
+    font-family: 'lemon';
+}
+
+/* footer */
+.footer {
+    padding: 0 15px 15px 15px;
+}
+
+#list-kategori .list-group-item {
+    border-left: solid 5px #27ae60;
+    padding-left: 15px;
+}
+
+/**
+ * Lokasi
+ */
+.list-group-item-lokasi {
+    color: #2c3e50;
+}
+.list-group-item-lokasi:hover {
+    background-color: #00a65a;
+    color: #f9f9f9;
+}
+
+
+.distro-profile .desc {
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.distro-profile .box-logo {
+    width: 256px;
+    height: 256px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.distro-profile .box-logo .logo {
+    width: 300px;
+}
+.distro-profile .logo {
+    margin-left: auto;
+    margin-right: auto;
+}
+.distro-profile .name {
+    color: #ffffff;
+    font-size: 3em;
+    -webkit-transition: color .5s;
+    transition: color .5s;
+}
+.distro-profile .name:hover {
+    color: #ff851b;
+}
+.distro-profile .stat {
+    color: #ffffff;
+    font-size: 2em;
+}
+
+.item-profile .desc .name {
+    font-size: 3em;
+    font-family: 'lemon';
+}
+
+.items a {
+    text-decoration: none;
+}
+.items .desc {
+    padding: 10px;
+    color: #2e3c50;
+}
+.items .desc .name {
+    font-size: 1em;
+    font-family: 'lemon';
+    text-align: center;
+}
+.items .img-container {
+    overflow: hidden;
+    height: 200px;
+}
+.items .img-container img {
+    width: 400px;
+}
+
