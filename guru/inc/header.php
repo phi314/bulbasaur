@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>RFID | Administrator</title>
+    <title>RFID | Guru</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -17,9 +17,9 @@
     <!-- Date Picker -->
     <link href="<?php echo base_url(); ?>assets/css/datepicker/datepicker3.css" rel="stylesheet" type="text/css" />
     <!-- Daterange picker -->
-    <link href="<?php echo base_url(); ?>assets/css/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />
     <!-- Datetable -->
-    <link href="<?php echo base_url(); ?>assets/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url(); ?>assets/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
     <!-- bootstrap wysihtml5 - text editor -->
     <link href="<?php echo base_url(); ?>assets/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
@@ -108,6 +108,16 @@
     <aside class="left-side sidebar-offcanvas">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
+            <!-- search form -->
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search..."/>
+                            <span class="input-group-btn">
+                                <button type='submit' name='seach' id='search-btn' class="btn btn-flat"><i class="fa fa-search"></i></button>
+                            </span>
+                </div>
+            </form>
+            <!-- /.search form -->
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu">
                 <li>
@@ -131,13 +141,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="transaksi.php">
-                        <i class="fa fa-database"></i> <span>Transaksi</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="events.php">
-                        <i class="fa fa-calendar"></i> <span>Event</span>
+                    <a href="absensi.php">
+                        <i class="fa fa-calendar"></i> <span>Absensi</span>
                     </a>
                 </li>
             </ul>

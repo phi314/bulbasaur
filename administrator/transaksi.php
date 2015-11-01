@@ -109,7 +109,7 @@ if(array_key_exists('key', $_POST))
                         <h3 class="box-title">Transaksi</h3>
                     </div>
 
-                        <table id="table-items" class="table">
+                        <table class="table datatable-simple">
                             <thead>
                             <tr>
                                 <th>Nama</th>
@@ -163,5 +163,4 @@ if(array_key_exists('key', $_POST))
         "bAutoWidth": false,
         "iDisplayLength": 100
     });
-    $('.dataTables_filter input').addClass("form-control"); // modify table search input
 </script>

@@ -151,6 +151,11 @@ if(array_key_exists('key', $_POST))
 
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
             <section class="col-lg-4">
+                <?php
+                    // hanya admin yg dapat menambah kategori
+                    if(is_admin()):
+                ?>
+                <!-- Kategori List List -->
                 <div class="box box-warning" id="list-tambah-fasilitas">
                     <div class="box-header">
                         <i class="ion ion-plus"></i>
@@ -172,6 +177,7 @@ if(array_key_exists('key', $_POST))
                         </div><!-- /.box-footer -->
                     </form>
                 </div><!-- /.kategori -->
+                <?php endif; ?>
             </section><!-- right col -->
         </div><!-- /.row (main row) -->
     </section><!-- /.content -->
@@ -188,4 +194,5 @@ if(array_key_exists('key', $_POST))
         "bAutoWidth": false,
         "iDisplayLength": 100
     });
+    $('.dataTables_filter input').addClass("form-control"); // modify table search input
 </script>

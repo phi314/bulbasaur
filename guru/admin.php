@@ -15,7 +15,7 @@
         $password = escape($_POST['password']);
         $password_enc = sha1($password);
         // cek user valid
-        $q = "SELECT id, nama, username, is_admin FROM guru WHERE username='$username' AND password='$password_enc' AND is_admin=1 AND is_active=1 LIMIT 1";
+        $q = "SELECT id, nama, username FROM admin WHERE username='$username' AND password='$password_enc' LIMIT 1";
         $r = mysql_query($q);
 
         $user = mysql_fetch_object($r);
@@ -24,18 +24,17 @@
         if($user != FALSE)
         {
             // set Session
-            $id = $user->id;
-            $_SESSION['logged_id'] = $id;
-            $_SESSION['logged_nama'] = $user->nama;
-            $_SESSION['logged_username'] = $user->username;
+            $_SESSION['id'] = $user->id;
+            $_SESSION['nama'] = $user->nama;
+            $_SESSION['username'] = $user->username;
             $_SESSION['logged_in'] = TRUE;
-            $_SESSION['logged_is_admin'] = $user->is_admin;
+            $_SESSION['usertype'] = 'superadmin';
 
             redirect('home.php');
         }
         else
         {
-            redirect('index.php?error_login=1');
+            redirect('loginsuper.php?error_login=1');
         }
     }
 ?>
@@ -44,30 +43,30 @@
 <html class="bg-black">
     <head>
         <meta charset="UTF-8">
-        <title>RFID System</title>
+        <title>AdminLTE | Log in</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-        <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url(); ?>assets/css/universal.css" rel="stylesheet" type="text/css" />
-        <link href="<?php echo base_url(); ?>assets/css/main.admin.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/universal.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/css/main.admin.css" rel="stylesheet" type="text/css" />
         <!-- Theme style -->
-        <link href="<?php echo base_url(); ?>assets/css/AdminLTE.css" rel="stylesheet" type="text/css" />
+        <link href="css/AdminLTE.css" rel="stylesheet" type="text/css" />
         <style type="text/css">
             .form-box .header {
-                background-color: #0073b7;
+                background-color: #f56954;
             }
         </style>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
-        <script src="<?php echo base_url(); ?>assets/js/html5shiv.js"></script>
-        <script src="<?php echo base_url(); ?>assets/js/respond.min.js"></script>
+        <script src="../assets/js/html5shiv.js"></script>
+        <script src="../assets/js/respond.min.js"></script>
         <![endif]-->
     </head>
     <body class="bg-black">
 
         <div class="form-box" id="login-box">
-            <div class="header">ADMINISTRATOR | RFID</div>
+            <div class="header">Administrator</div>
             <form action="" method="post">
                 <div class="body bg-gray">
                     <div class="form-group">
@@ -76,14 +75,19 @@
                     <div class="form-group">
                         <input type="password" name="password" class="form-control" placeholder="Password"/>
                     </div>          
+                    <div class="form-group">
+                        <input type="checkbox" name="remember_me"/> Remember me
+                    </div>
                 </div>
                 <div class="footer">
                     <div class="text-danger">
                         <?php echo isset($_GET['error_login']) ? 'Anda salah memasukan username atau password' : ''; ?>
                     </div>
                     <input type="hidden" value="<?php echo sha1(date('ymdhis')); ?>" name="key">
-                    <button type="submit" class="btn bg-blue btn-block">Login</button>
+                    <button type="submit" class="btn bg-red btn-block">Login</button>
 
+                    <p><a href="#">Lupa password</a></p>
+                    
                 </div>
             </form>
         </div>

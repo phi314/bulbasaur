@@ -104,10 +104,11 @@ if(array_key_exists('key', $_POST))
                         <h3 class="box-title">Pilih Event</h3>
                     </div>
                     <div class="box-body">
-                        <table id="table-items" class="table">
+                        <table class="table datatable-simple">
                             <thead>
                             <tr>
                                 <th>Nama</th>
+                                <th>Pilih</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -127,12 +128,7 @@ if(array_key_exists('key', $_POST))
                             ?>
                             <tr class="<?php echo $highligtht; ?>">
                                 <td><?php echo $facility->nama; ?></td>
-<!--                                <td>-->
-<!--                                    <div class="btn-group">-->
-<!--                                        <button class="btn btn-xs btn-warning">Update</button>-->
-<!--                                        <button class="btn btn-xs btn-danger">Hapus</button>-->
-<!--                                    </div>-->
-<!--                                </td>-->
+                                <td></td>
                             </tr>
                             <?php endwhile; ?>
                             </tbody>
@@ -143,10 +139,6 @@ if(array_key_exists('key', $_POST))
 
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
             <section class="col-lg-4">
-                <?php
-                    // hanya admin yg dapat menambah kategori
-                    if(is_admin()):
-                ?>
                 <!-- Kategori List List -->
                 <div class="box box-warning" id="list-tambah-fasilitas">
                     <div class="box-header">
@@ -160,13 +152,19 @@ if(array_key_exists('key', $_POST))
                                 <input type="text" name="rfid" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label>Nama</label>
-                                <input type="text" name="nama" class="form-control">
-                            </div>
-                            <div class="form-group">
                                 <label>Jumlah</label>
                                 <input type="text" name="jumlah" class="form-control">
                             </div>
+                            <h1>Detail Siswa</h1>
+                            <div class="form-group">
+                                <label>Nama</label>
+                                <h3 class="transaksi-nama"></h3>
+                            </div>
+                            <div class="form-group">
+                                <label>Kelas</label>
+                                <h3 class="transaksi-kelas"></h3>
+                            </div>
+
 
                         </div><!-- /.box-body -->
                         <div class="box-footer">
@@ -177,7 +175,6 @@ if(array_key_exists('key', $_POST))
                         </div><!-- /.box-footer -->
                     </form>
                 </div><!-- /.kategori -->
-                <?php endif; ?>
             </section><!-- right col -->
         </div><!-- /.row (main row) -->
     </section><!-- /.content -->
@@ -194,5 +191,4 @@ if(array_key_exists('key', $_POST))
         "bAutoWidth": false,
         "iDisplayLength": 100
     });
-    $('.dataTables_filter input').addClass("form-control"); // modify table search input
 </script>

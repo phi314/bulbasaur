@@ -14,8 +14,8 @@
 <script src="<?php echo base_url(); ?>assets/js/bootbox.min.js" type="text/javascript"></script>
 <script src="<?php echo base_url(); ?>assets/js/context.js" type="text/javascript"></script>
 <!-- Data Tables -->
-<script src="<?php echo base_url(); ?>assets/js/plugins/datatables/jquery.dataTables.min.js" type="text/javascript"></script>
-<script src="<?php echo base_url(); ?>assets/js/plugins/datatables/dataTables.bootstrap.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>assets/js/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
 
 <!-- input mask -->
 <script src="<?php echo base_url(); ?>assets/js/plugins/input-mask/jquery.inputmask.js" type="text/javascript"></script>
@@ -28,16 +28,6 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>assets/js/AdminLTE/app.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-    $(".datatable-simple").dataTable({
-        "paging": false,
-        "lengthChange": false,
-        "searching": true,
-        "ordering": true,
-        "info": false,
-        "autoWidth": true
-    });
-</script>
 
 </body>
 </html>

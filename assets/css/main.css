@@ -107,22 +107,16 @@ textarea {
 #home-header {
     height: 641px;
     position: relative;
-    background-image: url("../img/home2.jpg");
-    background-position: 0 -140px;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 .big-title {
     font-family: 'olivier';
-    color: #ffffff;
     text-align: center;
-    font-size: 80px;
+    font-size: 60px;
     margin-top: 30px;
 }
 .big-subtitle {
-    margin-top: -20px;
+    margin-top: -5px;
     font-family: 'lemon';
-    color: #ffffff;
     text-align: center;
     font-size: 15px;
 }

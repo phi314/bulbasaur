@@ -19,108 +19,33 @@ require_once('inc/header.php');
         {
             $kode_lokasi = $_POST['kode'];
             $filename = null;
-            // cek unique kode
 
-            $upload_stat = TRUE;
+            // simpan data ke database
+            $q = sprintf("INSERT INTO siswa (
+                    rfid,
+                    nis,
+                    nama,
+                    jk,
+                    id_guru,
+                    created_at
+                    )
+                    VALUES('%s', '%s', '%s', '%s', '%s', '%d')",
+                escape($_POST['rfid']),
+                escape($_POST['nis']),
+                escape($_POST['nama']),
+                escape($_POST['jk']),
+                $_SESSION['logged_id'],
+                now()
+            );
 
-            // jika ada foto
-            if(count($_FILES) != 0)
+            // jalankan query
+            $r = mysql_query($q);
+
+            if(!$q)
+                $error = 'Kesalahan Server';
+            else
             {
-                $allowed_ext = array('jpg','JPG','png','PNG','bmp','BMP');
-                $extension = end(explode('.', $_FILES['foto']['name']));
-                $filename = sha1($kode_lokasi).'.jpg';
-
-                // ukuran file max 1 Mb
-                if($_FILES['foto']['size'] > 10000000)
-                {
-                    $error = "Ukuran file maximal 1MB";
-                }
-                // jika file bukan png / bmp / jpg
-                elseif(!in_array($extension, $allowed_ext))
-                {
-                    $error = "file hanya boleh png / bmp / jpg";
-                }
-                else
-                {
-                    // upload foto
-                    $upload = move_uploaded_file($_FILES['foto']['tmp_name'], '../assets/img/foto_lokasi/'.$filename);
-                    if(!$upload)
-                    {
-                        $upload_stat = FALSE;
-                        $error = "Gagal Upload Foto Lokasi";
-                    }
-                }
-            }
-            // jika upload_stat tidak FALSE
-            if($upload_stat != FALSE)
-            {
-                // simpan data ke database
-                $q = sprintf("INSERT INTO lokasi (
-                        kode_lokasi,
-                        nama,
-                        alias,
-                        alamat,
-                        kota,
-                        lg,
-                        lt,
-                        tahun,
-                        deskripsi,
-                        foto_link,
-                        tipe_lokasi,
-                        id_admin,
-                        createdAt
-                        )
-                        VALUES('%s',UPPER('%s'),UPPER('%s'),UPPER('%s'),UPPER('%s'),'%f','%f','%s','%s','%s',UPPER('%s'),'%d','%s')",
-                    $kode_lokasi,
-                    escape($_POST['nama']),
-                    escape($_POST['alias']),
-                    escape($_POST['alamat']),
-                    escape($_POST['kota']),
-                    escape($_POST['longitude']),
-                    escape($_POST['latitude']),
-                    escape($_POST['tahun']),
-                    escape($_POST['deskripsi']),
-                    $filename,
-                    escape($_POST['tipe_lokasi']),
-                    1,
-                    now()
-                );
-
-                // jalankan query
-                $r = mysql_query($q);
-
-                if(!$q)
-                    $error = 'Kesalahan Server';
-                else
-                {
-                    $id = mysql_insert_id(); // id terakhir
-
-                    // masukan fasilitas
-                    if(count($_POST['fasilitas']) != 0)
-                    {
-                        $fasilitas = $_POST['fasilitas'];
-                        foreach($fasilitas as $f => $value):
-                            $q_i_f = sprintf("INSERT INTO fasilitas_lokasi(
-                                            id_fasilitas,
-                                            id_lokasi,
-                                            created_date
-                                            )
-                                           VALUES('%s', '%s', '%s')",
-
-                                    $value,
-                                    $id,
-                                    now());
-                            mysql_query($q_i_f);
-                        endforeach;
-                    }
-
-                    // buat log file
-                    $file_path = '../lib/tamankota-log.txt';
-                    $message = "[".now()."]Added lokasi $id  by $logged_type $logged_id";
-                    add_log($file_path, $message);
-                    // refresh page
-                    redirect("lokasi_detail.php?id=$id"); // redirect ke detail
-                }
+                redirect('siswa.php');
             }
         }
     }

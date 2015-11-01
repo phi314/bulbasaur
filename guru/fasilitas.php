@@ -64,12 +64,11 @@ if(array_key_exists('key', $_POST))
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Transaksi
+            Fasilitas
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="transaksi.php"><i class="fa fa-database"></i> Transaksi</a></li>
-            <li class="active">TopUp Saldo</li>
+            <li class="active">Fasilitas</li>
         </ol>
     </section>
 
@@ -95,54 +94,48 @@ if(array_key_exists('key', $_POST))
             </script>
         <?php endif; ?>
 
-        <div class="form-group">
-            <input type="text" name="rfid" class="form-control input-lg" placeholder="Tap RFID">
-        </div>
-
         <!-- Main row -->
         <div class="row">
             <!-- Left col -->
             <section class="col-lg-8">
-                <div class="box box-primary">
+                <div class="box box-success">
                     <div class="box-header">
                         <i class="fa fa-tree"></i>
-                        <h3 class="box-title">Data Siswa</h3>
+                        <h3 class="box-title">Fasilitas</h3>
                     </div>
                     <div class="box-body">
                         <table id="table-items" class="table">
                             <thead>
                             <tr>
                                 <th>Nama</th>
+<!--                                <th>Aksi</th>-->
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div><!-- /.distro -->
-                </div>
+                            <?php
+                                $facilities = mysql_query("SELECT * FROM fasilitas ORDER BY nama ASC");
+                                while($facility = mysql_fetch_object($facilities)):
 
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <i class="fa fa-database"></i>
-                        <h3 class="box-title">Data Transaksi Siswa</h3>
-                    </div>
-                    <div class="box-body">
-                        <table id="table-items" class="table">
-                            <thead>
-                            <tr>
-                                <th>Nama</th>
-                                <th>Tanggal</th>
-                                <th>Tipe</th>
-                                <th>Jumlah</th>
+                                $highligtht = '';
+                                // untuk highlight
+                                if(!empty($_GET['id']) AND empty($_POST))
+                                {
+                                    // jika id sama dengan GET id
+                                    if($facility->id == $_GET['id'])
+                                        $highligtht = 'list-group-item-success';
+                                }
+
+                            ?>
+                            <tr class="<?php echo $highligtht; ?>">
+                                <td><?php echo $facility->nama; ?></td>
+<!--                                <td>-->
+<!--                                    <div class="btn-group">-->
+<!--                                        <button class="btn btn-xs btn-warning">Update</button>-->
+<!--                                        <button class="btn btn-xs btn-danger">Hapus</button>-->
+<!--                                    </div>-->
+<!--                                </td>-->
                             </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td></td>
-                            </tr>
+                            <?php endwhile; ?>
                             </tbody>
                         </table>
                     </div><!-- /.distro -->
@@ -151,27 +144,31 @@ if(array_key_exists('key', $_POST))
 
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
             <section class="col-lg-4">
-                <div class="box box-warning" id="list-tambah-fasilitas">
+                <?php
+                    // hanya admin yg dapat menambah kategori
+                    if(is_admin()):
+                ?>
+                <!-- Kategori List List -->
+                <div class="box box-primary" id="list-tambah-fasilitas">
                     <div class="box-header">
                         <i class="ion ion-plus"></i>
-                        <h3 class="box-title">TopUp</h3>
+                        <h3 class="box-title">Tambah Fasilitas</h3>
                     </div><!-- /.box-header -->
                     <form action="" method="post">
                         <div class="box-body">
                             <div class="form-group">
-                                <label>Jumlah</label>
-                                <input type="text" name="jumlah" class="form-control">
+                                <label>Nama</label>
+                                <input type="text" name="nama" class="form-control">
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
-                            <input type="hidden" value="in" name="tipe">
-                            <input type="hidden" value="1" name="event">
                             <input type="hidden" value="<?php echo sha1(date('ymdhis')); ?>" name="key">
                             <input type="hidden" value="add_facility" name="submit_type">
                             <button class="btn btn-primary">Simpan</button>
                         </div><!-- /.box-footer -->
                     </form>
                 </div><!-- /.kategori -->
+                <?php endif; ?>
             </section><!-- right col -->
         </div><!-- /.row (main row) -->
     </section><!-- /.content -->
@@ -188,4 +185,5 @@ if(array_key_exists('key', $_POST))
         "bAutoWidth": false,
         "iDisplayLength": 100
     });
+    $('.dataTables_filter input').addClass("form-control"); // modify table search input
 </script>
