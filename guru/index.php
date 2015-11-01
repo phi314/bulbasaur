@@ -44,7 +44,7 @@
 <html class="bg-black">
     <head>
         <meta charset="UTF-8">
-        <title>RFID System</title>
+        <title>SMKN 6 Garut</title>
         <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
         <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
@@ -67,7 +67,7 @@
     <body class="bg-black">
 
         <div class="form-box" id="login-box">
-            <div class="header">GURU | RFID</div>
+            <div class="header">GURU | SMKN 6</div>
             <form action="" method="post">
                 <div class="body bg-gray">
                     <div class="form-group">
@@ -83,7 +83,6 @@
                     </div>
                     <input type="hidden" value="<?php echo sha1(date('ymdhis')); ?>" name="key">
                     <button type="submit" class="btn bg-blue btn-block">Login</button>
-
                 </div>
             </form>
         </div>

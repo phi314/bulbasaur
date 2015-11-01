@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
         <link rel="stylesheet" href="assets/css/normalize.css">
         <link rel="stylesheet" href="assets/css/universal.css">
+        <link rel="stylesheet" href="assets/css/datatables/dataTables.bootstrap.css">
         <link rel="stylesheet" href="assets/css/main.css">
         <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>

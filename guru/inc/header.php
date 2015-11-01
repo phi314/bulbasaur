@@ -131,16 +131,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="guru.php">
-                        <i class="fa fa-user"></i> <span>Guru</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="kelas.php">
-                        <i class="fa fa-building"></i> <span>Kelas</span>
-                    </a>
-                </li>
-                <li>
                     <a href="absensi.php">
                         <i class="fa fa-calendar"></i> <span>Absensi</span>
                     </a>
