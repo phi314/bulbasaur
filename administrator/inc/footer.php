@@ -29,10 +29,21 @@
 <script src="<?php echo base_url(); ?>assets/js/AdminLTE/app.js" type="text/javascript"></script>
 
 <script type="text/javascript">
+    var base_url = "/bulbasaur/";
+
     $(".datatable-simple").dataTable({
         "paging": false,
         "lengthChange": false,
         "searching": true,
+        "ordering": true,
+        "info": false,
+        "autoWidth": true
+    });
+
+    $(".datatable-orderonly").dataTable({
+        "paging": false,
+        "lengthChange": false,
+        "searching": false,
         "ordering": true,
         "info": false,
         "autoWidth": true

@@ -94,7 +94,7 @@ if(array_key_exists('key', $_POST))
             </script>
         <?php endif; ?>
 
-        <a class="btn btn-primary" href="transaksi_create.php"><i class="fa fa-plus"></i> Tambah Transaksi</a>
+        <a class="btn btn-primary" href="transaksi_choose.php"><i class="fa fa-plus"></i> Tambah Transaksi</a>
         <a class="btn btn-warning" href="transaksi_topup.php"><i class="fa fa-angle-double-up"></i> Top-up Saldo</a>
 
         <div class="h3"></div>
@@ -108,41 +108,30 @@ if(array_key_exists('key', $_POST))
                         <i class="fa fa-tree"></i>
                         <h3 class="box-title">Transaksi</h3>
                     </div>
-
+                    <div class="box-body">
                         <table class="table datatable-simple">
                             <thead>
                             <tr>
-                                <th>Nama</th>
-                                <th>Jumlah</th>
                                 <th>Tanggal</th>
                                 <th>Tipe</th>
-                                <th>Event</th>
+                                <th>Nama Siswa</th>
+                                <th>Jumlah</th>
+                                <th>Pembayaran</th>
                                 <th>Guru</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                                $facilities = mysql_query("SELECT * FROM transaksi ORDER BY created_at DESC");
-                                while($facility = mysql_fetch_object($facilities)):
-
-                                $highligtht = '';
-                                // untuk highlight
-                                if(!empty($_GET['id']) AND empty($_POST))
-                                {
-                                    // jika id sama dengan GET id
-                                    if($facility->id == $_GET['id'])
-                                        $highligtht = 'list-group-item-success';
-                                }
-
+                                $q_transaksi = mysql_query("SELECT * FROM transaksi ORDER BY created_at DESC");
+                                while($transaksi = mysql_fetch_object($q_transaksi)):
                             ?>
-                            <tr class="<?php echo $highligtht; ?>">
-                                <td><?php echo $facility->nama; ?></td>
-<!--                                <td>-->
-<!--                                    <div class="btn-group">-->
-<!--                                        <button class="btn btn-xs btn-warning">Update</button>-->
-<!--                                        <button class="btn btn-xs btn-danger">Hapus</button>-->
-<!--                                    </div>-->
-<!--                                </td>-->
+                            <tr class="">
+                                <td><?php echo tanggal_format_indonesia($transaksi->tanggal); ?></td>
+                                <td><?php echo $transaksi->tipe; ?></td>
+                                <td><?php echo $transaksi->id_siswa; ?></td>
+                                <td><?php echo $transaksi->jumlah; ?></td>
+                                <td><?php echo $transaksi->id_pembayaran; ?></td>
+                                <td><?php echo $transaksi->id_guru; ?></td>
                             </tr>
                             <?php endwhile; ?>
                             </tbody>
@@ -150,6 +139,8 @@ if(array_key_exists('key', $_POST))
                     </div><!-- /.distro -->
                 </div>
             </section><!-- /.Left col -->
+        </div>
+    </section>
 
 <?php include('inc/footer.php'); ?>
 
@@ -160,7 +151,7 @@ if(array_key_exists('key', $_POST))
         "bFilter": false,
         "bSort": false,
         "bInfo": false,
-        "bAutoWidth": false,
+        "bAutoWidth": true,
         "iDisplayLength": 100
     });
 </script>

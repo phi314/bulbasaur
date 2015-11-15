@@ -25,21 +25,11 @@
     if(array_key_exists('id', $_GET))
     {
         $id = escape($_GET['id']);
-        $lokasi = get_row_by_id('lokasi', 'id', $id);
+        $siswa = get_row_by_id('siswa', 'id', $id);
 
-        // init
-        $nama_lokasi = $lokasi->tipe_lokasi.' '.$lokasi->nama;
-        $lg = $lokasi->lg;
-        $lt = $lokasi->lt;
-        if($lokasi->lt == 0 OR $lokasi->lg == 0)
+        if($siswa == FALSE)
         {
-            $lg = 107.608242;
-            $lt = -6.914864;
-        }
-
-        if($lokasi == FALSE)
-        {
-            redirect('lokasi.php');
+            redirect('siswa.php');
             exit;
         }
     }
@@ -49,12 +39,12 @@
     {
         $submit_type = $_POST['submit_type'];
 
-        // post update lokasi
+        // post update siswa
         if($submit_type == 'update')
         {
 
             // simpan data ke database
-            $q = sprintf("UPDATE lokasi SET
+            $q = sprintf("UPDATE siswa SET
                             nama=UPPER('%s'),
                             alamat=UPPER('%s'),
                             kota=UPPER('%s'),
@@ -80,35 +70,21 @@
                 $error = 'Kesalahan Server';
             else
             {
-                // buat log file
-                $file_path = '../lib/tamankota-log.txt';
-                $message = "[".now()."]Update data lokasi $id by $logged_type $logged_id";
-                add_log($file_path, $message);
-                // refresh page
-                redirect("lokasi_detail.php?id=$id"); // redirect ke detail
+                redirect("siswa_detail.php?id=$id"); // redirect ke detail
             }
-        } // ./update-lokasi
+        } // ./update-siswa
         // update fasilitas
-        elseif($submit_type == 'update-facility')
+        elseif($submit_type == 'update-kelas')
         {
-            if(count($_POST['fasilitas']) != 0)
+            if(isset($_POST['kelas']))
             {
-                // hapus semua fasilitas lokasi
-                mysql_query("DELETE FROM fasilitas_lokasi WHERE id_lokasi='$id'");
-                $fasilitas = $_POST['fasilitas'];
-                foreach($fasilitas as $key => $value):
-                    $q_i_f_l = sprintf("INSERT INTO fasilitas_lokasi(id_lokasi, id_fasilitas, created_date) VALUES('%s', '%s', '%s')",
-                                $id, $value, now());
-                    mysql_query($q_i_f_l);
-                endforeach;
+                $id_kelas = $_POST['kelas'];
+                $q = "UPDATE siswa SET siswa.id_kelas='$id_kelas' WHERE id='$siswa->id'";
+                $r = mysql_query($q);
             }
 
-            // buat log file
-            $file_path = '../lib/tamankota-log.txt';
-            $message = "[".now()."]Update data fasilitas lokasi $id by $logged_type $logged_id";
-            add_log($file_path, $message);
             // refresh page
-            redirect("lokasi_detail.php?id=$id"); // redirect ke detail
+            redirect("siswa_detail.php?id=$id"); // redirect ke detail
         }
         // update foto
         elseif($submit_type == 'update-foto')
@@ -118,10 +94,10 @@
             // jika ada foto
             if(count($_FILES) != 0)
             {
-                $kode_lokasi = escape($_POST['kode_lokasi']);
+                $kode_siswa = escape($_POST['kode_siswa']);
                 $allowed_ext = array('jpg','JPG','png','PNG','bmp','BMP');
                 $extension = end(explode('.', $_FILES['foto']['name']));
-                $filename = sha1($kode_lokasi).'.jpg';
+                $filename = sha1($kode_siswa).'.jpg';
 
                 // ukuran file max 1 Mb
                 if($_FILES['foto']['size'] > 10000000)
@@ -136,14 +112,14 @@
                 else
                 {
                     // upload foto
-                    $upload = move_uploaded_file($_FILES['foto']['tmp_name'], '../assets/img/foto_lokasi/'.$filename);
+                    $upload = move_uploaded_file($_FILES['foto']['tmp_name'], '../assets/img/foto_siswa/'.$filename);
                     if(!$upload)
                     {
                         $upload_stat = FALSE;
-                        $error = "Gagal Upload Foto Lokasi";
+                        $error = "Gagal Upload Foto siswa";
                     }
                     else
-                        redirect('lokasi_detail.php?id='.$id);
+                        redirect('siswa_detail.php?id='.$id);
                 }
             }
         }
@@ -156,10 +132,10 @@
             // jika ada foto
             if(count($_FILES) != 0)
             {
-                $kode_lokasi = escape($_POST['kode_lokasi']);
+                $kode_siswa = escape($_POST['kode_siswa']);
                 $allowed_ext = array('jpg','JPG','png','PNG','bmp','BMP');
                 $extension = end(explode('.', $_FILES['foto']['name']));
-                $filename = sha1($kode_lokasi).'_'.$_FILES['foto']['name'].'.jpg';
+                $filename = sha1($kode_siswa).'_'.$_FILES['foto']['name'].'.jpg';
 
                 // ukuran file max 1 Mb
                 if($_FILES['foto']['size'] > 10000000)
@@ -174,15 +150,15 @@
                 else
                 {
                     // upload foto
-                    $upload = move_uploaded_file($_FILES['foto']['tmp_name'], '../assets/img/foto_lokasi/gallery/'.$filename);
+                    $upload = move_uploaded_file($_FILES['foto']['tmp_name'], '../assets/img/foto_siswa/gallery/'.$filename);
                     if(!$upload)
                     {
-                        redirect('lokasi_detail.php?id='.$id.'&gagal-upload-foto=1');
+                        redirect('siswa_detail.php?id='.$id.'&gagal-upload-foto=1');
                     }
                     else
                     {
-                        mysql_query("INSERT INTO gallery_lokasi(id_lokasi,filename,created_date) VALUES('$id','$filename','$now')");
-                        redirect('lokasi_detail.php?id='.$id);
+                        mysql_query("INSERT INTO gallery_siswa(id_siswa,filename,created_date) VALUES('$id','$filename','$now')");
+                        redirect('siswa_detail.php?id='.$id);
                     }
                 }
             }
@@ -190,19 +166,16 @@
     }
 
 ?>
-    <!-- Google Map Plugin -->
-    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDY0kkJiTPVd2U7aTOAwhc9ySH6oHxOIYM&sensor=false"></script>
-
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Lokasi
-            <small><?php echo $nama_lokasi; ?></small>
+            Siswa
+            <small><?php echo $siswa->nama; ?></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="lokasi.php"><i class="fa fa-location-arrow"></i> Lokasi</a></li>
-            <li class="active"><?php echo $nama_lokasi; ?></li>
+            <li><a href="siswa.php"><i class="fa fa-users"></i> Siswa</a></li>
+            <li class="active"><?php echo $siswa->nama; ?></li>
         </ol>
     </section>
 
@@ -225,36 +198,30 @@
                 <div class="box box-success">
                     <div class="box-header">
                         <i class="fa fa-flash"></i>
-                        <h3 class="box-title"><?php echo $nama_lokasi; ?> / <span class="text-muted"><?php echo $lokasi->alias; ?></span> </h3>
+                        <h3 class="box-title"><?php echo $siswa->nama; ?></h3>
                         <div class="box-tools pull-right">
-                            <?php
-                                // hanya admin yg dapat mengedit detail lokasi
-                                if(is_admin()):
-                            ?>
-                                <a href="#" class="btn bg-orange btn-sm" id="u-lokasi"><i class="fa fa-pencil"></i> </a>
-                            <?php endif; ?>
+                            <a href="#" class="btn bg-orange btn-sm" id="u-siswa"><i class="fa fa-pencil"></i> </a>
                         </div>
                     </div><!-- /.box-header -->
                     <div id="chat-box" class="box-body distro-profile">
                         <?php
-                            $foto_folder_path = '../assets/img/foto_lokasi/';
-                            if(file_exists($foto_folder_path.$lokasi->foto_link))
-                                $foto_link = $foto_folder_path.$lokasi->foto_link;
-                            else
-                                $foto_link = '../assets/img/imageNotFound.jpg';
+                            $foto_folder_path = '../assets/img/foto_siswa/';
+                            $foto_link = '../assets/img/imageNotFound.jpg';
+//                            if(file_exists($foto_folder_path.$siswa->foto_link))
+//                                $foto_link = $foto_folder_path.$siswa->foto_link;
 
                         ?>
                         <img class="logo img-responsive" src="<?php echo $foto_link; ?>">
                         <div class="desc">
                             <dl class="dl-horizontal">
-                                <dt>Alamat</dt>
+                                <dt>NIS</dt>
                                 <dd>
-                                    <?php echo $lokasi->alamat; ?>
+                                    <?php echo $siswa->nis; ?>
                                 </dd>
-                                <dt>Sejak Tahun</dt>
-                                <dd><?php echo $lokasi->tahun; ?></dd>
-                                <dt>Deskripsi</dt>
-                                <dd><?php echo html_entity_decode($lokasi->deskripsi); ?></dd>
+                                <dt>Kelas</dt>
+                                <dd><?php echo kelas($siswa->id_kelas); ?></dd>
+                                <dt>Jenis Kelamin</dt>
+                                <dd><?php echo jk($siswa->jk); ?></dd>
                             </dl>
                         </div>
                     </div><!-- /.distro -->
@@ -266,35 +233,10 @@
                 <div class="box box-primary">
                     <div class="box-header">
                         <i class="fa fa-map-marker"></i>
-                        <h3 class="box-title">Lokasi</h3>
+                        <h3 class="box-title">Absensi Hari Ini</h3>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-                        <script>
-                            var lokasi = new google.maps.LatLng(<?php echo $lt; ?>, <?php echo $lg; ?>);
-                            function initialize()
-                            {
-
-                                var mapProp = {
-                                    center: lokasi,
-                                    zoom: 16,
-                                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                                };
-
-                                var map=new google.maps.Map(document.getElementById("map") ,mapProp);
-
-                                marker=new google.maps.Marker({
-                                    position: lokasi
-                                });
-
-                                marker.setMap(map);
-
-                            }
-                            google.maps.event.addDomListener(window, 'load', initialize);
-                        </script>
-                        <div id="map" style="width:inherit; height:200px; margin-left: auto; margin-right: auto">
-
-                        </div>
-                        <p class="text-muted">LT: <?php echo $lt; ?>, LG: <?php echo $lg; ?></p>
+                        <h1 class="text-muted">HADIR</h1>
                     </div>
                 </div><!-- /.map -->
             </section><!-- right col -->
@@ -302,31 +244,71 @@
 
         <!-- Second Row -->
         <section class="row">
-            <div class="col-md-6">
+            <div class="col-md-7">
                 <div class="box box-info">
                     <div class="box-header">
-                        <h3 class="box-title"><i class="fa fa-calendar"></i> Events</h3>
-                    </div>
-                    <?php
-                    $q_e = "SELECT event.* FROM lokasi_event JOIN event ON event.id=lokasi_event.id_event WHERE lokasi_event.id_lokasi='$id' ORDER BY waktu ASC";
-                    $r_e = mysql_query($q_e);
-                    while($d_e = mysql_fetch_object($r_e)):
-                        ?>
-                        <a href="event_detail.php?id=<?php echo $d_e->id; ?>" class="list-group-item">
-                            <?php echo $d_e->nama; ?>
-                            <div class="pull-right"><i class="fa fa-chevron-circle-right"></i> </div>
-                        </a>
-
-                    <?php endwhile; ?>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="box box-info">
-                    <div class="box-header">
-                        <h3 class="box-title"><i class="fa fa-comments"></i> Review</h3>
+                        <h3 class="box-title"><i class="fa fa-calendar"></i> Transaksi</h3>
                     </div>
                     <div class="box-body">
-
+                        <table class="table datatable-orderonly">
+                            <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Pembayaran</th>
+                                <th>Tipe</th>
+                                <th>Jumlah</th>
+                                <th>Aksi</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $q = "SELECT * FROM transaksi where id_siswa='$siswa->id' ORDER BY tanggal DESC";
+                            $r = mysql_query($q);
+                            while($d = mysql_fetch_object($r)):
+                                ?>
+                                <tr>
+                                    <td><?php echo tanggal_format_indonesia($d->tanggal); ?></td>
+                                    <td><?php echo $d->id_pembayaran; ?></td>
+                                    <td><?php echo $d->tipe; ?></td>
+                                    <td><?php echo $d->jumlah; ?></td>
+                                    <td>
+                                        <div class="btn-group btn-group-xs">
+                                            <a href="kelas.php?id=<?php echo $d->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i> </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="box box-info">
+                    <div class="box-header">
+                        <h3 class="box-title"><i class="fa fa-comments"></i> Absensi</h3>
+                    </div>
+                    <div class="box-body">
+                        <table class="table datatable-orderonly">
+                            <thead>
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Keterangan</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+                            $q = "SELECT * FROM absensi where id_siswa='$siswa->id' ORDER BY tanggal DESC";
+                            $r = mysql_query($q);
+                            while($d = mysql_fetch_object($r)):
+                                ?>
+                                <tr>
+                                    <td><?php echo $d->tanggal; ?></td>
+                                    <td><?php echo $d->keterangan; ?></td>
+                                </tr>
+                            <?php endwhile; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -340,37 +322,23 @@
                         <h3 class="box-title"><i class="fa fa-edit"></i> Update</h3>
                     </div>
                     <div class="box-body">
-                        <form action="" id="form-u-lokasi"  method="post">
+                        <form action="" id="form-u-siswa"  method="post">
                             <div class="box-body">
                                 <div class="form-group">
+                                    <label for="nama">NIS</label>
+                                    <input class="form-control" name="nis" id="nis" value="<?php echo $siswa->nis; ?>" placeholder="Nama siswa" type="text" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="nama">Nama</label>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><?php echo $lokasi->tipe_lokasi; ?></span>
-                                        <input class="form-control" name="nama" id="nama" value="<?php echo $lokasi->nama; ?>" placeholder="Nama Lokasi" type="text" required>
-                                    </div>
+                                    <input class="form-control" name="nama" id="nama" value="<?php echo $siswa->nama; ?>" placeholder="Nama siswa" type="text" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="alamat">Alamat</label>
-                                    <textarea class="form-control" name="alamat" id="alamat" placeholder="Alamat" required><?php echo $lokasi->alamat; ?></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="kota">Kota</label>
-                                    <input class="form-control" name="kota" id="kota" value="<?php echo $lokasi->kota; ?>" placeholder="Kota" type="text" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="deskripsi">Deskripsi</label>
-                                    <textarea class="form-control" name="deskripsi" id="deskripsi" ><?php echo $lokasi->deskripsi; ?></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tahun">Tahun</label>
-                                    <input class="form-control" name="tahun" id="tahun" value="<?php echo $lokasi->tahun; ?>" placeholder="tahun" type="text" required>
-                                </div>
-                                <div class="form-group">
-                                    <label>Lokasi</label>
-                                    <div class="row">
-                                        <div class="col-xs-6"><input type="text" value="<?php echo $lokasi->lg; ?>" class="form-control" name="longitude" placeholder="Longitude"></div>
-                                        <div class="col-xs-6"><input type="text" value="<?php echo $lokasi->lt; ?>" class="form-control" name="latitude" placeholder="Latitude"></div>
-                                    </div>
+                                    <label for="alamat">Jenis Kelamin</label>
+                                    <select name="jk" class="form-control">
+                                        <option value="">--Pilih Jenis Kelamin--</option>
+                                        <option value="l" <?php echo set_select_value('l', $siswa->jk); ?>>Laki-laki</option>
+                                        <option value="p" <?php echo set_select_value('p', $siswa->jk); ?>>Perempuan</option>
+                                    </select>
                                 </div>
                             </div><!-- /.box-body -->
                             <div class="box-footer clearfix no-border">
@@ -383,39 +351,35 @@
                 </div><!-- ./Box -->
             </div>
 
-            <!-- Update Fasilitas Lokasi -->
+            <!-- Update Fasilitas siswa -->
             <div class="col-md-6">
                 <div class="box box-warning">
                     <div class="box-header">
-                        <h3 class="box-title"><i class="fa fa-edit"></i> Update Fasilitas Lokasi</h3>
+                        <h3 class="box-title"><i class="fa fa-edit"></i> Update Kelas Siswa</h3>
                     </div>
                     <div class="box-body">
-                        <form action="" id="form-u-f-lokasi" method="post">
+                        <form action="" id="form-u-f-siswa" method="post">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label>Fasilitas</label>
-                                    <br>
-                                    <?php
-                                        // query fasilitas lokasi
-                                        $q_f = "SELECT * FROM fasilitas ORDER BY nama ASC";
-                                        $r_f = mysql_query($q_f);
-                                        while($d_f_l = mysql_fetch_object($r_f)):
-                                            $checked = '';
-                                            // jika fasilitas lokasi ada maka ceklis
-                                            $q_f_l = "SELECT * FROM fasilitas_lokasi WHERE id_lokasi='$id' AND id_fasilitas='$d_f_l->id' LIMIT 1";
-                                            $r_f_l = mysql_query($q_f_l);
-                                            if(mysql_num_rows($r_f_l) == 1)
-                                                $checked = 'CHECKED';
-                                    ?>
-                                        <input type="checkbox" name="fasilitas[]" value="<?php echo $d_f_l->id; ?>" <?php echo $checked; ?>> <?php echo $d_f_l->nama; ?><br>
-                                    <?php
+                                    <label>Kelas</label>
+                                    <select name="kelas" class="form-control">
+                                        <option value="">--Pilih Kelas--</option>
+                                        <?php
+                                        // query fasilitas siswa
+                                        $q_kelas = "SELECT * FROM kelas ORDER BY tingkat, tahun ASC";
+                                        $r_kelas = mysql_query($q_kelas);
+                                        while($d_kelas = mysql_fetch_object($r_kelas)):
+                                        ?>
+                                            <option value="<?php echo $d_kelas->id; ?>" <?php set_select_value($d_kelas->id, $siswa->id); ?>><?php echo $d_kelas->tingkat.$d_kelas->nama.' ('.$d_kelas->tahun.')'; ?></option>
+                                        <?php
                                         endwhile;
-                                    ?>
+                                        ?>
+                                    </select>
                                 </div>
                             </div><!-- /.box-body -->
                             <div class="box-footer clearfix no-border">
                                 <input type="hidden" name="key" value="<?php echo sha1(date('ymdhis')); ?>">
-                                <input type="hidden" name="submit_type" value="update-facility">
+                                <input type="hidden" name="submit_type" value="update-kelas">
                                 <button class="btn btn-warning pull-right" type="submit"><i class="fa fa-pencil"></i> Update</button>
                             </div>
                         </form>
@@ -427,7 +391,7 @@
                         <h3 class="box-title"><i class="fa fa-edit"></i> Update Foto Utama</h3>
                     </div>
                     <div class="box-body">
-                        <form action="" id="form-u-f-lokasi" method="post" enctype="multipart/form-data">
+                        <form action="" id="form-u-f-siswa" method="post" enctype="multipart/form-data">
                             <div class="box-body">
                                 <div class="form-group">
                                     <input id="foto" name="foto" type="file" required="">
@@ -436,7 +400,7 @@
                             </div><!-- /.box-body -->
                             <div class="box-footer clearfix no-border">
                                 <input type="hidden" name="key" value="<?php echo sha1(date('ymdhis')); ?>">
-                                <input type="hidden" name="kode_lokasi" value="<?php echo $lokasi->kode_lokasi; ?>">
+                                <input type="hidden" name="kode_siswa" value="<?php echo $siswa->kode_siswa; ?>">
                                 <input type="hidden" name="submit_type" value="update-foto">
                                 <button class="btn btn-warning pull-right" type="submit"><i class="fa fa-pencil"></i> Update</button>
                             </div>
@@ -445,70 +409,12 @@
             </div>
         </section>
 
-        <section>
-            <div class="box box-info">
-                <div class="box-header">
-                    <h3 class="box-title"><i class="fa fa-edit"></i> Gallery</h3>
-                    <div class="box-tools pull-right">
-                        <a href="#" class="btn bg-blue btn-sm" id="t-gallery"><i class="fa fa-plus"></i> </a>
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="row">
-                        <?php
-                        $q_gallery = "SELECT * FROM gallery_lokasi WHERE id_lokasi='$id'";
-                        $r_gallery = mysql_query($q_gallery);
-                        while($d_gallery = mysql_fetch_object($r_gallery)):
-                            ?>
-                            <div class="col-md-4">
-                                <img src="../assets/img/foto_lokasi/gallery/<?php echo $d_gallery->filename; ?>" class="img-responsive">
-                            </div>
-                        <?php endwhile; ?>
-                    </div>
-                </div>
-            </div><!-- ./Box update foto -->
-        </section>
-    </section><!-- /.content -->
-
-<div id="form-t-foto" class="hide">
-    <form action="" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-            <input type="file" name="foto" required="">
-        </div>
-        <button type="button" data-dismiss="modal" class="btn btn-danger">Tutup</button>
-        <button class="btn btn-primary">Simpan</button>
-        <input type="hidden" name="key" value="<?php echo sha1(date('ymdhis')); ?>">
-        <input type="hidden" name="kode_lokasi" value="<?php echo $lokasi->kode_lokasi; ?>">
-        <input type="hidden" name="submit_type" value="tambah-foto-gallery">
-    </form>
-</div>
-
 <?php include('inc/footer.php'); ?>
 
 
 <script>
 
-    $('#u-lokasi').click(function(){
+    $('#u-siswa').click(function(){
         $("html, body").animate({ scrollTop: $('#section-3').offset().top }, 1000);
-    });
-    /**
-     * Init Editor
-     */
-    $("textarea[name=deskripsi]").wysihtml5({
-        "font-styles": false, //Font styling, e.g. h1, h2, etc. Default true
-        "emphasis": true, //Italics, bold, etc. Default true
-        "lists": false, //(Un)ordered lists, e.g. Bullets, Numbers. Default true
-        "html": false, //Button which allows you to edit the generated HTML. Default false
-        "link": false, //Button to insert a link. Default true
-        "image": false, //Button to insert an image. Default true,
-        "color": false //Button to change color of font
-    });
-
-    $('#t-gallery').click(function(){
-        var form = $('#form-t-foto').html();
-        bootbox.dialog({
-            title: "Tambah Foto Taman",
-            message: form
-        });
     });
 </script>

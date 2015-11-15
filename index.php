@@ -41,7 +41,7 @@
                     </table>
                 </div>
                 <div class="col-md-4">
-                    <input type="text" name="rfid" class="form-control input-lg" placeholder="Tap Kartu" id="home-rfid">
+                    <input type="text" name="rfid" class="form-control input-lg" placeholder="Tap Kartu" readonly id="home-rfid">
                     <h1>Detail Siswa</h1>
                     <div class="list-group">
                         <div class="list-group-item">
@@ -68,6 +68,8 @@
 
 
 <?php include("inc/footer.php"); ?>
+
+<script type="text/javascript" src="assets/js/jquery.rfid.js"></script>
 
 <script type="text/javascript">
 
@@ -100,8 +102,19 @@
 
     myTimer();
 
-    $('#home-rfid').change(function(){
-        var rfid = $(this).val();
+    // Parses raw scan into name and ID number
+    var rfidParser = function (rawData) {
+//        console.log(rawData);
+        if (rawData.length != 11) return null;
+        else return rawData;
+
+    };
+
+    // Called on a good scan (company card recognized)
+    var goodScan = function (cardData) {
+        $("#home-rfid").val(cardData.substr(0,10));
+
+        var rfid = $("#home-rfid").val();
 
         $.ajax({
             url: 'services/absensi_by_rfid.php',
@@ -128,7 +141,20 @@
 
             }
 
-        })
+        });
+
+    };
+
+    // Called on a bad scan (company card not recognized)
+    var badScan = function() {
+        console.log("Bad Scan.");
+    };
+
+    // Initialize the plugin.
+    $.rfidscan({
+        parser: rfidParser,
+        success: goodScan,
+        error: badScan
     });
 
 </script>

@@ -28,6 +28,21 @@ function jk($jk)
             break;
     }
 }
+
+function kelas($id_kelas)
+{
+    $q = "SELECT * FROM kelas WHERE id='$id_kelas' LIMIT 1";
+    $r = mysql_query($q);
+
+    $kelas = FALSE;
+    if(mysql_num_rows($r) == 1)
+    {
+        $d = mysql_fetch_object($r);
+        $kelas = $d->tingkat.$d->nama.' ('.$d->tahun.')';
+    }
+
+    return $kelas;
+}
 /**
  * @param $table
  * @param bool $order_by

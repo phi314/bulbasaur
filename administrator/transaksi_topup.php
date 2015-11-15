@@ -17,45 +17,32 @@ if(array_key_exists('key', $_POST))
 {
     $submit_type = $_POST['submit_type'];
     // Ajax Add
-    if($submit_type == 'add_facility')
+    if($submit_type == 'add_topup')
     {
-        $nama = escape($_POST['nama']); // nama fasilitas
-        $cek1 = get_row_by_id('fasilitas', 'nama', $nama);
-        // jika belum ada fasilitas dengan nama yg diinputkan
-        if($cek1 == FALSE)
-        {
-            // simpan data ke database
-            $q = sprintf("INSERT INTO fasilitas(
-                        nama,
-                        created_date
-                        )
-                        VALUES(UPPER('%s'),'%s')",
-                $nama,
-                now()
-            );
+        $id_siswa = escape($_POST['id_siswa']);
+        $q_siswa = get_by_id('siswa', 'id', $id_siswa, FALSE, 'ASC', 1);
+        $siswa = mysql_fetch_object($q_siswa);
+        $jumlah = escape($_POST['jumlah']);
 
-            // jalankan query
-            $r = mysql_query($q);
+        $saldo_akhir = $siswa->saldo + $jumlah;
 
-            // jika kesalahan query atau database
-            if(!$q)
-            {
-                $status = FALSE;
-                $error = 'Kesalahan Database';
-            }
-            else
-            {
-                $status = TRUE;
-                $error = '';
-                $id = mysql_insert_id();
-                redirect('fasilitas.php?add=true&nama='.$nama.'&id='.$id);
-            }
-        }
-        else
-        {
-            $status = FALSE;
-            $error = 'Fasilitas '.$nama.', sudah ada';
-        }
+        $q_t_pembayaran = sprintf("INSERT INTO transaksi(tipe, jumlah, id_siswa, id_pembayaran, saldo_akhir, id_guru, tanggal, created_at)
+                                        VALUES('%s', '%d', '%s','%s', '%s', '%s', '%s', '%s')",
+            'in',
+            $jumlah,
+            $id_siswa,
+            1,
+            $saldo_akhir,
+            $_SESSION['logged_id'],
+            now(),
+            now()
+        );
+
+        $r_t_pembayaran = mysql_query($q_t_pembayaran);
+
+        $q_update_saldo_siswa = mysql_query("UPDATE siswa SET saldo='$saldo_akhir' WHERE id='$id_siswa'");
+
+        redirect('transaksi.php');
     }
 }
 
@@ -85,18 +72,8 @@ if(array_key_exists('key', $_POST))
             </script>
         <?php endif; ?>
 
-        <?php if(!empty($_GET['add']) AND !empty($_GET['nama']) AND empty($_POST)): ?>
-            <div class="alert alert-success">
-                <i class="fa fa-info"></i>
-                <strong>Berhasil Tambah Fasilitas <?php echo $_GET['nama']; ?></strong>
-            </div>
-            <script>
-
-            </script>
-        <?php endif; ?>
-
         <div class="form-group">
-            <input type="text" name="rfid" class="form-control input-lg" placeholder="Tap RFID">
+            <input type="text" id="topup-rfid" name="topup-rfid" class="form-control input-lg" placeholder="Tap RFID">
         </div>
 
         <!-- Main row -->
@@ -112,13 +89,19 @@ if(array_key_exists('key', $_POST))
                         <table id="table-items" class="table">
                             <thead>
                             <tr>
+                                <th>NIS</th>
                                 <th>Nama</th>
+                                <th>Kelas</th>
+                                <th>Saldo</th>
                             </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td></td>
-                                </tr>
+                            <tr>
+                                <td id="topup-nis"></td>
+                                <td id="topup-nama"></td>
+                                <td id="topup-kelas"></td>
+                                <td id="topup-saldo"></td>
+                            </tr>
                             </tbody>
                         </table>
                     </div><!-- /.distro -->
@@ -130,21 +113,7 @@ if(array_key_exists('key', $_POST))
                         <h3 class="box-title">Data Transaksi Siswa</h3>
                     </div>
                     <div class="box-body">
-                        <table id="table-items" class="table">
-                            <thead>
-                            <tr>
-                                <th>Nama</th>
-                                <th>Tanggal</th>
-                                <th>Tipe</th>
-                                <th>Jumlah</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td></td>
-                            </tr>
-                            </tbody>
-                        </table>
+
                     </div><!-- /.distro -->
                 </div>
             </section><!-- /.Left col -->
@@ -156,18 +125,17 @@ if(array_key_exists('key', $_POST))
                         <i class="ion ion-plus"></i>
                         <h3 class="box-title">TopUp</h3>
                     </div><!-- /.box-header -->
-                    <form action="" method="post">
+                    <form action="" method="post" id="form-topup">
                         <div class="box-body">
                             <div class="form-group">
                                 <label>Jumlah</label>
-                                <input type="text" name="jumlah" class="form-control">
+                                <input type="text" name="jumlah" class="form-control" id="topup-jumlah">
                             </div>
                         </div><!-- /.box-body -->
                         <div class="box-footer">
-                            <input type="hidden" value="in" name="tipe">
-                            <input type="hidden" value="1" name="event">
+                            <input type="hidden" name="id_siswa" id="id_siswa">
                             <input type="hidden" value="<?php echo sha1(date('ymdhis')); ?>" name="key">
-                            <input type="hidden" value="add_facility" name="submit_type">
+                            <input type="hidden" value="add_topup" name="submit_type">
                             <button class="btn btn-primary">Simpan</button>
                         </div><!-- /.box-footer -->
                     </form>
@@ -187,5 +155,46 @@ if(array_key_exists('key', $_POST))
         "bInfo": false,
         "bAutoWidth": false,
         "iDisplayLength": 100
+    });
+
+    $('#topup-rfid').focus();
+
+    $('#topup-rfid').change(function(){
+        var rfid = $(this).val();
+
+        $.ajax({
+            url: base_url + 'services/detail_siswa_by_rfid.php',
+            type: 'get',
+            data: {
+                rfid: rfid
+            },
+            dataType: 'json',
+            success: function(data){
+                if(data.status == true)
+                {
+                    $('#topup-nis').text(data.nis);
+                    $('#topup-nama').text(data.nama);
+                    $('#topup-saldo').text(data.saldo_format_rupiah);
+                    $('#id_siswa').val(data.id);
+                    $('#topup-jumlah').focus();
+                }
+                else
+                {
+                    $('#topup-rfid').val('');
+                    $('#topup-nis').text('');
+                    $('#topup-nama').text('');
+                    $('#topup-rfid').focus();
+                }
+
+            }
+        });
+    });
+
+    $('#form-topup').submit(function(){
+        var c = confirm('Apakah anda yakin membuat transaksi ini?');
+
+        if(c == false){
+            return false;
+        }
     });
 </script>

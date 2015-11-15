@@ -12,40 +12,25 @@
         $submit_type = $_POST['submit_type'];
         switch($submit_type)
         {
-            case 'tambah_petugas':
+            case 'tambah_kelas':
 
-                $nama = strtoupper(escape($_POST['nama']));
-                $username = substr($nama, 0, 5).substr($_POST['tgl_lahir'], 3, 2).substr($_POST['tgl_lahir'], 8, 2);
-                $password = sha1($username.rand());
-                $tanggal_lahir = date('Y-m-d', strtotime($_POST['tgl_lahir']));
-
-                $q_t_petugas = sprintf("INSERT INTO petugas(nama, jk, tempat_lahir, tanggal_lahir, alamat, kota, telepon, email, username, password, create_date)
-                                        VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
-                                        escape($nama),
-                                        escape($_POST['jk']),
-                                        escape($_POST['t_lahir']),
-                                        $tanggal_lahir,
-                                        escape($_POST['alamat']),
-                                        escape($_POST['kota']),
-                                        escape($_POST['telepon']),
-                                        escape($_POST['email']),
-                                        $username,
-                                        $password,
+                $q_t_kelas = sprintf("INSERT INTO kelas(tingkat, nama, tahun, id_guru, created_at)
+                                        VALUES('%s', '%s', '%s', '%s', '%s')",
+                                        escape($_POST['tingkat']),
+                                        escape($_POST['nama']),
+                                        escape($_POST['tahun']),
+                                        escape($_SESSION['logged_id']),
                                         now()
                 );
 
-                $r_t_petugas = mysql_query($q_t_petugas);
-                if(!$r_t_petugas)
-                    $error = 'Gagal Tambah Petugas';
+                $r_t_kelas = mysql_query($q_t_kelas);
+
+                dump(mysql_error());
+                if(!$r_t_kelas)
+                    $error = 'Gagal Tambah kelas';
                 else
                 {
-                    $id = mysql_insert_id();
-                    // buat log file
-                    $file_path = '../lib/tamankota-log.txt';
-                    $message = "[".now()."]Tambah data petugas $id oleh $logged_id pass = Xcs$password";
-                    add_log($file_path, $message);
-                    // refresh page
-                    redirect('petugas.php?sukses_tambah_petugas=true');
+                    redirect('kelas.php?sukses_tambah_kelas=true');
                 }
                 break;
         }
@@ -81,17 +66,36 @@
                                     <i class="ion ion-clipboard"></i>
                                     <h3 class="box-title">List Kelas</h3>
                                 </div><!-- /.box-header -->
-                                <?php
-                                    $q = "SELECT * FROM kelas ORDER BY tingkat, tahun ASC";
-                                    $r = mysql_query($q);
-                                    while($d = mysql_fetch_object($r)):
-                                ?>
-                                    <a href="guru_detail.php?id=<?php echo $d->id; ?>" class="list-group-item">
-                                        <?php echo $d->nama; ?> <em>(<?php echo $d->nip; ?>)</em>
-                                        <div class="pull-right"><i class="fa fa-chevron-circle-right"></i> </div>
-                                    </a>
-
-                                <?php endwhile; ?>
+                                <div class="box-body">
+                                    <table class="table datatable-simple">
+                                        <thead>
+                                        <tr>
+                                            <th>Tingkat</th>
+                                            <th>Nama</th>
+                                            <th>Tahun</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $q = "SELECT * FROM kelas ORDER BY tingkat, tahun ASC";
+                                        $r = mysql_query($q);
+                                        while($d = mysql_fetch_object($r)):
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $d->tingkat; ?></td>
+                                                <td><?php echo $d->nama; ?></td>
+                                                <td><?php echo $d->tahun; ?></td>
+                                                <td>
+                                                    <div class="btn-group btn-group-xs">
+                                                        <a href="kelas.php?id=<?php echo $d->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i> </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        <?php endwhile; ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div><!-- /.box -->
                         </section><!-- /.Left col -->
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
@@ -107,7 +111,12 @@
                                     <form action="" method="post">
                                         <div class="form-group">
                                             <label>Tingkat</label>
-                                            <input type="text" class="form-control" name="tingkat" required="">
+                                            <select name="tingkat" class="form-control">
+                                                <option value="">--Pilih Tingkat--</option>
+                                                <option>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label>Nama</label>
@@ -119,7 +128,7 @@
                                         </div>
                                         <button class="btn btn-primary">Simpan</button>
                                         <input type="hidden" name="key" value="<?php echo crypt('romanov', '$1$sinkyousei$'); ?>">
-                                        <input type="hidden" name="submit_type" value="tambah_petugas">
+                                        <input type="hidden" name="submit_type" value="tambah_kelas">
                                     </form>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->

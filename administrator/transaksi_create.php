@@ -12,49 +12,62 @@ $status = FALSE;
 $success = '';
 $error = '';
 
+if(!isset($_SESSION['id_pembayaran']))
+{
+    redirect('transaksi_choose.php');
+}
+else
+{
+    $id_pembayaran = $_SESSION['id_pembayaran'];
+}
+
+$qpembayaran = get_by_id('pembayaran', 'id', $id_pembayaran, FALSE, 'ASC', 1);
+$pembayaran = mysql_fetch_object($qpembayaran);
+
 // post tambah
 if(array_key_exists('key', $_POST))
 {
     $submit_type = $_POST['submit_type'];
     // Ajax Add
-    if($submit_type == 'add_facility')
+    if($submit_type == 'add_session_id_pembayaran')
     {
-        $nama = escape($_POST['nama']); // nama fasilitas
-        $cek1 = get_row_by_id('fasilitas', 'nama', $nama);
-        // jika belum ada fasilitas dengan nama yg diinputkan
-        if($cek1 == FALSE)
+        $id_pembayaran = escape($_POST['id']);
+        $_SESSION['id_pembayaran'] = $id_pembayaran;
+    }
+    elseif($submit_type == 'add_transaksi')
+    {
+        $id_siswa = escape($_POST['id_siswa']);
+        $q_siswa = get_by_id('siswa', 'id', $id_siswa, FALSE, 'ASC', 1);
+        $siswa = mysql_fetch_object($q_siswa);
+        $jumlah = $pembayaran->jumlah;
+
+        if($siswa->saldo < $jumlah)
         {
-            // simpan data ke database
-            $q = sprintf("INSERT INTO fasilitas(
-                        nama,
-                        created_date
-                        )
-                        VALUES(UPPER('%s'),'%s')",
-                $nama,
-                now()
-            );
-
-            // jalankan query
-            $r = mysql_query($q);
-
-            // jika kesalahan query atau database
-            if(!$q)
-            {
-                $status = FALSE;
-                $error = 'Kesalahan Database';
-            }
-            else
-            {
-                $status = TRUE;
-                $error = '';
-                $id = mysql_insert_id();
-                redirect('fasilitas.php?add=true&nama='.$nama.'&id='.$id);
-            }
+            $error = 'Saldo tidak Mencukupi';
         }
         else
         {
-            $status = FALSE;
-            $error = 'Fasilitas '.$nama.', sudah ada';
+            $saldo_akhir = $siswa->saldo - $jumlah;
+
+            $q_t_pembayaran = sprintf("INSERT INTO transaksi(tipe, jumlah, id_siswa, id_pembayaran, saldo_akhir, id_guru, tanggal, created_at)
+                                        VALUES('%s', '%d', '%s','%s', '%s', '%s', '%s', '%s')",
+                'out',
+                $jumlah,
+                $id_siswa,
+                $id_pembayaran,
+                $saldo_akhir,
+                $_SESSION['logged_id'],
+                now(),
+                now()
+            );
+
+            $r_t_pembayaran = mysql_query($q_t_pembayaran);
+
+            $q_update_saldo_siswa = mysql_query("UPDATE siswa SET saldo='$saldo_akhir' WHERE id='$id_siswa'");
+
+            unset($_SESSION['id_pembayaran']);
+
+            redirect('transaksi.php?info=success-add-transaksi');
         }
     }
 }
@@ -64,7 +77,7 @@ if(array_key_exists('key', $_POST))
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Transaksi
+            Tambah Transaksi
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
@@ -74,26 +87,6 @@ if(array_key_exists('key', $_POST))
 
     <!-- Main content -->
     <section class="content">
-        <?php if(!empty($error)): ?>
-            <div class="alert alert-danger">
-                <i class="fa fa-warning"></i>
-                <strong><?php echo $error; ?></strong>
-            </div>
-            <script>
-
-            </script>
-        <?php endif; ?>
-
-        <?php if(!empty($_GET['add']) AND !empty($_GET['nama']) AND empty($_POST)): ?>
-            <div class="alert alert-success">
-                <i class="fa fa-info"></i>
-                <strong>Berhasil Tambah Fasilitas <?php echo $_GET['nama']; ?></strong>
-            </div>
-            <script>
-
-            </script>
-        <?php endif; ?>
-
         <!-- Main row -->
         <div class="row">
             <!-- Left col -->
@@ -101,81 +94,65 @@ if(array_key_exists('key', $_POST))
                 <div class="box box-warning">
                     <div class="box-header">
                         <i class="fa fa-calendar"></i>
-                        <h3 class="box-title">Pilih Event</h3>
+                        <h3 class="box-title">Pembayaran</h3>
                     </div>
                     <div class="box-body">
-                        <table class="table datatable-simple">
-                            <thead>
-                            <tr>
-                                <th>Nama</th>
-                                <th>Pilih</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                                $facilities = mysql_query("SELECT * FROM event ORDER BY created_at DESC");
-                                while($facility = mysql_fetch_object($facilities)):
 
-                                $highligtht = '';
-                                // untuk highlight
-                                if(!empty($_GET['id']) AND empty($_POST))
-                                {
-                                    // jika id sama dengan GET id
-                                    if($facility->id == $_GET['id'])
-                                        $highligtht = 'list-group-item-success';
-                                }
+                        <?php if(!empty($error)): ?>
+                            <div class="alert alert-danger">
+                                <i class="fa fa-warning"></i>
+                                <strong><?php echo $error; ?></strong>
+                            </div>
+                            <script>
 
-                            ?>
-                            <tr class="<?php echo $highligtht; ?>">
-                                <td><?php echo $facility->nama; ?></td>
-                                <td></td>
-                            </tr>
-                            <?php endwhile; ?>
-                            </tbody>
-                        </table>
+                            </script>
+                        <?php endif; ?>
+
+                        <h2><?php echo $pembayaran->nama; ?></h2>
+                        <h1><?php echo format_rupiah($pembayaran->jumlah); ?></h1>
+                        <h3><?php echo tanggal_format_indonesia($pembayaran->tanggal); ?></h3>
+                    </div><!-- /.distro -->
+                    <div class="box-footer">
+                        <form action="transaksi_create.php" method="post" class="hidden" id="form-transaksi">
+                            <input type="hidden" name="id_pembayaran" value="<?php echo $id_pembayaran; ?>">
+                            <input type="hidden" name="id_siswa" id="id_siswa">
+                            <input type="hidden" name="submit_type" value="add_transaksi">
+                            <input type="hidden" name="key" value="bulbasaur-transaksi">
+                            <button class="btn btn-lg btn-primary btn-block">Bayar <?php echo $pembayaran->nama; ?></button>
+                        </form>
+                    </div>
+                </div>
+            </section><!-- /.Left col -->
+            <!-- Left col -->
+            <section class="col-lg-4">
+                <div class="box box-warning">
+                    <div class="box-header">
+                        <i class="fa fa-calendar"></i>
+                        <h3 class="box-title">Detail Siswa</h3>
+                    </div>
+                    <div class="list-group">
+                       <div class="list-group-item">
+                           <input type="text" name="transaksi-rfid" id="transaksi-rfid" class="form-control">
+                       </div>
+                        <div class="list-group-item">
+                            <strong>NIS</strong>
+                            <h3 id="transaksi-nis"></h3>
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Nama</strong>
+                            <h3 id="transaksi-nama"></h3>
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Kelas</strong>
+                            <h3 id="transaksi-kelas"></h3>
+                        </div>
+                        <div class="list-group-item">
+                            <strong>Saldo</strong>
+                            <h3 id="transaksi-saldo"></h3>
+                        </div>
                     </div><!-- /.distro -->
                 </div>
             </section><!-- /.Left col -->
-
-            <!-- right col (We are only adding the ID to make the widgets sortable)-->
-            <section class="col-lg-4">
-                <!-- Kategori List List -->
-                <div class="box box-warning" id="list-tambah-fasilitas">
-                    <div class="box-header">
-                        <i class="ion ion-plus"></i>
-                        <h3 class="box-title">Tambah Transaksi</h3>
-                    </div><!-- /.box-header -->
-                    <form action="" method="post">
-                        <div class="box-body">
-                            <div class="form-group">
-                                <label>RFID</label>
-                                <input type="text" name="rfid" class="form-control" readonly>
-                            </div>
-                            <div class="form-group">
-                                <label>Jumlah</label>
-                                <input type="text" name="jumlah" class="form-control">
-                            </div>
-                            <h1>Detail Siswa</h1>
-                            <div class="form-group">
-                                <label>Nama</label>
-                                <h3 class="transaksi-nama"></h3>
-                            </div>
-                            <div class="form-group">
-                                <label>Kelas</label>
-                                <h3 class="transaksi-kelas"></h3>
-                            </div>
-
-
-                        </div><!-- /.box-body -->
-                        <div class="box-footer">
-                            <input type="hidden" name="tipe" value="out">
-                            <input type="hidden" value="<?php echo sha1(date('ymdhis')); ?>" name="key">
-                            <input type="hidden" value="add_facility" name="submit_type">
-                            <button class="btn btn-primary">Simpan</button>
-                        </div><!-- /.box-footer -->
-                    </form>
-                </div><!-- /.kategori -->
-            </section><!-- right col -->
         </div><!-- /.row (main row) -->
     </section><!-- /.content -->
 
@@ -191,4 +168,48 @@ if(array_key_exists('key', $_POST))
         "bAutoWidth": false,
         "iDisplayLength": 100
     });
+
+
+    $('#transaksi-rfid').focus();
+
+    $('#transaksi-rfid').change(function(){
+        var rfid = $(this).val();
+
+        $.ajax({
+            url: base_url + 'services/detail_siswa_by_rfid.php',
+            type: 'get',
+            data: {
+                rfid: rfid
+            },
+            dataType: 'json',
+            success: function(data){
+                if(data.status == true)
+                {
+                    $('#transaksi-nis').text(data.nis);
+                    $('#transaksi-nama').text(data.nama);
+                    $('#transaksi-saldo').text(data.saldo_format_rupiah);
+                    $('#form-transaksi').removeClass('hidden');
+                    $('#id_siswa').val(data.id);
+                    $('#form-transaksi').submit();
+                }
+                else
+                {
+                    $('#transaksi-rfid').val('');
+                    $('#transaksi-nis').text('');
+                    $('#transaksi-nama').text('');
+                    $('#transaksi-rfid').focus();
+                }
+
+            }
+        });
+    });
+
+    $('#form-transaksi').submit(function(){
+        var c = confirm('Apakah anda yakin membayar transaksi ini?');
+
+        if(c == false){
+            return false;
+        }
+    });
+
 </script>

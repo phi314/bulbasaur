@@ -29,7 +29,7 @@ require_once('inc/header.php');
                     id_guru,
                     created_at
                     )
-                    VALUES('%s', '%s', '%s', '%s', '%s', '%d')",
+                    VALUES('%s', '%s', '%s', '%s', '%s', '%s')",
                 escape($_POST['rfid']),
                 escape($_POST['nis']),
                 escape($_POST['nama']),
@@ -90,7 +90,7 @@ require_once('inc/header.php');
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="rfid">RFID</label>
-                                    <input type="text" class="form-control" name="rfid" id="rfid" placeholder="Tap RFID" readonly required="">
+                                    <input type="text" class="form-control" name="rfid" id="rfid" placeholder="Tap RFID" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="nis">NIS</label>
@@ -133,4 +133,5 @@ require_once('inc/header.php');
         "image": false, //Button to insert an image. Default true,
         "color": false //Button to change color of font
     });
+
 </script>

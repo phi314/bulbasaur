@@ -136,8 +136,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="events.php">
-                        <i class="fa fa-calendar"></i> <span>Event</span>
+                    <a href="pembayaran.php">
+                        <i class="fa fa-calendar"></i> <span>Pembayaran</span>
                     </a>
                 </li>
             </ul>
