@@ -100,7 +100,7 @@
                         </section><!-- /.Left col -->
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
                         <section class="col-lg-5 connectedSortable">
-
+                            <?php if($_SESSION['logged_is_admin']): ?>
                             <!-- Kategori List List -->
                             <div class="box box-primary">
                                 <div class="box-header">
@@ -133,6 +133,7 @@
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
                         </section><!-- right col -->
+                        <?php endif; ?>
                     </div><!-- /.row (main row) -->
 
                 </section><!-- /.content -->

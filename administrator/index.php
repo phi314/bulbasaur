@@ -15,7 +15,7 @@
         $password = escape($_POST['password']);
         $password_enc = sha1($password);
         // cek user valid
-        $q = "SELECT id, nama, username, is_admin FROM guru WHERE username='$username' AND password='$password_enc' AND is_admin=1 AND is_active=1 LIMIT 1";
+        $q = "SELECT id, nama, username, is_admin FROM guru WHERE username='$username' AND password='$password_enc' AND is_active=1 LIMIT 1";
         $r = mysql_query($q);
 
         $user = mysql_fetch_object($r);
@@ -67,7 +67,7 @@
     <body class="bg-black">
 
         <div class="form-box" id="login-box">
-            <div class="header">ADMINISTRATOR | SMKN 6</div>
+            <div class="header">TATA USAHA | SMKN 6</div>
             <form action="" method="post">
                 <div class="body bg-gray">
                     <div class="form-group">

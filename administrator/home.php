@@ -25,10 +25,29 @@
                 <!-- Main content -->
                 <section class="content">
 
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- right col (We are only adding the ID to make the widgets sortable)-->
+
+                                <div class="box box-success">
+                                    <div class="box-header">
+                                        <i class="fa fa-dashboard"></i>
+                                        <h3 class="box-title">Peninjauan</h3>
+                                    </div>
+                                    <div class="box-body list-group">
+                                        <div class="list-group-item">Siswa 20</div>
+                                        <div class="list-group-item">Guru 9</div>
+                                        <div class="list-group-item">Transaksi 345</div>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+
                     <!-- Main row -->
                     <div class="row">
                         <!-- Left col -->
-                        <section class="col-lg-7">
+                        <section class="col-lg-12">
 
                             <!-- Event List -->
                             <div class="box box-primary">
@@ -36,45 +55,37 @@
                                     <i class="ion ion-clipboard"></i>
                                     <h3 class="box-title">Transaksi Terakhir</h3>
                                 </div><!-- /.box-header -->
-                                <?php
-                                $q = "SELECT * FROM transaksi ORDER BY created_at DESC LIMIT 20";
-                                $r = mysql_query($q);
-                                while($d = mysql_fetch_object($r)):
-                                    ?>
-                                    <a href="event_detail.php?id=<?php echo $d->id; ?>" class="list-group-item">
-                                        <?php echo $d->nama; ?>
-                                        <br>
-                                        <small>
-                                            <label>Waktu Event</label>
-                                            <br>
-                                            <?php echo tanggal_format_indonesia($d->waktu, TRUE); ?>
-                                            <br>
-                                            Lama <?php echo $d->lama; ?> Hari
-                                        </small>
-                                        <div class="pull-right"><i class="fa fa-chevron-circle-right"></i> </div>
-                                    </a>
-
-                                <?php endwhile; ?>
+                                <div class="box-body">
+                                    <table class="table datatable-simple">
+                                        <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Tipe</th>
+                                            <th>Nama Siswa</th>
+                                            <th>Jumlah</th>
+                                            <th>Pembayaran</th>
+                                            <th>Guru</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                        $q_transaksi = mysql_query("SELECT * FROM transaksi ORDER BY created_at DESC");
+                                        while($transaksi = mysql_fetch_object($q_transaksi)):
+                                            ?>
+                                            <tr class="">
+                                                <td><?php echo tanggal_format_indonesia($transaksi->tanggal); ?></td>
+                                                <td><?php echo $transaksi->tipe; ?></td>
+                                                <td><?php echo $transaksi->id_siswa; ?></td>
+                                                <td><?php echo $transaksi->jumlah; ?></td>
+                                                <td><?php echo $transaksi->id_pembayaran; ?></td>
+                                                <td><?php echo $transaksi->id_guru; ?></td>
+                                            </tr>
+                                        <?php endwhile; ?>
+                                        </tbody>
+                                    </table>
+                                </div><!-- /.distro -->
                             </div><!-- /.box -->
                         </section><!-- /.Left col -->
-                        <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                        <section class="col-lg-5 connectedSortable">
-
-                            <div class="box box-success">
-                                <div class="box-header">
-                                    <i class="fa fa-dashboard"></i>
-                                    <h3 class="box-title">Peninjauan</h3>
-                                </div>
-                                <div class="box-body list-group">
-                                    <div class="list-group-item">Siswa 20</div>
-                                    <div class="list-group-item">Guru 9</div>
-                                    <div class="list-group-item">Transaksi 345</div>
-                                </div>
-                            </div>
-
-                        </section><!-- right col -->
-                    </div><!-- /.row (main row) -->
-
                 </section><!-- /.content -->
 
 <?php include('inc/footer.php'); ?>

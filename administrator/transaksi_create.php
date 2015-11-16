@@ -120,6 +120,12 @@ if(array_key_exists('key', $_POST))
                             <input type="hidden" name="key" value="bulbasaur-transaksi">
                             <button class="btn btn-lg btn-primary btn-block">Bayar <?php echo $pembayaran->nama; ?></button>
                         </form>
+                        <form action="transaksi_choose.php" method="post" class="hidden" id="form-cancel">
+                            <input type="hidden" name="id_pembayaran" value="<?php echo $id_pembayaran; ?>">
+                            <input type="hidden" name="submit_type" value="delete_pembayaran">
+                            <input type="hidden" name="key" value="bulbasaur-transaksi">
+                            <button class="btn btn-lg btn-warning btn-block">Pilih Pembayaran <?php echo $pembayaran->nama; ?></button>
+                        </form>
                     </div>
                 </div>
             </section><!-- /.Left col -->
