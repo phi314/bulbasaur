@@ -194,7 +194,7 @@
         <!-- Main row -->
         <div class="row">
             <!-- Left col -->
-            <section class="col-lg-7">
+            <section class="col-lg-12">
                 <div class="box box-success">
                     <div class="box-header">
                         <i class="fa fa-flash"></i>
@@ -222,29 +222,18 @@
                                 <dd><?php echo kelas($siswa->id_kelas); ?></dd>
                                 <dt>Jenis Kelamin</dt>
                                 <dd><?php echo jk($siswa->jk); ?></dd>
+                                <dt>Saldo</dt>
+                                <dd><?php echo format_rupiah($siswa->saldo); ?></dd>
                             </dl>
                         </div>
                     </div><!-- /.distro -->
                 </div>
             </section><!-- /.Left col -->
-            <!-- right col (We are only adding the ID to make the widgets sortable)-->
-            <section class="col-lg-5 connectedSortable">
-                <!-- Map -->
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <i class="fa fa-map-marker"></i>
-                        <h3 class="box-title">Absensi Hari Ini</h3>
-                    </div><!-- /.box-header -->
-                    <div class="box-body">
-                        <h1 class="text-muted">HADIR</h1>
-                    </div>
-                </div><!-- /.map -->
-            </section><!-- right col -->
         </div><!-- /.row (main row) -->
 
         <!-- Second Row -->
         <section class="row">
-            <div class="col-md-7">
+            <div class="col-md-12">
                 <div class="box box-info">
                     <div class="box-header">
                         <h3 class="box-title"><i class="fa fa-calendar"></i> Transaksi</h3>
@@ -257,54 +246,19 @@
                                 <th>Pembayaran</th>
                                 <th>Tipe</th>
                                 <th>Jumlah</th>
-                                <th>Aksi</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                            $q = "SELECT * FROM transaksi where id_siswa='$siswa->id' ORDER BY tanggal DESC";
+                            $q = "SELECT transaksi.*, pembayaran.nama FROM transaksi JOIN pembayaran ON pembayaran.id=transaksi.id_pembayaran WHERE id_siswa='$siswa->id' ORDER BY tanggal DESC";
                             $r = mysql_query($q);
                             while($d = mysql_fetch_object($r)):
                                 ?>
                                 <tr>
                                     <td><?php echo tanggal_format_indonesia($d->tanggal); ?></td>
-                                    <td><?php echo $d->id_pembayaran; ?></td>
+                                    <td><?php echo $d->nama; ?></td>
                                     <td><?php echo $d->tipe; ?></td>
-                                    <td><?php echo $d->jumlah; ?></td>
-                                    <td>
-                                        <div class="btn-group btn-group-xs">
-                                            <a href="kelas.php?id=<?php echo $d->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i> </a>
-                                        </div>
-                                    </td>
-                                </tr>
-                            <?php endwhile; ?>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-5">
-                <div class="box box-info">
-                    <div class="box-header">
-                        <h3 class="box-title"><i class="fa fa-comments"></i> Absensi</h3>
-                    </div>
-                    <div class="box-body">
-                        <table class="table datatable-orderonly">
-                            <thead>
-                            <tr>
-                                <th>Tanggal</th>
-                                <th>Keterangan</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php
-                            $q = "SELECT * FROM absensi where id_siswa='$siswa->id' ORDER BY tanggal DESC";
-                            $r = mysql_query($q);
-                            while($d = mysql_fetch_object($r)):
-                                ?>
-                                <tr>
-                                    <td><?php echo $d->tanggal; ?></td>
-                                    <td><?php echo $d->keterangan; ?></td>
+                                    <td><?php echo format_rupiah($d->jumlah); ?></td>
                                 </tr>
                             <?php endwhile; ?>
                             </tbody>
@@ -370,7 +324,7 @@
                                         $r_kelas = mysql_query($q_kelas);
                                         while($d_kelas = mysql_fetch_object($r_kelas)):
                                         ?>
-                                            <option value="<?php echo $d_kelas->id; ?>" <?php set_select_value($d_kelas->id, $siswa->id); ?>><?php echo $d_kelas->tingkat.$d_kelas->nama.' ('.$d_kelas->tahun.')'; ?></option>
+                                            <option value="<?php echo $d_kelas->id; ?>" <?php set_select_value($d_kelas->id, $siswa->id_kelas); ?>><?php echo $d_kelas->tingkat.$d_kelas->nama.' ('.$d_kelas->tahun.')'; ?></option>
                                         <?php
                                         endwhile;
                                         ?>

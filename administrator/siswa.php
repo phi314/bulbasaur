@@ -61,13 +61,21 @@ require_once('inc/header.php');
                         <?php
                             $q = get_all('siswa');
                             while($siswa = mysql_fetch_object($q)):
+
+                                $kelas = '';
+                                if($siswa->id_kelas != 0)
+                                {
+                                    $q_kelas = mysql_query("SELECT * FROM kelas WHERE id='$siswa->id_kelas' LIMIT 1");
+                                    $d_kelas = mysql_fetch_object($q_kelas);
+                                    $kelas = $d_kelas->tingkat.'-'.$d_kelas->nama.' ('.$d_kelas->tahun.')';
+                                }
                         ?>
                             <tr>
                                 <td><a href="siswa_detail.php?id=<?php echo $siswa->id; ?>"><?php echo $siswa->nis; ?></a></td>
                                 <td><?php echo $siswa->rfid; ?></td>
                                 <td><?php echo $siswa->nama; ?></td>
                                 <td><?php echo jk($siswa->jk); ?></td>
-                                <td></td>
+                                <td><?php echo $kelas; ?></td>
                             </tr>
                         <?php
                             endwhile;

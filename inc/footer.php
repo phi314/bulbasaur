@@ -1,5 +1,5 @@
         <footer class="footer" >
-            Copyrights &copy Tamankota 2014. All Rights Reserved.
+            Copyrights &copy SMK Negeri 6 Kota Garut 2015. All Rights Reserved.
         </footer>
 
         <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
@@ -12,6 +12,7 @@
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
              <script>
+                 var base_url = "/bulbasaur/";
         //     (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
         //     function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
         //     e=o.createElement(i);r=o.getElementsByTagName(i)[0];

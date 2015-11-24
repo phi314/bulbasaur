@@ -8,6 +8,8 @@ require_once('../lib/login.php');
 
 require_once('inc/header.php');
 
+$logged_id = $_SESSION['logged_id'];
+
 ?>
 
     <!-- Content Header (Page header) -->
@@ -34,10 +36,6 @@ require_once('inc/header.php');
             </script>
         <?php endif; ?>
 
-        <a class="btn btn-primary" href="siswa_create.php"><i class="fa fa-plus"></i> Tambah Siswa</a>
-
-        <div class="h3"></div>
-
         <section>
             <div class="box box-success">
                 <div class="box-header">
@@ -52,12 +50,14 @@ require_once('inc/header.php');
                             <th>RFID</th>
                             <th>NAMA</th>
                             <th>JK</th>
-                            <th>KELAS</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php
-                            $q = get_all('siswa');
+                            $q = mysql_query("SELECT siswa.*
+                                                FROM siswa
+                                                JOIN kelas ON kelas.id=siswa.id_kelas
+                                                WHERE kelas.id_guru='$logged_id'");
                             while($siswa = mysql_fetch_object($q)):
                         ?>
                             <tr>
@@ -65,7 +65,6 @@ require_once('inc/header.php');
                                 <td><?php echo $siswa->rfid; ?></td>
                                 <td><?php echo $siswa->nama; ?></td>
                                 <td><?php echo jk($siswa->jk); ?></td>
-                                <td></td>
                             </tr>
                         <?php
                             endwhile;

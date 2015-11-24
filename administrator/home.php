@@ -25,25 +25,6 @@
                 <!-- Main content -->
                 <section class="content">
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <!-- right col (We are only adding the ID to make the widgets sortable)-->
-
-                                <div class="box box-success">
-                                    <div class="box-header">
-                                        <i class="fa fa-dashboard"></i>
-                                        <h3 class="box-title">Peninjauan</h3>
-                                    </div>
-                                    <div class="box-body list-group">
-                                        <div class="list-group-item">Siswa 20</div>
-                                        <div class="list-group-item">Guru 9</div>
-                                        <div class="list-group-item">Transaksi 345</div>
-                                    </div>
-                                </div>
-
-                        </div>
-                    </div>
-
                     <!-- Main row -->
                     <div class="row">
                         <!-- Left col -->

@@ -81,25 +81,53 @@
                                     <i class="ion ion-clipboard"></i>
                                     <h3 class="box-title">Data Siswa Hari Ini</h3>
                                 </div><!-- /.box-header -->
-                                <?php
-                                    $q = "SELECT * FROM event ORDER BY created_at";
-                                    $r = mysql_query($q);
-                                    while($d = mysql_fetch_object($r)):
-                                ?>
-                                    <a href="event_detail.php?id=<?php echo $d->id; ?>" class="list-group-item">
-                                        <?php echo $d->nama; ?>
-                                        <br>
-                                        <small>
-                                            <label>Waktu Event</label>
-                                            <br>
-                                            <?php echo tanggal_format_indonesia($d->waktu, TRUE); ?>
-                                            <br>
-                                            Lama <?php echo $d->lama; ?> Hari
-                                        </small>
-                                        <div class="pull-right"><i class="fa fa-chevron-circle-right"></i> </div>
-                                    </a>
+                                <div class="box-body">
+                                    <table class="table datatable">
+                                        <thead>
+                                        <tr>
+                                            <th>Nama</th>
+                                            <th>Kelas</th>
+                                            <th>Tanggal</th>
+                                            <th>Jam Masuk</th>
+                                            <th>Jam Pulang</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="list-absensi">
+                                        <?php
+                                        $date_now = date('y-m-d');
+                                        $q_absensi = mysql_query("SELECT absensi.*
+                                                                    FROM absensi
+                                                                    JOIN siswa ON siswa.id=absensi.id_siswa
+                                                                    JOIN kelas ON kelas.id=siswa.id_kelas
+                                                                    WHERE kelas.id_guru = '$logged_id'
+                                                                    AND tanggal='$date_now'
+                                                                    ORDER BY updated_at DESC");
 
-                                <?php endwhile; ?>
+                                        while($d_absensi = mysql_fetch_object($q_absensi)):
+                                            $q_siswa = mysql_query("SELECT * FROM siswa WHERE id='$d_absensi->id_siswa' LIMIT 1");
+                                            $r_siswa = mysql_fetch_object($q_siswa);
+
+                                            $kelas = '';
+                                            if($r_siswa->id_kelas != 0)
+                                            {
+                                                $q_kelas = mysql_query("SELECT * FROM kelas WHERE id='$r_siswa->id_kelas' LIMIT 1");
+                                                $d_kelas = mysql_fetch_object($q_kelas);
+                                                $kelas = $d_kelas->tingkat.'-'.$d_kelas->nama.' ('.$d_kelas->tahun.')';
+                                            }
+                                            ?>
+                                            <tr id="<?php echo $d_absensi->id; ?>">
+                                                <td><?php echo $r_siswa->nama; ?></td>
+                                                <td><?php echo $kelas; ?></td>
+                                                <td><?php echo $d_absensi->tanggal; ?></td>
+                                                <td><?php echo $d_absensi->jam_masuk; ?></td>
+                                                <td><?php echo $d_absensi->jam_pulang; ?></td>
+                                            </tr>
+                                        <?php
+                                        endwhile;
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div><!-- /.box -->
                         </section><!-- /.Left col -->
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->

@@ -16,8 +16,20 @@ if(isset($_GET['rfid']))
 {
     $rfid = escape($_GET['rfid']);
 
-    $q = mysql_query("SELECT id, rfid, nis, nama, jk FROM siswa WHERE rfid='$rfid' LIMIT 1");
+    $kelas = '';
+
+    $q = mysql_query("SELECT id, rfid, nis, siswa.nama, jk, id_kelas  FROM siswa WHERE siswa.rfid='$rfid' LIMIT 1");
+
     $r = mysql_fetch_object($q);
+
+    if($r->id_kelas != 0)
+    {
+        $q_kelas = mysql_query("SELECT * FROM kelas WHERE id='$r->id_kelas' LIMIT 1");
+
+        $d_kelas = mysql_fetch_object($q_kelas);
+
+        $kelas = $d_kelas->tingkat.'-'.$d_kelas->nama.' ('.$d_kelas->tahun.')';
+    }
 
     $id_absensi = FALSE;
 
@@ -38,6 +50,8 @@ if(isset($_GET['rfid']))
         $time_now = date('H:i:s');
         $now = now();
 
+        $keterangan = "Sudah Absen";
+
         $absensi = FALSE;
 
         $q_absensi = mysql_query("SELECT * FROM absensi WHERE tanggal='$date_now' AND id_siswa='$r->id'");
@@ -50,7 +64,8 @@ if(isset($_GET['rfid']))
             // insert absensi siswa
             mysql_query("INSERT INTO absensi(id_siswa, tanggal, jam_masuk, absen, created_at) VALUES('$r->id', '$date_now', '$time_now', 'HADIR', '$now')");
 
-            $id_absensi = mysql_insert_id();
+            $keterangan = "Selamat Datang";
+
             $absensi = TRUE;
         }
 
@@ -59,8 +74,15 @@ if(isset($_GET['rfid']))
          */
         if($time_now > $jam_pulang)
         {
-            mysql_query("UPDATE absensi SET jam_pulang='$time_now' WHERE id_siswa='$r->id' AND tanggal='$date_now'");
-            $absensi = TRUE;
+            $q_val_pulang = mysql_query("SELECT jam_pulang FROM absensi WHERE id_siswa='$r->id' AND tanggal='$date_now' AND jam_pulang='00:00:00'");
+            if(mysql_num_rows($q_val_pulang) == 1)
+            {
+                mysql_query("UPDATE absensi SET jam_pulang='$time_now' WHERE id_siswa='$r->id' AND tanggal='$date_now'");
+
+                $keterangan = 'Sudah Pulang';
+
+                $absensi = TRUE;
+            }
         }
 
         $q_absensi1 = mysql_query("SELECT * FROM absensi WHERE tanggal='$date_now' AND id_siswa='$r->id'");
@@ -72,13 +94,14 @@ if(isset($_GET['rfid']))
             'rfid'      => $r->rfid,
             'nis'       => $r->nis,
             'nama'      => $r->nama,
+            'kelas'     => $kelas,
             'jk'        => $r->jk,
             'jam_masuk' => $r_absensi->jam_masuk,
             'jam_pulang' => $r_absensi->jam_pulang,
             'now'       => $time_now,
             'absensi'   => $absensi,
-            'id_absensi' => $id_absensi,
-            'keterangan' => ''
+            'id_absensi' => $r_absensi->id,
+            'keterangan' => $keterangan
         ];
     }
 }

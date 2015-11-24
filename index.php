@@ -49,10 +49,18 @@ require_once('lib/unleashed.lib.php');
                             while($d_absensi = mysql_fetch_object($q_absensi)):
                                 $q_siswa = mysql_query("SELECT * FROM siswa WHERE id='$d_absensi->id_siswa' LIMIT 1");
                                 $r_siswa = mysql_fetch_object($q_siswa);
+
+                                $kelas = '';
+                                if($r_siswa->id_kelas != 0)
+                                {
+                                    $q_kelas = mysql_query("SELECT * FROM kelas WHERE id='$r_siswa->id_kelas' LIMIT 1");
+                                    $d_kelas = mysql_fetch_object($q_kelas);
+                                    $kelas = $d_kelas->tingkat.'-'.$d_kelas->nama.' ('.$d_kelas->tahun.')';
+                                }
                         ?>
                                 <tr id="<?php echo $d_absensi->id; ?>">
                                     <td><?php echo $r_siswa->nama; ?></td>
-                                    <td><?php echo $r_siswa->nis; ?></td>
+                                    <td><?php echo $kelas; ?></td>
                                     <td><?php echo $d_absensi->jam_masuk; ?></td>
                                     <td><?php echo $d_absensi->jam_pulang; ?></td>
                                 </tr>
@@ -78,10 +86,10 @@ require_once('lib/unleashed.lib.php');
                             <strong>Kelas</strong>
                             <h3 class="absensi-kelas"></h3>
                         </div>
-<!--                        <div class="list-group-item">-->
-<!--                            <strong>Keterangan</strong>-->
-<!--                            <h3 class="absensi-keterangan"></h3>-->
-<!--                        </div>-->
+                        <div class="list-group-item">
+                            <strong>Keterangan</strong>
+                            <h3 class="absensi-keterangan"></h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -116,6 +124,8 @@ require_once('lib/unleashed.lib.php');
                 $('#home-rfid').val('');
                 $('.absensi-nis').text('');
                 $('.absensi-nama').text('');
+                $('.absensi-kelas').text('');
+                $('.absensi-keterangan').text('');
                 $('#home-rfid').focus();
             }
         }   , 1000);
@@ -150,17 +160,19 @@ require_once('lib/unleashed.lib.php');
                 {
                     $('.absensi-nis').text(data.nis);
                     $('.absensi-nama').text(data.nama);
+                    $('.absensi-kelas').text(data.kelas);
+                    $('.absensi-keterangan').text(data.keterangan);
 
                     var tr = "<tr id='" + data.id_absensi + "'>" +
                         "<td>" + data.nama +"</td>" +
-                        "<td>" + data.nis +"</td>" +
+                        "<td>" + data.kelas +"</td>" +
                         "<td>" + data.jam_masuk +"</td>" +
-                        "<td>" + data.jam_pulang +"</td>" +
-                        "<td>" + data.keterangan +"</td>";
+                        "<td>" + data.jam_pulang +"</td>";
 
                     if(data.absensi == true)
                     {
                         $('tr .dataTables_empty').hide();
+                        $('tr#' + data.id_absensi).hide();
                         $(tr).prependTo('#list-absensi');
                     }
 
@@ -171,6 +183,8 @@ require_once('lib/unleashed.lib.php');
                     $('#home-rfid').val('');
                     $('.absensi-nis').text('');
                     $('.absensi-nama').text('');
+                    $('.absensi-kelas').text('');
+                    $('.absensi-keterangan').text('');
                     $('#home-rfid').focus();
                 }
 

@@ -41,34 +41,59 @@ if(array_key_exists('key', $_POST))
         $siswa = mysql_fetch_object($q_siswa);
         $jumlah = $pembayaran->jumlah;
 
-        if($siswa->saldo < $jumlah)
+
+        // check jika siswa sudah membayar
+        $q_val_cek = mysql_query("SELECT * FROM transaksi WHERE id_siswa='$siswa->id' AND id_pembayaran='$id_pembayaran'");
+
+        if(mysql_num_rows($q_val_cek) == 0)
         {
-            $error = 'Saldo tidak Mencukupi';
+            // jika saldo tidak mencukupi
+            if($siswa->saldo < $jumlah)
+            {
+                $error = 'Saldo tidak Mencukupi';
+            }
+            else
+            {
+
+                $saldo_akhir = $siswa->saldo - $jumlah;
+
+                $kode = hash('crc32', now().$id_siswa.$id_pembayaran);
+                $q_t_pembayaran = sprintf("INSERT INTO transaksi(kode, tipe, jumlah, id_siswa, id_pembayaran, saldo_akhir, id_guru, tanggal, created_at)
+                                        VALUES('%s', '%s', '%d', '%s','%s', '%s', '%s', '%s', '%s')",
+                    $kode,
+                    'out',
+                    $jumlah,
+                    $id_siswa,
+                    $id_pembayaran,
+                    $saldo_akhir,
+                    $_SESSION['logged_id'],
+                    now(),
+                    now()
+                );
+
+                $r_t_pembayaran = mysql_query($q_t_pembayaran);
+
+                $q_update_saldo_siswa = mysql_query("UPDATE siswa SET saldo='$saldo_akhir' WHERE id='$id_siswa'");
+
+                $error = 'Berhasil Transaksi';
+
+                unset($_SESSION['id_pembayaran']);
+
+                redirect("transaksi.php?info=$error");
+
+            }
         }
         else
         {
-            $saldo_akhir = $siswa->saldo - $jumlah;
-
-            $q_t_pembayaran = sprintf("INSERT INTO transaksi(tipe, jumlah, id_siswa, id_pembayaran, saldo_akhir, id_guru, tanggal, created_at)
-                                        VALUES('%s', '%d', '%s','%s', '%s', '%s', '%s', '%s')",
-                'out',
-                $jumlah,
-                $id_siswa,
-                $id_pembayaran,
-                $saldo_akhir,
-                $_SESSION['logged_id'],
-                now(),
-                now()
-            );
-
-            $r_t_pembayaran = mysql_query($q_t_pembayaran);
-
-            $q_update_saldo_siswa = mysql_query("UPDATE siswa SET saldo='$saldo_akhir' WHERE id='$id_siswa'");
-
-            unset($_SESSION['id_pembayaran']);
-
-            redirect('transaksi.php?info=success-add-transaksi');
+            $error = 'Siswa sudah melakukan Pembayaran ini sebelumnya';
         }
+
+    }
+    elseif($submit_type == 'clear_pembayaran')
+    {
+        unset($_SESSION['id_pembayaran']);
+
+        redirect('transaksi_choose.php');
     }
 }
 
@@ -120,11 +145,11 @@ if(array_key_exists('key', $_POST))
                             <input type="hidden" name="key" value="bulbasaur-transaksi">
                             <button class="btn btn-lg btn-primary btn-block">Bayar <?php echo $pembayaran->nama; ?></button>
                         </form>
-                        <form action="transaksi_choose.php" method="post" class="hidden" id="form-cancel">
+                        <form action="transaksi_create.php" method="post" id="form-cancel">
                             <input type="hidden" name="id_pembayaran" value="<?php echo $id_pembayaran; ?>">
-                            <input type="hidden" name="submit_type" value="delete_pembayaran">
+                            <input type="hidden" name="submit_type" value="clear_pembayaran">
                             <input type="hidden" name="key" value="bulbasaur-transaksi">
-                            <button class="btn btn-lg btn-warning btn-block">Pilih Pembayaran <?php echo $pembayaran->nama; ?></button>
+                            <button class="btn btn-lg btn-warning btn-block">Ganti Pembayaran</button>
                         </form>
                     </div>
                 </div>

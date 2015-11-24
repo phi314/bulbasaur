@@ -117,21 +117,23 @@ if(array_key_exists('key', $_POST))
                                 <th>Nama Siswa</th>
                                 <th>Jumlah</th>
                                 <th>Pembayaran</th>
-                                <th>Guru</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                                $q_transaksi = mysql_query("SELECT * FROM transaksi ORDER BY created_at DESC");
+                                $q_transaksi = mysql_query("SELECT transaksi.*, siswa.nama as nama_siswa, pembayaran.nama as nama_pembayaran
+                                                            FROM transaksi
+                                                            JOIN siswa ON siswa.id=transaksi.id_siswa
+                                                            JOIN pembayaran ON pembayaran.id=transaksi.id_pembayaran
+                                                            ORDER BY created_at DESC");
                                 while($transaksi = mysql_fetch_object($q_transaksi)):
                             ?>
-                            <tr class="">
+                            <tr class="<?php echo $transaksi->tipe == 'in' ? 'success' : 'danger' ?>">
                                 <td><?php echo tanggal_format_indonesia($transaksi->tanggal); ?></td>
                                 <td><?php echo $transaksi->tipe; ?></td>
-                                <td><?php echo $transaksi->id_siswa; ?></td>
+                                <td><?php echo $transaksi->nama_siswa; ?></td>
                                 <td><?php echo $transaksi->jumlah; ?></td>
-                                <td><?php echo $transaksi->id_pembayaran; ?></td>
-                                <td><?php echo $transaksi->id_guru; ?></td>
+                                <td><?php echo $transaksi->nama_pembayaran; ?></td>
                             </tr>
                             <?php endwhile; ?>
                             </tbody>
