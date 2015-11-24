@@ -23,13 +23,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="transaksi_create.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/administrator/transaksi_create.php">
+      <file leaf-file-name="index.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="126" column="65" selection-start="4606" selection-end="4606" vertical-scroll-proportion="0.4550173" vertical-offset="2005" max-vertical-offset="4068">
+            <state line="46" column="118" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.2214533" vertical-offset="700" max-vertical-offset="3600">
               <folding>
-                <marker date="1447687979563" expanded="true" signature="1249:1446" placeholder="INSERT INTO ..." />
-                <marker date="1447687979563" expanded="true" signature="1797:1855" placeholder="UPDATE siswa..." />
+                <marker date="1448339631168" expanded="true" signature="1579:1651" placeholder="SELECT * FRO..absensi..." />
+                <marker date="1448339631168" expanded="true" signature="1792:1851" placeholder="SELECT * FRO..siswa..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="absensi_by_rfid.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/services/absensi_by_rfid.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="66" column="53" selection-start="1737" selection-end="1737" vertical-scroll-proportion="-18.074074" vertical-offset="700" max-vertical-offset="1692">
+              <folding>
+                <marker date="1448339608601" expanded="true" signature="295:363" placeholder="SELECT id, r..siswa..." />
+                <marker date="1448339608601" expanded="true" signature="849:918" placeholder="SELECT * FRO..absensi..." />
+                <marker date="1448339608601" expanded="true" signature="1109:1237" placeholder="INSERT INTO ..." />
+                <marker date="1448339608601" expanded="true" signature="1443:1756" placeholder="UPDATE absen..." />
+                <marker date="1448339608601" expanded="true" signature="1443:2228" placeholder="UPDATE absen..." />
+                <marker date="1448339608601" expanded="true" signature="1443:1532" placeholder="UPDATE absen..." />
+                <marker date="1448339608601" expanded="true" signature="1611:1680" placeholder="SELECT * FRO..absensi..." />
               </folding>
             </state>
           </provider>
@@ -60,13 +77,11 @@
         <option value="$PROJECT_DIR$/services/detail_siswa.php" />
         <option value="$PROJECT_DIR$/assets/js/clock.js" />
         <option value="$PROJECT_DIR$/assets/css/main.css" />
-        <option value="$PROJECT_DIR$/services/absensi_by_rfid.php" />
         <option value="$PROJECT_DIR$/inc/header.php" />
         <option value="$PROJECT_DIR$/inc/footer.php" />
         <option value="$PROJECT_DIR$/guru/inc/header.php" />
         <option value="$PROJECT_DIR$/guru/index.php" />
         <option value="$PROJECT_DIR$/lib/unleashed.lib.php" />
-        <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/administrator/siswa_create.php" />
         <option value="$PROJECT_DIR$/administrator/inc/header.php" />
         <option value="$PROJECT_DIR$/administrator/pembayaran.php" />
@@ -83,15 +98,18 @@
         <option value="$PROJECT_DIR$/administrator/guru.php" />
         <option value="$PROJECT_DIR$/administrator/kelas.php" />
         <option value="$PROJECT_DIR$/administrator/transaksi_create.php" />
+        <option value="$PROJECT_DIR$/lib/settings.php" />
+        <option value="$PROJECT_DIR$/services/absensi_by_rfid.php" />
+        <option value="$PROJECT_DIR$/index.php" />
       </list>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-1317" />
-    <option name="y" value="24" />
+    <option name="y" value="-4" />
     <option name="width" value="1317" />
-    <option name="height" value="744" />
+    <option name="height" value="772" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -119,6 +137,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -147,13 +166,26 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="administrator" />
+              <option name="myItemId" value="services" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bulbasaur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bulbasaur" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -193,15 +225,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1317" y="24" width="1317" height="744" extended-state="6" />
+    <frame x="-1317" y="-4" width="1317" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20535012" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20849724" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -210,10 +243,9 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -233,11 +265,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/administrator/transaksi_topup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="43" selection-start="2895" selection-end="2895" vertical-scroll-proportion="0.0" vertical-offset="2649" max-vertical-offset="3654" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/administrator/logout.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="185" selection-end="215" vertical-scroll-proportion="0.0" vertical-offset="216" max-vertical-offset="324" />
@@ -343,11 +370,6 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="593" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/services/absensi_by_rfid.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="522" selection-end="522" vertical-scroll-proportion="-10.0" vertical-offset="252" max-vertical-offset="882" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/inc/header.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="79" selection-start="1065" selection-end="1065" vertical-scroll-proportion="0.0" vertical-offset="342" max-vertical-offset="612" />
@@ -393,11 +415,6 @@
         <state line="31" column="60" selection-start="782" selection-end="782" vertical-scroll-proportion="0.0" vertical-offset="558" max-vertical-offset="2556" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="11" selection-start="3758" selection-end="4502" vertical-scroll-proportion="-14.666667" vertical-offset="2178" max-vertical-offset="2970" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/unleashed.lib.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="9" selection-start="618" selection-end="618" vertical-scroll-proportion="0.24913494" vertical-offset="0" max-vertical-offset="6120">
@@ -435,20 +452,14 @@
     <entry file="file://$PROJECT_DIR$/services/detail_siswa_by_rfid.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="41" column="26" selection-start="1056" selection-end="1056" vertical-scroll-proportion="-13.407408" vertical-offset="376" max-vertical-offset="990">
-          <folding>
-            <marker date="1447568351871" expanded="true" signature="-1:-1" placeholder="SELECT id, r..siswa..." />
-            <marker date="1447568351871" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..transaksi..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/transaksi.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="138" column="43" selection-start="3126" selection-end="4665" vertical-scroll-proportion="-11.888889" vertical-offset="2163" max-vertical-offset="2916">
-          <folding>
-            <marker date="1447566918906" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1447566918906" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..transaksi..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -468,26 +479,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="52" selection-start="541" selection-end="541" vertical-scroll-proportion="0.2741117" vertical-offset="0" max-vertical-offset="1134">
-          <folding />
-        </state>
+        <state line="9" column="52" selection-start="541" selection-end="541" vertical-scroll-proportion="0.2741117" vertical-offset="0" max-vertical-offset="1134" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/home.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="76" column="48" selection-start="3537" selection-end="3537" vertical-scroll-proportion="1.9930795" vertical-offset="216" max-vertical-offset="1746">
-          <folding>
-            <marker date="1447686741471" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..transaksi..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="116" selection-start="577" selection-end="577" vertical-scroll-proportion="0.15570934" vertical-offset="216" max-vertical-offset="1782">
-          <folding>
-            <marker date="1447687260250" expanded="true" signature="-1:-1" placeholder="SELECT id, n..guru..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -501,38 +506,65 @@
     <entry file="file://$PROJECT_DIR$/administrator/guru.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="139" column="43" selection-start="7009" selection-end="7009" vertical-scroll-proportion="-13.148149" vertical-offset="2147" max-vertical-offset="2736">
-          <folding>
-            <marker date="1447687346734" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1447687346734" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..guru..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/kelas.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="119" column="24" selection-start="5586" selection-end="5586" vertical-scroll-proportion="3.7058823" vertical-offset="0" max-vertical-offset="2646">
-          <folding>
-            <marker date="1447687427646" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1447687427646" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..kelas..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/transaksi_choose.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="63" column="0" selection-start="1483" selection-end="1678" vertical-scroll-proportion="0.6666667" vertical-offset="1152" max-vertical-offset="2088">
-          <folding>
-            <marker date="1447562684137" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..pembayaran..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/transaksi_create.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="126" column="65" selection-start="4606" selection-end="4606" vertical-scroll-proportion="0.4550173" vertical-offset="2005" max-vertical-offset="4068">
+        <state line="126" column="65" selection-start="4606" selection-end="4606" vertical-scroll-proportion="-9.740741" vertical-offset="2005" max-vertical-offset="4068">
           <folding>
-            <marker date="1447687979563" expanded="true" signature="1249:1446" placeholder="INSERT INTO ..." />
-            <marker date="1447687979563" expanded="true" signature="1797:1855" placeholder="UPDATE siswa..." />
+            <marker date="1447687979563" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
+            <marker date="1447687979563" expanded="true" signature="-1:-1" placeholder="UPDATE siswa..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/settings.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="67" selection-start="463" selection-end="463" vertical-scroll-proportion="-11.333333" vertical-offset="0" max-vertical-offset="450">
+          <folding>
+            <element signature="e#6#88#0" expanded="false" />
+            <marker date="1448324796968" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..settings..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/services/absensi_by_rfid.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="53" selection-start="1737" selection-end="1737" vertical-scroll-proportion="-18.074074" vertical-offset="700" max-vertical-offset="1692">
+          <folding>
+            <marker date="1448339608601" expanded="true" signature="295:363" placeholder="SELECT id, r..siswa..." />
+            <marker date="1448339608601" expanded="true" signature="849:918" placeholder="SELECT * FRO..absensi..." />
+            <marker date="1448339608601" expanded="true" signature="1109:1237" placeholder="INSERT INTO ..." />
+            <marker date="1448339608601" expanded="true" signature="1443:1756" placeholder="UPDATE absen..." />
+            <marker date="1448339608601" expanded="true" signature="1443:2228" placeholder="UPDATE absen..." />
+            <marker date="1448339608601" expanded="true" signature="1443:1532" placeholder="UPDATE absen..." />
+            <marker date="1448339608601" expanded="true" signature="1611:1680" placeholder="SELECT * FRO..absensi..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="46" column="118" selection-start="1643" selection-end="1643" vertical-scroll-proportion="0.2214533" vertical-offset="700" max-vertical-offset="3600">
+          <folding>
+            <marker date="1448339631168" expanded="true" signature="1579:1651" placeholder="SELECT * FRO..absensi..." />
+            <marker date="1448339631168" expanded="true" signature="1792:1851" placeholder="SELECT * FRO..siswa..." />
           </folding>
         </state>
       </provider>

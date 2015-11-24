@@ -1,7 +1,11 @@
 <?php
     $title = 'Home' ;
+include("inc/header.php");
+
+require_once('lib/connection.php');
+require_once('lib/unleashed.lib.php');
+
 ?>
-<?php include("inc/header.php"); ?>
 
     <section id="home-header">
         <div  class="container">
@@ -35,9 +39,27 @@
                             <th>Kelas</th>
                             <th>Jam Masuk</th>
                             <th>Jam Pulang</th>
-                            <th>Keterangan</th>
                         </tr>
                         </thead>
+                        <tbody id="list-absensi">
+                        <?php
+                            $date_now = date('y-m-d');
+                            $q_absensi = mysql_query("SELECT * FROM absensi WHERE tanggal='$date_now' ORDER BY updated_at DESC");
+
+                            while($d_absensi = mysql_fetch_object($q_absensi)):
+                                $q_siswa = mysql_query("SELECT * FROM siswa WHERE id='$d_absensi->id_siswa' LIMIT 1");
+                                $r_siswa = mysql_fetch_object($q_siswa);
+                        ?>
+                                <tr id="<?php echo $d_absensi->id; ?>">
+                                    <td><?php echo $r_siswa->nama; ?></td>
+                                    <td><?php echo $r_siswa->nis; ?></td>
+                                    <td><?php echo $d_absensi->jam_masuk; ?></td>
+                                    <td><?php echo $d_absensi->jam_pulang; ?></td>
+                                </tr>
+                        <?php
+                            endwhile;
+                        ?>
+                        </tbody>
                     </table>
                 </div>
                 <div class="col-md-4">
@@ -56,10 +78,10 @@
                             <strong>Kelas</strong>
                             <h3 class="absensi-kelas"></h3>
                         </div>
-                        <div class="list-group-item">
-                            <strong>Keterangan</strong>
-                            <h3 class="absensi-keterangan"></h3>
-                        </div>
+<!--                        <div class="list-group-item">-->
+<!--                            <strong>Keterangan</strong>-->
+<!--                            <h3 class="absensi-keterangan"></h3>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>
@@ -128,6 +150,19 @@
                 {
                     $('.absensi-nis').text(data.nis);
                     $('.absensi-nama').text(data.nama);
+
+                    var tr = "<tr id='" + data.id_absensi + "'>" +
+                        "<td>" + data.nama +"</td>" +
+                        "<td>" + data.nis +"</td>" +
+                        "<td>" + data.jam_masuk +"</td>" +
+                        "<td>" + data.jam_pulang +"</td>" +
+                        "<td>" + data.keterangan +"</td>";
+
+                    if(data.absensi == true)
+                    {
+                        $('tr .dataTables_empty').hide();
+                        $(tr).prependTo('#list-absensi');
+                    }
 
                     myTimer();
                 }
