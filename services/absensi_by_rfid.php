@@ -22,13 +22,16 @@ if(isset($_GET['rfid']))
 
     $r = mysql_fetch_object($q);
 
-    if($r->id_kelas != 0)
+    if(mysql_num_rows($q) == 1 )
     {
-        $q_kelas = mysql_query("SELECT * FROM kelas WHERE id='$r->id_kelas' LIMIT 1");
+        if($r->id_kelas != 0)
+        {
+            $q_kelas = mysql_query("SELECT * FROM kelas WHERE id='$r->id_kelas' LIMIT 1");
 
-        $d_kelas = mysql_fetch_object($q_kelas);
+            $d_kelas = mysql_fetch_object($q_kelas);
 
-        $kelas = $d_kelas->tingkat.'-'.$d_kelas->nama.' ('.$d_kelas->tahun.')';
+            $kelas = $d_kelas->tingkat.'-'.$d_kelas->nama.' ('.$d_kelas->tahun.')';
+        }
     }
 
     $id_absensi = FALSE;
