@@ -88,7 +88,7 @@
                                                 <td><?php echo $d->tahun; ?></td>
                                                 <td>
                                                     <div class="btn-group btn-group-xs">
-                                                        <a href="kelas.php?id=<?php echo $d->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i> </a>
+                                                        <a href="kelas_detail.php?id=<?php echo $d->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i> </a>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -85,7 +85,7 @@
                                         while($d = mysql_fetch_object($r)):
                                             ?>
                                             <tr>
-                                                <td><?php echo $d->nip; ?></td>
+                                                <td><a href="guru_detail.php?id=<?php echo $d->id; ?>"><?php echo $d->nip; ?></a></td>
                                                 <td><?php echo $d->nama; ?></td>
                                                 <td><?php echo jk($d->jk); ?></td>
                                             </tr>

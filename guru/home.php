@@ -42,14 +42,12 @@
                                     <h3 class="box-title">Absensi</h3>
                                 </div><!-- /.box-header -->
                                 <div class="box-body">
-                                    <table class="table datatable-noeverything">
+                                    <table class="table datatable">
                                         <thead>
                                         <tr>
-                                            <th>Nama</th>
-                                            <th>Kelas</th>
                                             <th>Tanggal</th>
-                                            <th>Jam Masuk</th>
-                                            <th>Jam Pulang</th>
+                                            <th>Keterangan / Pelajaran</th>
+                                            <th>Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody id="list-absensi">
@@ -57,29 +55,17 @@
                                         $date_now = date('y-m-d');
                                         $q_absensi = mysql_query("SELECT absensi.*
                                                                     FROM absensi
-                                                                    JOIN siswa ON siswa.id=absensi.id_siswa
-                                                                    JOIN kelas ON kelas.id=siswa.id_kelas
-                                                                    WHERE kelas.id_guru = '$logged_id'
-                                                                    ORDER BY updated_at DESC");
+                                                                    WHERE tanggal='$date_now'
+                                                                    ORDER BY created_at DESC");
 
                                         while($d_absensi = mysql_fetch_object($q_absensi)):
-                                            $q_siswa = mysql_query("SELECT * FROM siswa WHERE id='$d_absensi->id_siswa' LIMIT 1");
-                                            $r_siswa = mysql_fetch_object($q_siswa);
-
-                                            $kelas = '';
-                                            if($r_siswa->id_kelas != 0)
-                                            {
-                                                $q_kelas = mysql_query("SELECT * FROM kelas WHERE id='$r_siswa->id_kelas' LIMIT 1");
-                                                $d_kelas = mysql_fetch_object($q_kelas);
-                                                $kelas = $d_kelas->tingkat.'-'.$d_kelas->nama.' ('.$d_kelas->tahun.')';
-                                            }
                                             ?>
                                             <tr id="<?php echo $d_absensi->id; ?>">
-                                                <td><?php echo $r_siswa->nama; ?></td>
-                                                <td><?php echo $kelas; ?></td>
-                                                <td><?php echo $d_absensi->tanggal; ?></td>
-                                                <td><?php echo $d_absensi->jam_masuk; ?></td>
-                                                <td><?php echo $d_absensi->jam_pulang; ?></td>
+                                                <td><?php echo tanggal_format_indonesia($d_absensi->tanggal); ?></td>
+                                                <td><?php echo $d_absensi->keterangan; ?></td>
+                                                <td>
+                                                    <a href="absensi_detail.php?id=<?php echo $d_absensi->id; ?>" class="btn btn-xs btn-success">detail</a>
+                                                </td>
                                             </tr>
                                         <?php
                                         endwhile;

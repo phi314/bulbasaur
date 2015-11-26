@@ -5,7 +5,7 @@
  * # hanya pegawai dengan status pemilik yang bisa tambah pegawai
  * # pemilik hanya dapat mengubah alamat, kota, telepon, email, link pada distro
  * # hanya pemilik yang dapat mengubah data pegawai
- * # petugas bisa isi item
+ * # guru bisa isi item
  */
 
     ob_start();
@@ -25,12 +25,12 @@
     if(array_key_exists('id', $_GET))
     {
         $id = escape($_GET['id']);
-        $petugas = get_row_by_id('petugas', 'id', $id);
+        $guru = get_row_by_id('guru', 'id', $id);
 
         // init
-        if($petugas == FALSE)
+        if($guru == FALSE)
         {
-            redirect('petugas.php');
+            redirect('guru.php');
             exit;
         }
     }
@@ -46,24 +46,16 @@
 
             $tgl_lahir = date('Y-m-d', strtotime($_POST['tgl_lahir']));
             // simpan data ke database
-            $q = sprintf("UPDATE petugas SET
-                            nama=UPPER('%s'),
+            $q = sprintf("UPDATE guru SET
+                            nip='%s',
+                            nama='%s',
                             jk='%s',
-                            tempat_lahir=UPPER('%s'),
-                            tanggal_lahir=UPPER('%s'),
-                            alamat='%s',
-                            kota='%s',
-                            telepon='%s',
-                            email='%s'
+                            username='%s'
                             WHERE id='$id'",
+                escape($_POST['nip']),
                 escape($_POST['nama']),
                 escape($_POST['jk']),
-                escape($_POST['t_lahir']),
-                escape($tgl_lahir),
-                escape($_POST['alamat']),
-                escape($_POST['kota']),
-                escape($_POST['telepon']),
-                escape($_POST['email'])
+                escape($_POST['username'])
             );
 
             // jalankan query
@@ -73,12 +65,7 @@
                 $error = 'Kesalahan Server';
             else
             {
-                // buat log file
-                $file_path = '../lib/tamankota-log.txt';
-                $message = "[".now()."]Update data petugas $id by $logged_id";
-                add_log($file_path, $message);
-                // refresh page
-                redirect("petugas_detail.php?id=$id"); // redirect ke detail
+                redirect("guru_detail.php?id=$id&info=behasil-update-guru"); // redirect ke detail
             }
         } // ./update-lokasi
         // update foto
@@ -106,56 +93,31 @@
                 else
                 {
                     // upload foto
-                    $upload = move_uploaded_file($_FILES['foto']['tmp_name'], '../assets/img/foto_petugas/'.$filename);
+                    $upload = move_uploaded_file($_FILES['foto']['tmp_name'], '../assets/img/foto_guru/'.$filename);
                     if(!$upload)
                     {
                         $upload_stat = FALSE;
                         $error = "Gagal Upload Foto";
                     }
                     else
-                        redirect('petugas_detail.php?id='.$id);
+                        redirect('guru_detail.php?id='.$id);
                 }
             }
         }
         // update foto
-        elseif($submit_type == 'tambah-foto-gallery')
+        elseif($submit_type == 'delete_guru')
         {
+            $delete = mysql_query("DELETE FROM guru WHERE id='$id'");
 
-            $upload_stat = TRUE;
-
-            // jika ada foto
-            if(count($_FILES) != 0)
+            if($delete == FALSE)
             {
-                $kode_lokasi = escape($_POST['kode_lokasi']);
-                $allowed_ext = array('jpg','JPG','png','PNG','bmp','BMP');
-                $extension = end(explode('.', $_FILES['foto']['name']));
-                $filename = sha1($kode_lokasi).'_'.$_FILES['foto']['name'].'.jpg';
-
-                // ukuran file max 1 Mb
-                if($_FILES['foto']['size'] > 10000000)
-                {
-                    $error = "Ukuran file maximal 1MB";
-                }
-                // jika file bukan png / bmp / jpg
-                elseif(!in_array($extension, $allowed_ext))
-                {
-                    $error = "file hanya boleh png / bmp / jpg";
-                }
-                else
-                {
-                    // upload foto
-                    $upload = move_uploaded_file($_FILES['foto']['tmp_name'], '../assets/img/foto_lokasi/gallery/'.$filename);
-                    if(!$upload)
-                    {
-                        redirect('lokasi_detail.php?id='.$id.'&gagal-upload-foto=1');
-                    }
-                    else
-                    {
-                        mysql_query("INSERT INTO gallery_lokasi(id_lokasi,filename,created_date) VALUES('$id','$filename','$now')");
-                        redirect('lokasi_detail.php?id='.$id);
-                    }
-                }
+                $error = 'Gagal hapus Guru';
             }
+            else
+            {
+                redirect('guru.php?info=berhasil-hapus-guru');
+            }
+
         }
     }
 
@@ -163,13 +125,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Petugas
-            <small><?php echo $petugas->nama; ?></small>
+            guru
+            <small><?php echo $guru->nama; ?></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="petugas.php"><i class="fa fa-user"></i> Petugas</a></li>
-            <li class="active"><?php echo $petugas->nama; ?></li>
+            <li><a href="guru.php"><i class="fa fa-user"></i> guru</a></li>
+            <li class="active"><?php echo $guru->nama; ?></li>
         </ol>
     </section>
 
@@ -192,33 +154,17 @@
                 <div class="box box-success">
                     <div class="box-header">
                         <i class="fa fa-user"></i>
-                        <h3 class="box-title"><?php echo $petugas->nama; ?> </h3>
-                        <div class="box-tools pull-right">
-                            <?php
-                                // hanya admin yg dapat mengedit detail lokasi
-                                if(is_admin()):
-                            ?>
-                                <a href="#" class="btn bg-orange btn-sm" id="u-petugas"><i class="fa fa-pencil"></i> </a>
-                            <?php endif; ?>
-                        </div>
+                        <h3 class="box-title"><?php echo $guru->nama; ?> </h3>
                     </div><!-- /.box-header -->
                     <div id="chat-box" class="box-body distro-profile">
                         <div class="desc">
                             <dl class="dl-horizontal">
-                                <dt>Tempat Lahir</dt>
-                                <dd><?php echo $petugas->tempat_lahir; ?></dd>
-                                <dt>Tanggal Lahir</dt>
-                                <dd><?php echo tanggal_format_indonesia($petugas->tanggal_lahir); ?></dd>
-                                <dt>Alamat</dt>
-                                <dd>
-                                    <?php echo $petugas->alamat; ?> <?php echo 'Kota '.$petugas->kota; ?>
-                                </dd>
-                                <dt>Telepon</dt>
-                                <dd><?php echo $petugas->telepon ?></dd>
-                                <dt>Email</dt>
-                                <dd><?php echo $petugas->email; ?></dd>
+                                <dt>NIP</dt>
+                                <dd><?php echo $guru->nip; ?></dd>
+                                <dt>Jenis Kelamin</dt>
+                                <dd><?php echo jk($guru->jk); ?></dd>
                                 <dt>Username</dt>
-                                <dd><?php echo $petugas->username; ?></dd>
+                                <dd><?php echo $guru->username; ?></dd>
                             </dl>
                         </div>
                     </div><!-- /.distro -->
@@ -234,8 +180,8 @@
                         <form action="" method="post" enctype="multipart/form-data">
                             <div class="box-body">
                                 <?php
-                                    $folder_path = '../assets/img/foto_petugas/';
-                                    $file = $petugas->id.'.jpg';
+                                    $folder_path = '../assets/img/foto_guru/';
+                                    $file = $guru->id.'.jpg';
                                     $filename = $folder_path.$file;
                                     if(file_exists($filename)):
                                 ?>
@@ -255,6 +201,13 @@
                         </form>
                     </div><!-- ./Box-body -->
                 </div>
+
+                <form action="" method="post" id="form_delete_guru">
+                    <input type="hidden" name="submit_type" value="delete_guru">
+                    <input type="hidden" name="key" value="<?php echo sha1(date('ymdhis')); ?>">
+                    <button class="btn btn-xs btn-danger"><i class="fa fa-times"></i> hapus guru</button>
+                </form>
+
             </section><!-- right col -->
         </div><!-- /.row (main row) -->
 
@@ -269,43 +222,24 @@
                         <form action="" id="form-u-lokasi"  method="post">
                             <div class="box-body">
                                 <div class="form-group">
+                                    <label for="nama">NIP</label>
+                                    <input class="form-control" name="nip" id="nip" value="<?php echo $guru->nip; ?>" placeholder="Nama Lokasi" type="text" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="nama">Nama</label>
-                                    <input class="form-control" name="nama" id="nama" value="<?php echo $petugas->nama; ?>" placeholder="Nama Lokasi" type="text" required>
+                                    <input class="form-control" name="nama" id="nama" value="<?php echo $guru->nama; ?>" placeholder="Nama Lokasi" type="text" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Jenis Kelamin</label><br>
-                                    <input type="radio" name="jk" value="laki-laki" required="" <?php echo $petugas->jk == 'laki-laki' ? 'CHECKED' : ''; ?>> Laki-laki
-                                    <input type="radio" name="jk" value="perempuan" required="" <?php echo $petugas->jk == 'perempuan' ? 'CHECKED' : ''; ?>> Perempuan
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Tempat Lahir</label>
-                                            <input type="text" class="form-control" name="t_lahir" required="" value="<?php echo $petugas->tempat_lahir; ?>">
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="form-group">
-                                            <label>Tanggal Lahir</label>
-                                            <input type="text" class="form-control tanggal" name="tgl_lahir" required="" value="<?php echo date('m/d/Y', strtotime($petugas->tanggal_lahir)); ?>">
-                                        </div>
-                                    </div>
+                                    <label for="alamat">Jenis Kelamin</label>
+                                    <select name="jk" class="form-control">
+                                        <option value="">--Pilih Jenis Kelamin--</option>
+                                        <option value="l" <?php echo set_select_value('l', $guru->jk); ?>>Laki-laki</option>
+                                        <option value="p" <?php echo set_select_value('p', $guru->jk); ?>>Perempuan</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="alamat">Alamat</label>
-                                    <textarea class="form-control" name="alamat" id="alamat" placeholder="Alamat" required><?php echo $petugas->alamat; ?></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="kota">Kota</label>
-                                    <input class="form-control" name="kota" id="kota" value="<?php echo $petugas->kota; ?>" placeholder="Kota" type="text" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tahun">Telepon</label>
-                                    <input class="form-control" name="telepon" id="telepon" value="<?php echo $petugas->telepon; ?>" placeholder="tahun" type="text" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="tahun">Email</label>
-                                    <input class="form-control" name="email" id="email" value="<?php echo $petugas->email; ?>" placeholder="tahun" type="email" required>
+                                    <label for="tahun">Username</label>
+                                    <input class="form-control" name="username" id="username" value="<?php echo $guru->username; ?>" placeholder="tahun" type="text" required>
                                 </div>
                             </div><!-- /.box-body -->
                             <div class="box-footer clearfix no-border">
@@ -326,7 +260,16 @@
 
 <script>
 
-    $('#u-petugas').click(function(){
+    $('#u-guru').click(function(){
         $("html, body").animate({ scrollTop: $('#section-3').offset().top }, 1000);
+    });
+
+    $("#form_delete_guru").submit(function(){
+        var c = confirm("Apakah anda yakin menghapus guru ini?")
+
+        if(c == false)
+        {
+            return false;
+        }
     });
 </script>

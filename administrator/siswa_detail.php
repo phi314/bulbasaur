@@ -45,22 +45,14 @@
 
             // simpan data ke database
             $q = sprintf("UPDATE siswa SET
-                            nama=UPPER('%s'),
-                            alamat=UPPER('%s'),
-                            kota=UPPER('%s'),
-                            deskripsi='%s',
-                            tahun='%s',
-                            lg='%f',
-                            lt='%f',
-                            id_admin='$id_user'
+                            nis='%s',
+                            nama='%s',
+                            jk='%s',
+                            id_guru='$id_user'
                             WHERE id='$id'",
+                escape($_POST['nis']),
                 escape($_POST['nama']),
-                escape($_POST['alamat']),
-                escape($_POST['kota']),
-                escape($_POST['deskripsi']),
-                escape($_POST['tahun']),
-                escape($_POST['longitude']),
-                escape($_POST['latitude'])
+                escape($_POST['jk'])
             );
 
             // jalankan query
@@ -124,44 +116,21 @@
             }
         }
         // update foto
-        elseif($submit_type == 'tambah-foto-gallery')
+        elseif($submit_type == 'delete_siswa')
         {
+            $id = escape($_POST['id']);
 
-            $upload_stat = TRUE;
+            $delete = mysql_query("DELETE FROM siswa WHERE id='$id'");
 
-            // jika ada foto
-            if(count($_FILES) != 0)
+            if($delete == FALSE)
             {
-                $kode_siswa = escape($_POST['kode_siswa']);
-                $allowed_ext = array('jpg','JPG','png','PNG','bmp','BMP');
-                $extension = end(explode('.', $_FILES['foto']['name']));
-                $filename = sha1($kode_siswa).'_'.$_FILES['foto']['name'].'.jpg';
-
-                // ukuran file max 1 Mb
-                if($_FILES['foto']['size'] > 10000000)
-                {
-                    $error = "Ukuran file maximal 1MB";
-                }
-                // jika file bukan png / bmp / jpg
-                elseif(!in_array($extension, $allowed_ext))
-                {
-                    $error = "file hanya boleh png / bmp / jpg";
-                }
-                else
-                {
-                    // upload foto
-                    $upload = move_uploaded_file($_FILES['foto']['tmp_name'], '../assets/img/foto_siswa/gallery/'.$filename);
-                    if(!$upload)
-                    {
-                        redirect('siswa_detail.php?id='.$id.'&gagal-upload-foto=1');
-                    }
-                    else
-                    {
-                        mysql_query("INSERT INTO gallery_siswa(id_siswa,filename,created_date) VALUES('$id','$filename','$now')");
-                        redirect('siswa_detail.php?id='.$id);
-                    }
-                }
+                $error = 'Gagal hapus siswa';
             }
+            else
+            {
+                redirect('siswa.php?info=berhasil-hapus-siswa');
+            }
+
         }
     }
 
@@ -360,6 +329,14 @@
                             </div>
                         </form>
                     </div><!-- ./Box-body -->
+                </div>
+
+                <form action="" method="post" id="form_delete_siswa">
+                    <input type="hidden" name="id" value="<?php echo $siswa->id; ?>">
+                    <input type="hidden" name="submit_type" value="delete_siswa">
+                    <input type="hidden" name="key" value="<?php echo sha1(date('ymdhis')); ?>">
+                    <button class="btn btn-xs btn-danger"><i class="fa fa-times"></i> hapus siswa</button>
+                </form>
             </div>
         </section>
 
@@ -370,5 +347,14 @@
 
     $('#u-siswa').click(function(){
         $("html, body").animate({ scrollTop: $('#section-3').offset().top }, 1000);
+    });
+
+    $("#form_delete_siswa").submit(function(){
+        var c = confirm("Apakah anda yakin menghapus siswa ini?")
+
+        if(c == false)
+        {
+            return false;
+        }
     });
 </script>
