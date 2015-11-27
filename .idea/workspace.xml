@@ -40,7 +40,7 @@
       <file leaf-file-name="kelas.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/administrator/kelas.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="52" selection-start="3551" selection-end="3551" vertical-scroll-proportion="0.34948096" vertical-offset="1382" max-vertical-offset="2646">
+            <state line="87" column="81" selection-start="3498" selection-end="3498" vertical-scroll-proportion="0.3183391" vertical-offset="1382" max-vertical-offset="2646">
               <folding>
                 <marker date="1448513659845" expanded="true" signature="392:529" placeholder="INSERT INTO ..." />
                 <marker date="1448513659845" expanded="true" signature="2972:3019" placeholder="SELECT * FRO..kelas..." />
@@ -115,7 +115,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1317" />
+    <option name="x" value="49" />
     <option name="y" value="-4" />
     <option name="width" value="1317" />
     <option name="height" value="772" />
@@ -222,7 +222,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1317" y="-4" width="1317" height="772" extended-state="6" />
+    <frame x="49" y="-4" width="1317" height="772" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -607,7 +607,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/kelas.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="52" selection-start="3551" selection-end="3551" vertical-scroll-proportion="0.34948096" vertical-offset="1382" max-vertical-offset="2646">
+        <state line="87" column="81" selection-start="3498" selection-end="3498" vertical-scroll-proportion="0.3183391" vertical-offset="1382" max-vertical-offset="2646">
           <folding>
             <marker date="1448513659845" expanded="true" signature="392:529" placeholder="INSERT INTO ..." />
             <marker date="1448513659845" expanded="true" signature="2972:3019" placeholder="SELECT * FRO..kelas..." />
