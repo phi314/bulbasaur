@@ -215,8 +215,6 @@
                                             <option value="<?php echo $guru->id; ?>" <?php set_select_value($guru->id, $kelas->id_guru); ?>><?php echo $guru->nama; ?></option>
                                         <?php endwhile; ?>
                                     </select>
-
-
                                 </div>
                             </div><!-- /.box-body -->
                             <div class="box-footer clearfix no-border">

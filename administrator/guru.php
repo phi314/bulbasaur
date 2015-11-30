@@ -24,7 +24,7 @@
                                         escape($_POST['jk']),
                                         escape($_POST['user_level']),
                                         escape($_POST['username']),
-                                        escape($_POST['password']),
+                                        sha1(escape($_POST['password'])),
                                         $_SESSION['logged_id'],
                                         now()
                 );

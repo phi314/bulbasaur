@@ -44,17 +44,18 @@
         if($submit_type == 'update')
         {
 
-            $tgl_lahir = date('Y-m-d', strtotime($_POST['tgl_lahir']));
             // simpan data ke database
             $q = sprintf("UPDATE guru SET
                             nip='%s',
                             nama='%s',
                             jk='%s',
+                            user_level='%s',
                             username='%s'
                             WHERE id='$id'",
                 escape($_POST['nip']),
                 escape($_POST['nama']),
                 escape($_POST['jk']),
+                escape($_POST['user_level']),
                 escape($_POST['username'])
             );
 
@@ -216,9 +217,9 @@
                                 <div class="form-group">
                                     <label for="nama">User Level</label>
                                     <select name="user_level" required class="form-control">
-                                        <option value="0" <?php echo set_select_value('0', $guru->jk); ?>>Guru</option>
-                                        <option value="1" <?php echo set_select_value('1', $guru->jk); ?>>Admin</option>
-                                        <option value="2" <?php echo set_select_value('2', $guru->jk); ?>>Tata Usaha</option>
+                                        <option value="0" <?php echo set_select_value('0', $guru->user_level); ?>>Guru</option>
+                                        <option value="1" <?php echo set_select_value('1', $guru->user_level); ?>>Admin</option>
+                                        <option value="2" <?php echo set_select_value('2', $guru->user_level); ?>>Tata Usaha</option>
                                     </select>
                                 </div>
                             </div><!-- /.box-body -->

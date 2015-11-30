@@ -24,7 +24,7 @@
                                         escape($_POST['tingkat']),
                                         escape($_POST['nama']),
                                         escape($_POST['tahun']),
-                                        escape($_SESSION['logged_id']),
+                                        escape($_POST['id_guru']),
                                         now()
                 );
 
@@ -132,6 +132,17 @@
                                         <div class="form-group">
                                             <label>Tahun</label>
                                             <input type="text" class="form-control" name="tahun" required="">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="alamat">Walikelas</label>
+                                            <select name="id_guru" class="form-control">
+                                                <?php
+                                                $q_guru = mysql_query("SELECT * FROM guru WHERE user_level='0' ORDER BY nama ASC");
+                                                while($guru = mysql_fetch_object($q_guru)):
+                                                    ?>
+                                                    <option value="<?php echo $guru->id; ?>"><?php echo $guru->nama; ?></option>
+                                                <?php endwhile; ?>
+                                            </select>
                                         </div>
                                         <button class="btn btn-primary">Simpan</button>
                                         <input type="hidden" name="key" value="<?php echo crypt('romanov', '$1$sinkyousei$'); ?>">
