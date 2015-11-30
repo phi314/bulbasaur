@@ -154,7 +154,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Password</label>
-                                            <input type="text" class="form-control" name="password" required="">
+                                            <input type="password" class="form-control" name="password" required="">
                                         </div>
                                         <button class="btn btn-primary">Simpan</button>
                                         <input type="hidden" name="key" value="<?php echo crypt('romanov', '$1$sinkyousei$'); ?>">

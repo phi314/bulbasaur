@@ -23,13 +23,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="guru.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="guru.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/administrator/guru.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="69" column="35" selection-start="2385" selection-end="2385" vertical-scroll-proportion="22.0" vertical-offset="1836" max-vertical-offset="3186">
+            <state line="156" column="65" selection-start="8068" selection-end="8068" vertical-scroll-proportion="0.47058824" vertical-offset="2536" max-vertical-offset="3186">
               <folding>
-                <marker date="1448854655635" expanded="true" signature="493:672" placeholder="INSERT INTO ..." />
-                <marker date="1448854655635" expanded="true" signature="3740:3794" placeholder="SELECT * FRO..guru..." />
+                <marker date="1448854930276" expanded="true" signature="493:672" placeholder="INSERT INTO ..." />
+                <marker date="1448854930276" expanded="true" signature="3740:3794" placeholder="SELECT * FRO..guru..." />
               </folding>
             </state>
           </provider>
@@ -38,7 +38,7 @@
       <file leaf-file-name="guru_detail.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/administrator/guru_detail.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="176" column="0" selection-start="5657" selection-end="5657" vertical-scroll-proportion="-13.407408" vertical-offset="2806" max-vertical-offset="4680">
+            <state line="207" column="0" selection-start="7558" selection-end="7558" vertical-scroll-proportion="-0.6666667" vertical-offset="3708" max-vertical-offset="4680">
               <folding>
                 <element signature="e#7#273#0" expanded="true" />
                 <marker date="1448854746416" expanded="true" signature="1159:1373" placeholder="UPDATE guru ..." />
@@ -48,10 +48,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="siswa_detail.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="siswa_detail.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/administrator/siswa_detail.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="311" column="0" selection-start="13125" selection-end="13125" vertical-scroll-proportion="0.4982699" vertical-offset="5202" max-vertical-offset="6066">
+            <state line="308" column="0" selection-start="13060" selection-end="13060" vertical-scroll-proportion="-8.666667" vertical-offset="5202" max-vertical-offset="6066">
               <folding>
                 <element signature="e#5429#5507#0" expanded="true" />
                 <marker date="1448854799770" expanded="true" signature="1077:1297" placeholder="UPDATE siswa..." />
@@ -133,9 +133,9 @@
         <option value="$PROJECT_DIR$/administrator/kelas.php" />
         <option value="$PROJECT_DIR$/lib/unleashed.lib.php" />
         <option value="$PROJECT_DIR$/administrator/inc/header.php" />
-        <option value="$PROJECT_DIR$/administrator/guru.php" />
         <option value="$PROJECT_DIR$/administrator/guru_detail.php" />
         <option value="$PROJECT_DIR$/administrator/siswa_detail.php" />
+        <option value="$PROJECT_DIR$/administrator/guru.php" />
       </list>
     </option>
   </component>
@@ -613,19 +613,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/administrator/guru.php">
+    <entry file="file://$PROJECT_DIR$/administrator/siswa_detail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="35" selection-start="2385" selection-end="2385" vertical-scroll-proportion="22.0" vertical-offset="1836" max-vertical-offset="3186">
+        <state line="308" column="0" selection-start="13060" selection-end="13060" vertical-scroll-proportion="-8.666667" vertical-offset="5202" max-vertical-offset="6066">
           <folding>
-            <marker date="1448854655635" expanded="true" signature="493:672" placeholder="INSERT INTO ..." />
-            <marker date="1448854655635" expanded="true" signature="3740:3794" placeholder="SELECT * FRO..guru..." />
+            <element signature="e#5429#5507#0" expanded="true" />
+            <marker date="1448854799770" expanded="true" signature="1077:1297" placeholder="UPDATE siswa..." />
+            <marker date="1448854799770" expanded="true" signature="1915:1980" placeholder="UPDATE siswa..." />
+            <marker date="1448854799770" expanded="true" signature="3659:3691" placeholder="DELETE FROM ..." />
+            <marker date="1448854799770" expanded="true" signature="7625:7782" placeholder="SELECT trans..transaksi..." />
+            <marker date="1448854799770" expanded="true" signature="11822:11869" placeholder="SELECT * FRO..kelas..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/guru_detail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="176" column="0" selection-start="5657" selection-end="5657" vertical-scroll-proportion="-13.407408" vertical-offset="2806" max-vertical-offset="4680">
+        <state line="207" column="0" selection-start="7558" selection-end="7558" vertical-scroll-proportion="-0.6666667" vertical-offset="3708" max-vertical-offset="4680">
           <folding>
             <element signature="e#7#273#0" expanded="true" />
             <marker date="1448854746416" expanded="true" signature="1159:1373" placeholder="UPDATE guru ..." />
@@ -634,16 +638,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/administrator/siswa_detail.php">
+    <entry file="file://$PROJECT_DIR$/administrator/guru.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="311" column="0" selection-start="13125" selection-end="13125" vertical-scroll-proportion="0.4982699" vertical-offset="5202" max-vertical-offset="6066">
+        <state line="156" column="65" selection-start="8068" selection-end="8068" vertical-scroll-proportion="0.47058824" vertical-offset="2536" max-vertical-offset="3186">
           <folding>
-            <element signature="e#5429#5507#0" expanded="true" />
-            <marker date="1448854799770" expanded="true" signature="1077:1297" placeholder="UPDATE siswa..." />
-            <marker date="1448854799770" expanded="true" signature="1915:1980" placeholder="UPDATE siswa..." />
-            <marker date="1448854799770" expanded="true" signature="3659:3691" placeholder="DELETE FROM ..." />
-            <marker date="1448854799770" expanded="true" signature="7625:7782" placeholder="SELECT trans..transaksi..." />
-            <marker date="1448854799770" expanded="true" signature="11822:11869" placeholder="SELECT * FRO..kelas..." />
+            <marker date="1448854930276" expanded="true" signature="493:672" placeholder="INSERT INTO ..." />
+            <marker date="1448854930276" expanded="true" signature="3740:3794" placeholder="SELECT * FRO..guru..." />
           </folding>
         </state>
       </provider>
