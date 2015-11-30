@@ -173,14 +173,14 @@
                         </div>
                     </div><!-- /.box-header -->
                     <div id="chat-box" class="box-body distro-profile">
-                        <?php
-                            $foto_folder_path = '../assets/img/foto_siswa/';
-                            $foto_link = '../assets/img/imageNotFound.jpg';
-//                            if(file_exists($foto_folder_path.$siswa->foto_link))
-//                                $foto_link = $foto_folder_path.$siswa->foto_link;
-
-                        ?>
-                        <img class="logo img-responsive" src="<?php echo $foto_link; ?>">
+<!--                        --><?php
+//                            $foto_folder_path = '../assets/img/foto_siswa/';
+//                            $foto_link = '../assets/img/imageNotFound.jpg';
+////                            if(file_exists($foto_folder_path.$siswa->foto_link))
+////                                $foto_link = $foto_folder_path.$siswa->foto_link;
+//
+//                        ?>
+<!--                        <img class="logo img-responsive" src="--><?php //echo $foto_link; ?><!--">-->
                         <div class="desc">
                             <dl class="dl-horizontal">
                                 <dt>NIS</dt>
@@ -308,28 +308,6 @@
                         </form>
                     </div>
                 </div><!-- ./Box -->
-
-                <div class="box box-warning">
-                    <div class="box-header">
-                        <h3 class="box-title"><i class="fa fa-edit"></i> Update Foto Utama</h3>
-                    </div>
-                    <div class="box-body">
-                        <form action="" id="form-u-f-siswa" method="post" enctype="multipart/form-data">
-                            <div class="box-body">
-                                <div class="form-group">
-                                    <input id="foto" name="foto" type="file" required="">
-                                    <p class="help-block">Max. 1MB</p>
-                                </div>
-                            </div><!-- /.box-body -->
-                            <div class="box-footer clearfix no-border">
-                                <input type="hidden" name="key" value="<?php echo sha1(date('ymdhis')); ?>">
-                                <input type="hidden" name="kode_siswa" value="<?php echo $siswa->kode_siswa; ?>">
-                                <input type="hidden" name="submit_type" value="update-foto">
-                                <button class="btn btn-warning pull-right" type="submit"><i class="fa fa-pencil"></i> Update</button>
-                            </div>
-                        </form>
-                    </div><!-- ./Box-body -->
-                </div>
 
                 <form action="" method="post" id="form_delete_siswa">
                     <input type="hidden" name="id" value="<?php echo $siswa->id; ?>">

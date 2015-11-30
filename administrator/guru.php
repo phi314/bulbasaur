@@ -17,11 +17,12 @@
                 $nama = escape($_POST['nama']);
                 $password = sha1($nama.now().rand());
 
-                $q_t_guru = sprintf("INSERT INTO guru(nip, nama, jk, username, password, id_guru, created_at)
-                                        VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%d')",
+                $q_t_guru = sprintf("INSERT INTO guru(nip, nama, jk, user_level, username, password, id_guru, created_at)
+                                        VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%d')",
                                         escape($_POST['nip']),
                                         escape($nama),
                                         escape($_POST['jk']),
+                                        escape($_POST['user_level']),
                                         escape($_POST['username']),
                                         escape($_POST['password']),
                                         $_SESSION['logged_id'],
@@ -58,10 +59,20 @@
                 <!-- Main content -->
                 <section class="content">
 
+                    <?php if(!empty($error)): ?>
+                        <div class="alert alert-danger">
+                            <i class="fa fa-warning"></i>
+                            <strong><?php echo $error; ?></strong>
+                        </div>
+                        <script>
+
+                        </script>
+                    <?php endif; ?>
+
                     <!-- Main row -->
                     <div class="row">
                         <!-- Left col -->
-                        <section class="col-lg-7">
+                        <section class="col-lg-8">
 
                             <!-- TO DO List -->
                             <div class="box box-primary">
@@ -76,6 +87,9 @@
                                             <th>NIP</th>
                                             <th>NAMA</th>
                                             <th>JK</th>
+                                            <th>GURU</th>
+                                            <th>TU</th>
+                                            <th>ADMIN</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -88,6 +102,9 @@
                                                 <td><a href="guru_detail.php?id=<?php echo $d->id; ?>"><?php echo $d->nip; ?></a></td>
                                                 <td><?php echo $d->nama; ?></td>
                                                 <td><?php echo jk($d->jk); ?></td>
+                                                <td><?php echo $d->user_level == '0' ? "<i class='fa fa-check'></i>" : ""; ?></td>
+                                                <td><?php echo $d->user_level == '2' ? "<i class='fa fa-check'></i>" : ""; ?></td>
+                                                <td><?php echo $d->user_level == '1' ? "<i class='fa fa-check'></i>" : ""; ?></td>
                                             </tr>
 
                                         <?php endwhile; ?>
@@ -97,8 +114,8 @@
                             </div><!-- /.box -->
                         </section><!-- /.Left col -->
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                        <section class="col-lg-5 connectedSortable">
-                            <?php if($_SESSION['logged_is_admin']): ?>
+                        <section class="col-lg-4 connectedSortable">
+                            <?php if($logged_user_level == '1'): ?>
                             <!-- Kategori List List -->
                             <div class="box box-primary">
                                 <div class="box-header">
@@ -121,6 +138,14 @@
                                                 <option value="">--Pilih Jenis Kelamin--</option>
                                                 <option value="l">Laki-Laki</option>
                                                 <option value="p">Perempuan</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="nama">User Level</label>
+                                            <select name="user_level" required class="form-control">
+                                                <option value="0">Guru</option>
+                                                <option value="1">Admin</option>
+                                                <option value="2">Tata Usaha</option>
                                             </select>
                                         </div>
                                         <div class="form-group">

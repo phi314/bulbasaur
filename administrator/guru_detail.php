@@ -125,12 +125,11 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            guru
             <small><?php echo $guru->nama; ?></small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="guru.php"><i class="fa fa-user"></i> guru</a></li>
+            <li><a href="guru.php"><i class="fa fa-user"></i> Guru</a></li>
             <li class="active"><?php echo $guru->nama; ?></li>
         </ol>
     </section>
@@ -165,6 +164,8 @@
                                 <dd><?php echo jk($guru->jk); ?></dd>
                                 <dt>Username</dt>
                                 <dd><?php echo $guru->username; ?></dd>
+                                <dt>User Level</dt>
+                                <dd><?php echo user_level($guru->user_level); ?></dd>
                             </dl>
                         </div>
                     </div><!-- /.distro -->
@@ -172,35 +173,6 @@
             </section><!-- /.Left col -->
             <!-- right col (We are only adding the ID to make the widgets sortable)-->
             <section class="col-lg-5 connectedSortable">
-                <div class="box box-warning">
-                    <div class="box-header">
-                        <h3 class="box-title"><i class="fa fa-edit"></i> Foto Profil</h3>
-                    </div>
-                    <div class="box-body">
-                        <form action="" method="post" enctype="multipart/form-data">
-                            <div class="box-body">
-                                <?php
-                                    $folder_path = '../assets/img/foto_guru/';
-                                    $file = $guru->id.'.jpg';
-                                    $filename = $folder_path.$file;
-                                    if(file_exists($filename)):
-                                ?>
-                                    <img src="<?php echo $filename; ?>" class="img-responsive">
-                                <?php endif; ?>
-                                <div class="form-group">
-                                    <input id="foto" name="foto" type="file" required="">
-                                    <p class="help-block">Max. 1MB</p>
-                                </div>
-                            </div><!-- /.box-body -->
-                            <div class="box-footer clearfix no-border">
-                                <input type="hidden" name="key" value="<?php echo sha1(date('ymdhis')); ?>">
-                                <input type="hidden" name="kode_lokasi" value="<?php echo $lokasi->kode_lokasi; ?>">
-                                <input type="hidden" name="submit_type" value="update-foto">
-                                <button class="btn btn-warning pull-right" type="submit"><i class="fa fa-pencil"></i> Update</button>
-                            </div>
-                        </form>
-                    </div><!-- ./Box-body -->
-                </div>
 
                 <form action="" method="post" id="form_delete_guru">
                     <input type="hidden" name="submit_type" value="delete_guru">
@@ -240,6 +212,14 @@
                                 <div class="form-group">
                                     <label for="tahun">Username</label>
                                     <input class="form-control" name="username" id="username" value="<?php echo $guru->username; ?>" placeholder="tahun" type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nama">User Level</label>
+                                    <select name="user_level" required class="form-control">
+                                        <option value="0" <?php echo set_select_value('0', $guru->jk); ?>>Guru</option>
+                                        <option value="1" <?php echo set_select_value('1', $guru->jk); ?>>Admin</option>
+                                        <option value="2" <?php echo set_select_value('2', $guru->jk); ?>>Tata Usaha</option>
+                                    </select>
                                 </div>
                             </div><!-- /.box-body -->
                             <div class="box-footer clearfix no-border">

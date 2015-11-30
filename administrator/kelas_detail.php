@@ -48,11 +48,13 @@
             $q = sprintf("UPDATE kelas SET
                             tingkat='%d',
                             nama='%s',
-                            tahun='%d'
+                            tahun='%d',
+                            id_guru='%d'
                             WHERE id='$id'",
                 escape($_POST['tingkat']),
                 escape($_POST['nama']),
-                escape($_POST['tahun'])
+                escape($_POST['tahun']),
+                escape($_POST['id_guru'])
             );
 
             // jalankan query
@@ -202,6 +204,19 @@
                                 <div class="form-group">
                                     <label for="alamat">Tahun</label>
                                     <input class="form-control" name="tahun" id="tahun" value="<?php echo $kelas->tahun; ?>" type="text" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="alamat">Walkikelas</label>
+                                    <select name="id_guru" class="form-control">
+                                        <?php
+                                        $q_guru = mysql_query("SELECT * FROM guru WHERE user_level='0' ORDER BY nama ASC");
+                                        while($guru = mysql_fetch_object($q_guru)):
+                                        ?>
+                                            <option value="<?php echo $guru->id; ?>" <?php set_select_value($guru->id, $kelas->id_guru); ?>><?php echo $guru->nama; ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
+
+
                                 </div>
                             </div><!-- /.box-body -->
                             <div class="box-footer clearfix no-border">

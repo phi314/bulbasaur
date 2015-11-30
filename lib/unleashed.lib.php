@@ -29,6 +29,21 @@ function jk($jk)
     }
 }
 
+function user_level($level)
+{
+    switch($level){
+        case '1':
+            return 'Admin';
+            break;
+        case '2':
+            return 'Tata Usaha';
+            break;
+        default:
+            return "Guru";
+            break;
+    }
+}
+
 function kelas($id_kelas)
 {
     $q = "SELECT * FROM kelas WHERE id='$id_kelas' LIMIT 1";

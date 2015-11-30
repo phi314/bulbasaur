@@ -15,7 +15,7 @@
         $password = escape($_POST['password']);
         $password_enc = sha1($password);
         // cek user valid
-        $q = "SELECT id, nama, username, is_admin FROM guru WHERE username='$username' AND password='$password_enc' AND is_active=1 LIMIT 1";
+        $q = "SELECT id, nama, username, user_level FROM guru WHERE username='$username' AND password='$password_enc' AND is_active=1 LIMIT 1";
         $r = mysql_query($q);
 
         $user = mysql_fetch_object($r);
@@ -23,13 +23,20 @@
         // jika user valid
         if($user != FALSE)
         {
+            // jika guru, kembali ke login
+            if($user->user_level == 0)
+            {
+                redirect('home.php?info=user-tidak-ditemukan');
+                exit;
+            }
+
             // set Session
             $id = $user->id;
             $_SESSION['logged_id'] = $id;
             $_SESSION['logged_nama'] = $user->nama;
             $_SESSION['logged_username'] = $user->username;
             $_SESSION['logged_in'] = TRUE;
-            $_SESSION['logged_is_admin'] = $user->is_admin;
+            $_SESSION['logged_user_level'] = $user->user_level;
 
             redirect('home.php');
         }

@@ -34,7 +34,7 @@ require_once('inc/header.php');
             </script>
         <?php endif; ?>
 
-        <?php if($_SESSION['logged_is_admin']): ?>
+        <?php if($logged_user_level == '1'): ?>
             <a class="btn btn-primary" href="siswa_create.php"><i class="fa fa-plus"></i> Tambah Siswa</a>
         <?php endif; ?>
 

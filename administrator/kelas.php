@@ -5,6 +5,11 @@
     require_once('../lib/unleashed.lib.php');
     require_once('../lib/login.php');
 
+    if($logged_user_level != '1')
+    {
+        redirect('kelas.php');
+    }
+
 
     // submitter
     if(array_key_exists('key', $_POST))
@@ -58,7 +63,7 @@
                     <!-- Main row -->
                     <div class="row">
                         <!-- Left col -->
-                        <section class="col-lg-7">
+                        <section class="col-lg-8">
 
                             <!-- TO DO List -->
                             <div class="box box-primary">
@@ -73,12 +78,13 @@
                                             <th>Tingkat</th>
                                             <th>Nama</th>
                                             <th>Tahun</th>
+                                            <th>Walikelas</th>
                                             <th>Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <?php
-                                        $q = "SELECT * FROM kelas ORDER BY tingkat, tahun ASC";
+                                        $q = "SELECT kelas.*, guru.nama as walikelas FROM kelas JOIN guru ON guru.id=kelas.id_guru ORDER BY tingkat, tahun ASC";
                                         $r = mysql_query($q);
                                         while($d = mysql_fetch_object($r)):
                                         ?>
@@ -86,6 +92,7 @@
                                                 <td><?php echo $d->tingkat; ?></td>
                                                 <td><?php echo $d->nama; ?></td>
                                                 <td><?php echo $d->tahun; ?></td>
+                                                <td><?php echo $d->walikelas; ?></td>
                                                 <td>
                                                     <div class="btn-group btn-group-xs">
                                                         <a href="kelas_detail.php?id=<?php echo $d->id; ?>" class="btn btn-warning"><i class="fa fa-edit"></i> </a>
@@ -99,8 +106,8 @@
                             </div><!-- /.box -->
                         </section><!-- /.Left col -->
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                        <section class="col-lg-5 connectedSortable">
-                            <?php if($_SESSION['logged_is_admin']): ?>
+                        <section class="col-lg-4 connectedSortable">
+                            <?php if($logged_user_level == '1'): ?>
                             <!-- Kategori List List -->
                             <div class="box box-primary">
                                 <div class="box-header">

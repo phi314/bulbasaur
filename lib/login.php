@@ -10,10 +10,10 @@
         $logged_id = $_SESSION['logged_id'];
         $logged_name = $_SESSION['logged_nama'];
         $logged_username = $_SESSION['logged_username'];
-        $logged_is_admin = $_SESSION['logged_is_admin'];
+        $logged_user_level = $_SESSION['logged_user_level'];
         $logged_in = $_SESSION['logged_in'];
 
-        // jika guru
+        // get from guru
         $user = get_row_by_id('guru', 'id', $logged_id);
 
         /**

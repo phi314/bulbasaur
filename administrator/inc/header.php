@@ -84,7 +84,6 @@
                                 <p>
                                     <?php
                                         echo $logged_name;
-                                        // hanya untuk pegawai
                                     ?>
                                 </p>
                             </li>
@@ -130,6 +129,7 @@
                         <i class="fa fa-building"></i> <span>Kelas</span>
                     </a>
                 </li>
+                <?php if($_SESSION['logged_user_level'] == '2'): ?>
                 <li>
                     <a href="transaksi.php">
                         <i class="fa fa-database"></i> <span>Transaksi</span>
@@ -140,6 +140,7 @@
                         <i class="fa fa-calendar"></i> <span>Pembayaran</span>
                     </a>
                 </li>
+                <?php endif; ?>
             </ul>
         </section>
         <!-- /.sidebar -->

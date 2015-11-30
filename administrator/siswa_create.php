@@ -11,6 +11,11 @@ require_once('inc/header.php');
     $success = '';
     $error = '';
 
+    if($logged_user_level != '1')
+    {
+        redirect('siswa.php');
+    }
+
     // post tambah
     if(array_key_exists('key', $_POST))
     {
