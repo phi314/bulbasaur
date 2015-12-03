@@ -114,6 +114,11 @@ textarea {
     font-size: 60px;
     margin-top: 30px;
 }
+.big-title a {
+    text-decoration: none;
+    color: #000000;
+}
+
 .big-subtitle {
     margin-top: -5px;
     font-family: 'lemon';

@@ -72,7 +72,7 @@
                     <!-- Main row -->
                     <div class="row">
                         <!-- Left col -->
-                        <section class="col-lg-8">
+                        <section class="col-lg-9">
 
                             <!-- TO DO List -->
                             <div class="box box-primary">
@@ -114,7 +114,7 @@
                             </div><!-- /.box -->
                         </section><!-- /.Left col -->
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
-                        <section class="col-lg-4 connectedSortable">
+                        <section class="col-lg-3 connectedSortable">
                             <?php if($logged_user_level == '1'): ?>
                             <!-- Kategori List List -->
                             <div class="box box-primary">

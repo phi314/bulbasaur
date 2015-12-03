@@ -15,7 +15,7 @@
         $password = escape($_POST['password']);
         $password_enc = sha1($password);
         // cek user valid
-        $q = "SELECT id, nama, username FROM guru WHERE username='$username' AND password='$password_enc' AND is_active=1 LIMIT 1";
+        $q = "SELECT id, nama, username, user_level FROM guru WHERE username='$username' AND password='$password_enc' AND is_active=1 LIMIT 1";
         $r = mysql_query($q);
 
         $user = mysql_fetch_object($r);
@@ -23,6 +23,13 @@
         // jika user valid
         if($user != FALSE)
         {
+            // jika guru, kembali ke login
+            if($user->user_level != 0)
+            {
+                redirect('home.php?info=user-tidak-ditemukan');
+                exit;
+            }
+
             // set Session
             $id = $user->id;
             $_SESSION['logged_id'] = $id;
@@ -83,6 +90,7 @@
                     </div>
                     <input type="hidden" value="<?php echo sha1(date('ymdhis')); ?>" name="key">
                     <button type="submit" class="btn bg-blue btn-block">Login</button>
+                    <a  href="../index.php" class="btn bg-green btn-block">Beranda</a>
                 </div>
             </form>
         </div>

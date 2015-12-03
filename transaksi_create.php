@@ -101,7 +101,7 @@ if(array_key_exists('key', $_POST))
 
         <div class="row">
             <div class="col-md-8">
-                <div class="big-title">SMK Negeri 6</div>
+                <div class="big-title"><a href="index.php">SMK Negeri 6</a></div>
                 <div class="big-subtitle">Kota Garut</div>
             </div>
             <div class="col-md-4">

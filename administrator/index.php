@@ -90,7 +90,7 @@
                     </div>
                     <input type="hidden" value="<?php echo sha1(date('ymdhis')); ?>" name="key">
                     <button type="submit" class="btn bg-blue btn-block">Login</button>
-
+                    <a  href="../index.php" class="btn bg-green btn-block">Beranda</a>
                 </div>
             </form>
         </div>
