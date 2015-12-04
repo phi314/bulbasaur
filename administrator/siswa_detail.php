@@ -42,27 +42,38 @@
         // post update siswa
         if($submit_type == 'update')
         {
-
-            // simpan data ke database
-            $q = sprintf("UPDATE siswa SET
+            $rfid = escape($_POST['rfid']);
+            if(strlen($rfid) < 10 OR strlen($rfid) > 10)
+            {
+                $error = "RFID tidak sesuai";
+            }
+            else
+            {
+                // simpan data ke database
+                $q = sprintf("UPDATE siswa SET
+                            rfid='%s',
                             nis='%s',
                             nama='%s',
                             jk='%s',
                             id_guru='$id_user'
                             WHERE id='$id'",
-                escape($_POST['nis']),
-                escape($_POST['nama']),
-                escape($_POST['jk'])
-            );
+                    $rfid,
+                    escape($_POST['nis']),
+                    escape($_POST['nama']),
+                    escape($_POST['jk'])
+                );
 
-            // jalankan query
-            $r = mysql_query($q);
+                // jalankan query
+                $r = mysql_query($q);
 
-            if(!$q)
-                $error = 'Kesalahan Server';
-            else
-            {
-                redirect("siswa_detail.php?id=$id"); // redirect ke detail
+                if(!$q)
+                {
+                    $error = 'Kesalahan Server';
+                }
+                else
+                {
+                    redirect("siswa_detail.php?id=$id"); // redirect ke detail
+                }
             }
         } // ./update-siswa
         // update fasilitas
@@ -248,8 +259,12 @@
                         <form action="" id="form-u-siswa"  method="post">
                             <div class="box-body">
                                 <div class="form-group">
+                                    <label for="nama">RFID</label>
+                                    <input class="form-control" name="rfid" id="rfid" value="<?php echo $siswa->rfid; ?>" placeholder="RFID" type="text" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="nama">NIS</label>
-                                    <input class="form-control" name="nis" id="nis" value="<?php echo $siswa->nis; ?>" placeholder="Nama siswa" type="text" required>
+                                    <input class="form-control" name="nis" id="nis" value="<?php echo $siswa->nis; ?>" placeholder="NIS" type="text" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama</label>
