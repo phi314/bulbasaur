@@ -41,7 +41,7 @@
                     else
                     {
                         $id = mysql_insert_id();
-                        redirect("abasensi_detail.php?id=$id");
+                        redirect("absensi_detail.php?id=$id");
                     }
                 }
 

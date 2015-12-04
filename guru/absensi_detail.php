@@ -148,7 +148,7 @@
                 </section><!-- /.content -->
 
 <?php include('inc/footer.php'); ?>
-<script type="text/javascript" src="assets/js/jquery.rfid.js"></script>
+<script type="text/javascript" src="../assets/js/jquery.rfid.js"></script>
 
 <script type="text/javascript">
     var timer;
