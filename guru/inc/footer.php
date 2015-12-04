@@ -29,6 +29,9 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url(); ?>assets/js/AdminLTE/app.js" type="text/javascript"></script>
 
+<script>
+    var base_url = '/bulbasaur/';
+</script>
 
 </body>
 </html>

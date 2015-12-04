@@ -124,7 +124,7 @@
                                         </ul>
                                     </div>
                                     <input type="text" name="rfid" class="form-control input-lg" placeholder="Tap Kartu" readonly id="home-rfid">
-                                    <input type="hidden" name="id_absensi" value="<?php echo $absensi->id; ?>">
+                                    <input type="hidden" name="id_absensi" id="id_absensi" value="<?php echo $absensi->id; ?>">
                                     <div class="list-group-item">
                                         <h3>Detail Siswa</h3>
                                     </div>
@@ -135,10 +135,6 @@
                                     <div class="list-group-item">
                                         <strong>Nama</strong>
                                         <h3 class="absensi-nama"></h3>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <strong>Kelas</strong>
-                                        <h3 class="absensi-kelas"></h3>
                                     </div>
                                 </div><!-- /.box-body -->
                             </div><!-- /.box -->
@@ -186,11 +182,11 @@
         $("#home-rfid").val(cardData.substr(0,10));
 
         var rfid = $("#home-rfid").val();
-        var id_absensi = $("id_absensi").val();
+        var id_absensi = $("#id_absensi").val();
 
         $.ajax({
-            url: 'services/absensi_kelas_by_rfid.php',
-            type: 'get',
+            url: base_url + 'services/absensi_kelas_by_rfid.php',
+            type: 'post',
             data: {
                 rfid: rfid,
                 id_absensi: id_absensi
@@ -201,19 +197,15 @@
                 {
                     $('.absensi-nis').text(data.nis);
                     $('.absensi-nama').text(data.nama);
-                    $('.absensi-kelas').text(data.kelas);
                     $('.absensi-keterangan').text(data.keterangan);
 
                     var tr = "<tr id='" + data.id_absensi + "'>" +
                         "<td>" + data.nama +"</td>" +
-                        "<td>" + data.kelas +"</td>" +
-                        "<td>" + data.jam_masuk +"</td>" +
-                        "<td>" + data.jam_pulang +"</td>";
+                        "<td>" + data.time_now +"</td>" +
+                        "<td>" + data.date_now +"</td>";
 
                     if(data.absensi == true)
                     {
-                        $('tr .dataTables_empty').hide();
-                        $('tr#' + data.id_absensi).hide();
                         $(tr).prependTo('#list-siswa');
                     }
 
@@ -224,8 +216,6 @@
                     $('#home-rfid').val('');
                     $('.absensi-nis').text('');
                     $('.absensi-nama').text('');
-                    $('.absensi-kelas').text('');
-                    $('.absensi-keterangan').text('');
                     $('#home-rfid').focus();
                 }
 
