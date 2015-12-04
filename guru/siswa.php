@@ -61,7 +61,7 @@ $logged_id = $_SESSION['logged_id'];
                             while($siswa = mysql_fetch_object($q)):
                         ?>
                             <tr>
-                                <td><a href="siswa_detail.php?id=<?php echo $siswa->id; ?>"><?php echo $siswa->nis; ?></a></td>
+                                <td><?php echo $siswa->nis; ?></td>
                                 <td><?php echo $siswa->rfid; ?></td>
                                 <td><?php echo $siswa->nama; ?></td>
                                 <td><?php echo jk($siswa->jk); ?></td>
