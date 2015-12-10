@@ -160,7 +160,7 @@ if(array_key_exists('key', $_POST))
                             <tr class="<?php echo $transaksi->tipe == 'in' ? 'success' : 'danger' ?>">
                                 <td><?php echo tanggal_format_indonesia($transaksi->tanggal); ?></td>
                                 <td><?php echo $transaksi->tipe; ?></td>
-                                <td><?php echo $transaksi->nama_siswa; ?></td>
+                                <td><a href="siswa_detail.php?id=<?php echo $transaksi->id_siswa; ?>"><?php echo $transaksi->nama_siswa; ?></a></td>
                                 <td><?php echo $transaksi->jumlah; ?></td>
                                 <td><?php echo $transaksi->nama_pembayaran; ?></td>
                             </tr>

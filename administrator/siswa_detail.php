@@ -226,6 +226,7 @@
                                 <th>Pembayaran</th>
                                 <th>Tipe</th>
                                 <th>Jumlah</th>
+                                <th>Cetak</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -239,6 +240,7 @@
                                     <td><?php echo $d->nama; ?></td>
                                     <td><?php echo $d->tipe; ?></td>
                                     <td><?php echo format_rupiah($d->jumlah); ?></td>
+                                    <td><a href="detail_transaksi_export_pdf.php?id=<?php echo $d->id; ?>&id_siswa=<?php echo $siswa->id; ?>"><i class="fa fa-print"></i></a></td>
                                 </tr>
                             <?php endwhile; ?>
                             </tbody>

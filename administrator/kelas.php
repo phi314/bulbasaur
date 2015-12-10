@@ -5,12 +5,6 @@
     require_once('../lib/unleashed.lib.php');
     require_once('../lib/login.php');
 
-    if($logged_user_level != '1')
-    {
-        redirect('kelas.php');
-    }
-
-
     // submitter
     if(array_key_exists('key', $_POST))
     {
@@ -30,7 +24,6 @@
 
                 $r_t_kelas = mysql_query($q_t_kelas);
 
-                dump(mysql_error());
                 if(!$r_t_kelas)
                     $error = 'Gagal Tambah kelas';
                 else
