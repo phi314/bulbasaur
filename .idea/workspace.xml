@@ -23,46 +23,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="siswa_detail.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/administrator/siswa_detail.php">
+      <file leaf-file-name="transaksi_success.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/transaksi_success.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="242" column="140" selection-start="8857" selection-end="8857" vertical-scroll-proportion="7.3333335" vertical-offset="4356" max-vertical-offset="6282">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detail_transaksi_export_pdf.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/administrator/detail_transaksi_export_pdf.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="22" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.56401384" vertical-offset="736" max-vertical-offset="2304">
+            <state line="44" column="42" selection-start="1308" selection-end="1308" vertical-scroll-proportion="0.716263" vertical-offset="378" max-vertical-offset="2412">
               <folding>
-                <element signature="e#6#88#0" expanded="true" />
-                <element signature="e#1077#1100#0" expanded="true" />
-                <element signature="e#1138#1161#0" expanded="true" />
-                <element signature="e#1442#1460#0" expanded="true" />
-                <element signature="e#1490#1508#0" expanded="true" />
-                <element signature="e#1539#1557#0" expanded="true" />
-                <element signature="e#1589#1607#0" expanded="true" />
-                <marker date="1449718141110" expanded="true" signature="387:671" placeholder="SELECT trans..transaksi..." />
-                <marker date="1449718141110" expanded="true" signature="1052:1082" placeholder="..." />
-                <marker date="1449718141110" expanded="true" signature="1062:1082" placeholder="..." />
-                <marker date="1449718141110" expanded="true" signature="1262:1282" placeholder="..." />
-                <marker date="1449718141110" expanded="true" signature="1420:1437" placeholder="..." />
+                <marker date="1449745938127" expanded="true" signature="248:620" placeholder="SELECT trans..transaksi..." />
+                <marker date="1449745938127" expanded="true" signature="1605:1672" placeholder="UPDATE trans..." />
+                <marker date="1449745938127" expanded="true" signature="2155:2187" placeholder="..." />
+                <marker date="1449745938127" expanded="true" signature="3956:4000" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="unleashed.lib.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/unleashed.lib.php">
+      <file leaf-file-name="transaksi_create.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/transaksi_create.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="9" selection-start="1107" selection-end="1107" vertical-scroll-proportion="-7.4444447" vertical-offset="519" max-vertical-offset="6390">
+            <state line="66" column="22" selection-start="2010" selection-end="2010" vertical-scroll-proportion="0.0" vertical-offset="1188" max-vertical-offset="4644">
               <folding>
-                <marker date="1448854051696" expanded="true" signature="1136:1184" placeholder="SELECT * FRO..kelas..." />
-                <marker date="1448854051696" expanded="true" signature="1606:1626" placeholder="SELECT * FRO..." />
-                <marker date="1448854051696" expanded="true" signature="2077:2120" placeholder="SELECT * FRO..$table WHERE..." />
-                <marker date="1448854051696" expanded="true" signature="2453:2504" placeholder="SELECT * FRO..$table WHERE..." />
+                <marker date="1449729563930" expanded="true" signature="1029:1115" placeholder="SELECT * FRO..transaksi..." />
+                <marker date="1449729563930" expanded="true" signature="1530:1757" placeholder="INSERT INTO ..." />
+                <marker date="1449729563930" expanded="true" signature="2202:2260" placeholder="UPDATE siswa..." />
               </folding>
             </state>
           </provider>
@@ -98,7 +80,6 @@
         <option value="$PROJECT_DIR$/administrator/transaksi_create.php" />
         <option value="$PROJECT_DIR$/administrator/transaksi_topup.php" />
         <option value="$PROJECT_DIR$/administrator/pembayaran.php" />
-        <option value="$PROJECT_DIR$/transaksi_success.php" />
         <option value="$PROJECT_DIR$/services/absensi_by_rfid.php" />
         <option value="$PROJECT_DIR$/assets/css/main.admin.css" />
         <option value="$PROJECT_DIR$/guru/home.php" />
@@ -117,7 +98,6 @@
         <option value="$PROJECT_DIR$/index.php" />
         <option value="$PROJECT_DIR$/assets/css/main.css" />
         <option value="$PROJECT_DIR$/transaksi_choose.php" />
-        <option value="$PROJECT_DIR$/transaksi_create.php" />
         <option value="$PROJECT_DIR$/guru/absensi.php" />
         <option value="$PROJECT_DIR$/guru/inc/footer.php" />
         <option value="$PROJECT_DIR$/guru/absensi_detail.php" />
@@ -129,6 +109,8 @@
         <option value="$PROJECT_DIR$/administrator/transaksi_siswa_export_pdf.php" />
         <option value="$PROJECT_DIR$/administrator/siswa_detail.php" />
         <option value="$PROJECT_DIR$/administrator/detail_transaksi_export_pdf.php" />
+        <option value="$PROJECT_DIR$/transaksi_create.php" />
+        <option value="$PROJECT_DIR$/transaksi_success.php" />
       </list>
     </option>
   </component>
@@ -165,7 +147,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -184,94 +165,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bulbasaur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bulbasaur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bulbasaur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bulbasaur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html2pdf" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bulbasaur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bulbasaur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="html2pdf" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bulbasaur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bulbasaur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="administrator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bulbasaur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bulbasaur" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="administrator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="inc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -321,7 +217,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2895358" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2989772" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -381,11 +277,6 @@
     <entry file="file://$PROJECT_DIR$/administrator/transaksi_choose.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="38" column="18" selection-start="741" selection-end="893" vertical-scroll-proportion="-9.333333" vertical-offset="432" max-vertical-offset="2088" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/transaksi_success.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="63" selection-start="3234" selection-end="3234" vertical-scroll-proportion="-14.740741" vertical-offset="1402" max-vertical-offset="1980" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/services/login.php">
@@ -508,11 +399,6 @@
         <state line="25" column="18" selection-start="532" selection-end="532" vertical-scroll-proportion="0.0" vertical-offset="232" max-vertical-offset="1692" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/transaksi_create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="119" column="0" selection-start="3553" selection-end="3553" vertical-scroll-proportion="0.0" vertical-offset="1967" max-vertical-offset="4626" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/guru/guru.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="50.851852" vertical-offset="1373" max-vertical-offset="1926" />
@@ -590,9 +476,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/html2pdf/html2pdf.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="116910">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="116910" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/html2pdf/examples/exemple00.php">
@@ -610,48 +494,47 @@
         <state line="147" column="42" selection-start="4948" selection-end="4948" vertical-scroll-proportion="-12.0" vertical-offset="2322" max-vertical-offset="3474" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/administrator/siswa_detail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="242" column="140" selection-start="8857" selection-end="8857" vertical-scroll-proportion="7.3333335" vertical-offset="4356" max-vertical-offset="6282">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/html2pdf/examples/ticket.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="50" column="23" selection-start="2372" selection-end="2372" vertical-scroll-proportion="-0.31141868" vertical-offset="900" max-vertical-offset="1692">
-          <folding />
-        </state>
+        <state line="50" column="23" selection-start="2372" selection-end="2372" vertical-scroll-proportion="-0.31141868" vertical-offset="900" max-vertical-offset="1692" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/unleashed.lib.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="9" selection-start="1107" selection-end="1107" vertical-scroll-proportion="-7.4444447" vertical-offset="519" max-vertical-offset="6390">
-          <folding>
-            <marker date="1448854051696" expanded="true" signature="1136:1184" placeholder="SELECT * FRO..kelas..." />
-            <marker date="1448854051696" expanded="true" signature="1606:1626" placeholder="SELECT * FRO..." />
-            <marker date="1448854051696" expanded="true" signature="2077:2120" placeholder="SELECT * FRO..$table WHERE..." />
-            <marker date="1448854051696" expanded="true" signature="2453:2504" placeholder="SELECT * FRO..$table WHERE..." />
-          </folding>
+        <state line="46" column="9" selection-start="1107" selection-end="1107" vertical-scroll-proportion="0.0" vertical-offset="828" max-vertical-offset="6498">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/detail_transaksi_export_pdf.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="22" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.56401384" vertical-offset="736" max-vertical-offset="2304">
+        <state line="59" column="22" selection-start="1248" selection-end="1248" vertical-scroll-proportion="0.56401384" vertical-offset="736" max-vertical-offset="2304" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/administrator/siswa_detail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="242" column="140" selection-start="8857" selection-end="8857" vertical-scroll-proportion="-0.34256056" vertical-offset="4356" max-vertical-offset="6282" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transaksi_create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="22" selection-start="2010" selection-end="2010" vertical-scroll-proportion="0.0" vertical-offset="1188" max-vertical-offset="4644">
           <folding>
-            <element signature="e#6#88#0" expanded="true" />
-            <element signature="e#1077#1100#0" expanded="true" />
-            <element signature="e#1138#1161#0" expanded="true" />
-            <element signature="e#1442#1460#0" expanded="true" />
-            <element signature="e#1490#1508#0" expanded="true" />
-            <element signature="e#1539#1557#0" expanded="true" />
-            <element signature="e#1589#1607#0" expanded="true" />
-            <marker date="1449718141110" expanded="true" signature="387:671" placeholder="SELECT trans..transaksi..." />
-            <marker date="1449718141110" expanded="true" signature="1052:1082" placeholder="..." />
-            <marker date="1449718141110" expanded="true" signature="1062:1082" placeholder="..." />
-            <marker date="1449718141110" expanded="true" signature="1262:1282" placeholder="..." />
-            <marker date="1449718141110" expanded="true" signature="1420:1437" placeholder="..." />
+            <marker date="1449729563930" expanded="true" signature="1029:1115" placeholder="SELECT * FRO..transaksi..." />
+            <marker date="1449729563930" expanded="true" signature="1530:1757" placeholder="INSERT INTO ..." />
+            <marker date="1449729563930" expanded="true" signature="2202:2260" placeholder="UPDATE siswa..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/transaksi_success.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="42" selection-start="1308" selection-end="1308" vertical-scroll-proportion="0.716263" vertical-offset="378" max-vertical-offset="2412">
+          <folding>
+            <marker date="1449745938127" expanded="true" signature="248:620" placeholder="SELECT trans..transaksi..." />
+            <marker date="1449745938127" expanded="true" signature="1605:1672" placeholder="UPDATE trans..." />
+            <marker date="1449745938127" expanded="true" signature="2155:2187" placeholder="..." />
+            <marker date="1449745938127" expanded="true" signature="3956:4000" placeholder="..." />
           </folding>
         </state>
       </provider>

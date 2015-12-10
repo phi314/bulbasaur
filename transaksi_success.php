@@ -13,7 +13,7 @@ if(isset($_GET['kode_transaksi']))
 {
     $kode = $_GET['kode_transaksi'];
 
-    $q = mysql_query("SELECT transaksi.*, siswa.nis, siswa.nama as nama_siswa, siswa.saldo, pembayaran.nama as nama_pembayaran
+    $q = mysql_query("SELECT transaksi.*, siswa.nis, siswa.nama as nama_siswa, siswa.saldo, siswa.telepon, pembayaran.nama as nama_pembayaran
                       FROM transaksi
                       JOIN siswa ON siswa.id=transaksi.id_siswa
                       JOIN pembayaran ON pembayaran.id=transaksi.id_pembayaran
@@ -27,6 +27,30 @@ if(isset($_GET['kode_transaksi']))
     }
 
     $transaksi = mysql_fetch_object($q);
+
+    if(!empty($transaksi->telepon))
+    {
+        if($transaksi->sms_notification == 0)
+        {
+            include "lib/smsGateway.php";
+            $smsGateway = new SmsGateway('kucingtelor212@gmail.com', 'telortaring');
+
+            $deviceID = 15507;
+            $number = $transaksi->telepon;
+
+            $message = "[SMKN6GARUT] Terima kasih telah melakukan transaksi pembayaran $transaksi->nama_pembayaran sebesar $transaksi->jumlah pada $transaksi->tanggal.";
+
+            $options = [
+
+                'send_at' => strtotime('+1 minutes'), // Send the message in 5 minutes
+                'expires_at' => strtotime('+1 hour') // Cancel the message in 1 hour if the message is not yet sent
+
+            ];
+
+            $send = $smsGateway->sendMessageToNumber($number, $message, $deviceID, $options);
+            mysql_query("UPDATE transaksi SET sms_notification='1' WHERE id='$transaksi->id'");
+        }
+    }
 }
 else
 {
