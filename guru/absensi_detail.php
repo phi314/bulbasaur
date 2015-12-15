@@ -8,7 +8,10 @@
     if(isset($_GET['id']))
     {
         $id = escape($_GET['id']);
-        $q = mysql_query("SELECT * FROM absensi WHERE id='$id' LIMIT 1");
+        $q = mysql_query("SELECT *, pelajaran.nama as nama_pelajaran, kelas.nama as nama_kelas, kelas.tingkat as tingkat_kelas, kelas.tahun as tahun_kelas FROM absensi
+                            JOIN pelajaran ON pelajaran.id=absensi.id_pelajaran
+                            JOIN kelas ON kelas.id=absensi.id_kelas
+                            WHERE absensi.id='$id' LIMIT 1");
         $absensi = mysql_fetch_object($q);
 
         $q_absensi_detail = mysql_query("SELECT * FROM absensi_detail
@@ -54,7 +57,7 @@
     <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Absensi <?php echo $absensi->keterangan; ?>
+                        Absensi <?php echo $absensi->nama_pelajaran; ?> <?php echo $absensi->tingkat_kelas.'-'.$absensi->nama_kelas; ?>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>

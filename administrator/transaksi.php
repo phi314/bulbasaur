@@ -146,6 +146,7 @@ if(array_key_exists('key', $_POST))
                                 <th>Nama Siswa</th>
                                 <th>Jumlah</th>
                                 <th>Pembayaran</th>
+                                <th>Cetak</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -163,6 +164,7 @@ if(array_key_exists('key', $_POST))
                                 <td><a href="siswa_detail.php?id=<?php echo $transaksi->id_siswa; ?>"><?php echo $transaksi->nama_siswa; ?></a></td>
                                 <td><?php echo $transaksi->jumlah; ?></td>
                                 <td><?php echo $transaksi->nama_pembayaran; ?></td>
+                                <td><a href="detail_transaksi_export_pdf.php?id=<?php echo $transaksi->id; ?>&id_siswa=<?php echo $transaksi->id_siswa; ?>" class="btn btn-xs btn-info"><i class="fa fa-print"></i> </a> </td>
                             </tr>
                             <?php endwhile; ?>
                             </tbody>

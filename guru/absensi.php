@@ -27,9 +27,11 @@
                 }
                 else
                 {
-                    $q_t_event = sprintf("INSERT INTO absensi(id_guru, tanggal, keterangan, created_at)
-                                        VALUES('%s', '%s', '%s', '%s')",
+                    $q_t_event = sprintf("INSERT INTO absensi(id_guru, id_pelajaran, id_kelas, tanggal, keterangan, created_at)
+                                        VALUES('%s', '%s', '%s', '%s', '%s', '%s')",
                         $_SESSION['logged_id'],
+                        escape($_POST['pelajaran']),
+                        escape($_POST['kelas']),
                         now(),
                         $keterangan,
                         now()
@@ -94,21 +96,27 @@
                                         <thead>
                                         <tr>
                                             <th>Tanggal</th>
-                                            <th>Keterangan / Pelajaran</th>
+                                            <th>Pelajaran</th>
+                                            <th>Kelas</th>
+                                            <th>Keterangan</th>
                                             <th>Aksi</th>
                                         </tr>
                                         </thead>
                                         <tbody id="list-absensi">
                                         <?php
                                         $date_now = date('y-m-d');
-                                        $q_absensi = mysql_query("SELECT absensi.*
+                                        $q_absensi = mysql_query("SELECT absensi.*, pelajaran.nama as nama_pelajaran, kelas.nama as nama_kelas, kelas.tingkat as tingkat_kelas, kelas.tahun as tahun_kelas
                                                                     FROM absensi
+                                                                    JOIN pelajaran ON pelajaran.id = absensi.id_pelajaran
+                                                                    JOIN kelas ON kelas.id = absensi.id_kelas
                                                                     ORDER BY created_at DESC");
 
                                         while($d_absensi = mysql_fetch_object($q_absensi)):
                                             ?>
                                             <tr id="<?php echo $d_absensi->id; ?>">
                                                 <td><?php echo tanggal_format_indonesia($d_absensi->tanggal); ?></td>
+                                                <td><?php echo $d_absensi->nama_pelajaran; ?></td>
+                                                <td><?php echo $d_absensi->tingkat_kelas.'-'.$d_absensi->nama_kelas.' ('.$d_absensi->tahun_kelas.')'; ?></td>
                                                 <td><?php echo $d_absensi->keterangan; ?></td>
                                                 <td>
                                                     <a href="absensi_detail.php?id=<?php echo $d_absensi->id; ?>" class="btn btn-xs btn-success">detail</a>
@@ -138,8 +146,34 @@
                                             <div class="form-control-static"><?php echo tanggal_format_indonesia(now()); ?></div>
                                         </div>
                                         <div class="form-group">
+                                            <label>Pelajaran</label>
+                                            <select name="pelajaran" class="form-control" required="">
+                                                <option value="">--Silahkan Pilih Pelajaran--</option>
+                                                <?php
+
+                                                    $q_pelajaran = mysql_query("SELECT * FROM pelajaran ORDER BY nama ASC");
+                                                    while($d_pelajaran = mysql_fetch_object($q_pelajaran)):
+                                                ?>
+                                                    <option value="<?php echo $d_pelajaran->id; ?>"><?php echo $d_pelajaran->nama; ?></option>
+                                                <?php endwhile; ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Kelas</label>
+                                            <select name="kelas" class="form-control" required="">
+                                                <option value="">--Silahkan Pilih Kelas--</option>
+                                                <?php
+
+                                                $q_kelas = mysql_query("SELECT * FROM kelas ORDER BY nama ASC");
+                                                while($d_kelas = mysql_fetch_object($q_kelas)):
+                                                    ?>
+                                                    <option value="<?php echo $d_kelas->id; ?>"><?php echo $d_kelas->tingkat.'-'.$d_kelas->nama.' ('.$d_kelas->tahun.')'; ?></option>
+                                                <?php endwhile; ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label>Keterangan</label>
-                                            <textarea class="form-control" name="keterangan" id="keterangan" required=""></textarea>
+                                            <textarea class="form-control" name="keterangan" id="keterangan" ></textarea>
                                         </div>
                                         <br>
                                         <button class="btn btn-primary">Simpan</button>

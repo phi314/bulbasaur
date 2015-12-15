@@ -125,6 +125,11 @@
                     </a>
                 </li>
                 <li>
+                    <a href="pelajaran.php">
+                        <i class="fa fa-book"></i> <span>Pelajaran</span>
+                    </a>
+                </li>
+                <li>
                     <a href="kelas.php">
                         <i class="fa fa-building"></i> <span>Kelas</span>
                     </a>
