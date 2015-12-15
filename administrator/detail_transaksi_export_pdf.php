@@ -48,15 +48,27 @@ else
 
     .h2 {height: 20px; }
     .h5 {height: 50px; }
+
+    .tandatangan {
+        width: 100%;
+        margin: 50px 800px;
+    }
 </style>
 
 <page>
-    <div>
-        <div style="font-size: 12pt">Laporan Transaksi</div>
-        <div style="font-size: 24pt">SMK NEGERI 6 GARUT</div>
-    </div>
+    <table style="width: 100%">
+        <tr>
+            <td style="width: 10%"><img src="../assets/img/logo.png"></td>
+            <td style="width: 50%">
+                <div style="font-size: 12pt">Laporan Transaksi</div>
+                <div style="font-size: 24pt">SMK NEGERI 6 GARUT</div>
+            </td>
+            <td style="width: 40%">
+                Dicetak pada tanggal: <?php echo tanggal_format_indonesia(now(), TRUE); ?>
+            </td>
+        </tr>
+    </table>
 
-    <div class="h5"></div>
     <div class="h5"></div>
 
     <div>
@@ -101,6 +113,20 @@ else
                 <td><?php echo format_rupiah($r->jumlah); ?></td>
             </tr>
         </table>
+    </div>
+
+    <div class="footer">
+        <div class="tandatangan">
+            Petugas Tata Usaha,
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)
+
+        </div>
     </div>
 
 </page>
