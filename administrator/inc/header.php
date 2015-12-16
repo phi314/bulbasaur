@@ -114,6 +114,7 @@
                         <i class="fa fa-home"></i> <span>Home</span>
                     </a>
                 </li>
+                <?php if($_SESSION['logged_user_level'] == '1'): ?>
                 <li>
                     <a href="siswa.php">
                         <i class="fa fa-users"></i> <span>Siswa</span>
@@ -134,7 +135,7 @@
                         <i class="fa fa-building"></i> <span>Kelas</span>
                     </a>
                 </li>
-                <?php if($_SESSION['logged_user_level'] == '2'): ?>
+                <?php elseif($_SESSION['logged_user_level'] == '2'): ?>
                 <li>
                     <a href="transaksi.php">
                         <i class="fa fa-database"></i> <span>Transaksi</span>
