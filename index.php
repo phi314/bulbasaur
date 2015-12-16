@@ -65,7 +65,7 @@ require_once('lib/unleashed.lib.php');
                         <?php endwhile; ?>
                         </tbody>
                     </table>
-                    <a href="guru/index.php" class="btn btn-xs btn-info">Login Guru</a>
+                    <a href="login.php" class="btn btn-xs btn-info">Login</a>
                 </div>
             </div>
         </div>

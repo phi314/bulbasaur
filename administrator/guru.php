@@ -31,7 +31,14 @@
 
                 $r_t_guru = mysql_query($q_t_guru);
                 if(!$r_t_guru)
+                {
                     $error = 'Gagal Tambah Guru';
+
+                    if(mysql_errno() == 1062)
+                    {
+                        $error = "Nip ".$_POST['nip'].", sudah ada sebelumnya";
+                    }
+                }
                 else
                 {
                     redirect('guru.php?sukses_tambah_guru=true');
@@ -126,7 +133,7 @@
                                     <form action="" method="post">
                                         <div class="form-group">
                                             <label>NIP</label>
-                                            <input type="text" class="form-control" name="nip" required="">
+                                            <input type="number" class="form-control" name="nip" required="">
                                         </div>
                                         <div class="form-group">
                                             <label>Nama</label>

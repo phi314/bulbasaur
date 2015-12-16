@@ -20,13 +20,19 @@ require_once('inc/header.php');
     if(array_key_exists('key', $_POST))
     {
         $submit_type = $_POST['submit_type'];
+
         if($submit_type == 'tambah')
         {
-            $kode_lokasi = $_POST['kode'];
-            $filename = null;
 
-            // simpan data ke database
-            $q = sprintf("INSERT INTO siswa (
+            $rfid = escape($_POST['rfid']);
+            if(strlen($rfid) < 10 OR strlen($rfid) > 10)
+            {
+                $error = "RFID tidak sesuai";
+            }
+            else
+            {
+                // simpan data ke database
+                $q = sprintf("INSERT INTO siswa (
                     rfid,
                     nis,
                     nama,
@@ -35,22 +41,29 @@ require_once('inc/header.php');
                     created_at
                     )
                     VALUES('%s', '%s', '%s', '%s', '%s', '%s')",
-                escape($_POST['rfid']),
-                escape($_POST['nis']),
-                escape($_POST['nama']),
-                escape($_POST['jk']),
-                $_SESSION['logged_id'],
-                now()
-            );
+                    escape($_POST['rfid']),
+                    escape($_POST['nis']),
+                    escape($_POST['nama']),
+                    escape($_POST['jk']),
+                    $_SESSION['logged_id'],
+                    now()
+                );
 
-            // jalankan query
-            $r = mysql_query($q);
+                // jalankan query
+                $r = mysql_query($q);
 
-            if(!$q)
-                $error = 'Kesalahan Server';
-            else
-            {
-                redirect('siswa.php');
+                if(!$q)
+                {
+                    $error = 'Kesalahan Server';
+                }
+                elseif(mysql_errno() == 1062)
+                {
+                    $error = "Data siswa ini sudah ada sebelumnya. Mohon cek ulang nis atau RFID.";
+                }
+                else
+                {
+                    redirect('siswa.php?info=berhasil-tambah-siswa');
+                }
             }
         }
     }
@@ -95,11 +108,11 @@ require_once('inc/header.php');
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="rfid">RFID</label>
-                                    <input type="text" class="form-control" name="rfid" id="rfid" placeholder="Tap RFID" required="">
+                                    <input type="number" class="form-control" name="rfid" id="rfid" placeholder="Tap RFID" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="nis">NIS</label>
-                                    <input type="text" class="form-control" name="nis" id="nis" placeholder="Nomor Induk Siswa" required="">
+                                    <input type="number" class="form-control" name="nis" id="nis" placeholder="Nomor Induk Siswa" required="">
                                 </div>
                                 <div class="form-group">
                                     <label for="nama">Nama</label>

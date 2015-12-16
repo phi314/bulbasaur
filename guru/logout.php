@@ -10,4 +10,4 @@ require_once('../lib/unleashed.lib.php');
 session_start();
 // buat log file
 session_destroy();
-header('location: index.php');
+header('location: ../index.php');
