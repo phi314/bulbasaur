@@ -129,6 +129,52 @@
                                     </table>
                                 </div>
                             </div><!-- /.box -->
+
+                            <div class="box box-success">
+                                <div class="box-header">
+                                    <i class="fa fa-briefcase"></i>
+                                    <h3 class="box-title"> Cetak Absensi</h3>
+                                </div>
+                                <div class="box-body">
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>Pelajaran</th>
+                                            <th>Kelas</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php
+                                            $q_absensi_pelajaran_guru = mysql_query("SELECT absensi.*, pelajaran.nama as nama_pelajaran, kelas.tingkat, kelas.nama as nama_kelas, kelas.tahun
+                                                                                        FROM absensi
+                                                                                        JOIN pelajaran ON pelajaran.id=absensi.id_pelajaran
+                                                                                        JOIN kelas ON kelas.id=absensi.id_kelas
+                                                                                        WHERE absensi.id_guru='$user_id'
+                                                                                        GROUP BY absensi.id_kelas");
+
+                                            while($d_absensi_pelajaran_guru = mysql_fetch_object($q_absensi_pelajaran_guru)):
+                                        ?>
+                                            <tr>
+                                                <td><?php echo $d_absensi_pelajaran_guru->nama_pelajaran; ?></td>
+                                                <td><?php echo $d_absensi_pelajaran_guru->tingkat.'-'.$d_absensi_pelajaran_guru->nama_kelas.' ('.$d_absensi_pelajaran_guru->tahun.')'; ?></td>
+                                                <td>
+                                                    <form action="absensi_perbulan_export_excel.php" method="post">
+                                                        <input type="hidden" name="id_pelajaran" value="<?php echo $d_absensi_pelajaran_guru->id_pelajaran; ?>">
+                                                        <input type="hidden" name="id_kelas" value="<?php echo $d_absensi_pelajaran_guru->id_kelas; ?>">
+                                                        <button class="btn btn-success">Cetak</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                            endwhile;
+
+                                        ?>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
                         </section><!-- /.Left col -->
                         <!-- right col (We are only adding the ID to make the widgets sortable)-->
                         <section class="col-lg-4 connectedSortable">
