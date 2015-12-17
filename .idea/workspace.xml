@@ -26,15 +26,8 @@
       <file leaf-file-name="absensi.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/guru/absensi.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="163" column="146" selection-start="8576" selection-end="8576" vertical-scroll-proportion="-12.074074" vertical-offset="2608" max-vertical-offset="4446">
-              <folding>
-                <marker date="1450359490734" expanded="true" signature="543:642" placeholder="SELECT * FRO..absensi..." />
-                <marker date="1450359490734" expanded="true" signature="889:1057" placeholder="INSERT INTO ..." />
-                <marker date="1450359490734" expanded="true" signature="4029:4571" placeholder="SELECT absen..absensi..." />
-                <marker date="1450359490734" expanded="true" signature="6864:7572" placeholder="SELECT absen..absensi..." />
-                <marker date="1450359490734" expanded="true" signature="10671:10712" placeholder="SELECT * FRO..pelajaran..." />
-                <marker date="1450359490734" expanded="true" signature="11641:11678" placeholder="SELECT * FRO..kelas..." />
-              </folding>
+            <state line="163" column="146" selection-start="8576" selection-end="8576" vertical-scroll-proportion="0.0" vertical-offset="2608" max-vertical-offset="4446">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -42,14 +35,14 @@
       <file leaf-file-name="absensi_perbulan_export_excel.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guru/absensi_perbulan_export_excel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="100" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.4083045" vertical-offset="196" max-vertical-offset="1854">
+            <state line="81" column="81" selection-start="3337" selection-end="3337" vertical-scroll-proportion="0.5294118" vertical-offset="1062" max-vertical-offset="1854">
               <folding>
-                <marker date="1450362209610" expanded="true" signature="460:856" placeholder="SELECT absen..absensi..." />
-                <marker date="1450362209610" expanded="true" signature="1783:1965" placeholder="SELECT tangg..absensi..." />
-                <marker date="1450362209610" expanded="true" signature="2328:2363" placeholder="SELECT * FRO..siswa..." />
-                <marker date="1450362209610" expanded="true" signature="2328:2374" placeholder="SELECT * FRO..siswa..." />
-                <marker date="1450362209610" expanded="true" signature="2795:2972" placeholder="SELECT id FR..absensi..." />
-                <marker date="1450362209610" expanded="true" signature="3121:3221" placeholder="SELECT * FRO..absensi_detail..." />
+                <marker date="1450362499856" expanded="true" signature="460:856" placeholder="SELECT absen..absensi..." />
+                <marker date="1450362499856" expanded="true" signature="1783:1965" placeholder="SELECT tangg..absensi..." />
+                <marker date="1450362499856" expanded="true" signature="2328:2363" placeholder="SELECT * FRO..siswa..." />
+                <marker date="1450362499856" expanded="true" signature="2328:2374" placeholder="SELECT * FRO..siswa..." />
+                <marker date="1450362499856" expanded="true" signature="2795:2972" placeholder="SELECT id FR..absensi..." />
+                <marker date="1450362499856" expanded="true" signature="3121:3221" placeholder="SELECT * FRO..absensi_detail..." />
               </folding>
             </state>
           </provider>
@@ -152,6 +145,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -200,7 +194,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -250,7 +243,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20220299" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20535012" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -258,11 +251,11 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -280,9 +273,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26121163" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -511,107 +504,61 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/guru.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="20" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0" vertical-offset="738" max-vertical-offset="3312">
-          <folding>
-            <marker date="1450272510593" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1450272510593" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..guru..." />
-          </folding>
-        </state>
+        <state line="41" column="20" selection-start="1557" selection-end="1557" vertical-scroll-proportion="0.0" vertical-offset="738" max-vertical-offset="3312" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/siswa_detail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="13" selection-start="1023" selection-end="1185" vertical-scroll-proportion="0.0" vertical-offset="864" max-vertical-offset="6480">
-          <folding>
-            <marker date="1449638606724" expanded="true" signature="-1:-1" placeholder="UPDATE siswa..." />
-            <marker date="1449638606724" expanded="true" signature="-1:-1" placeholder="UPDATE siswa..." />
-            <marker date="1449638606724" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1449638606724" expanded="true" signature="-1:-1" placeholder="SELECT trans..transaksi..." />
-            <marker date="1449638606724" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..kelas..." />
-          </folding>
-        </state>
+        <state line="48" column="13" selection-start="1023" selection-end="1185" vertical-scroll-proportion="0.0" vertical-offset="864" max-vertical-offset="6480" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/siswa_create.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="0" selection-start="1775" selection-end="1775" vertical-scroll-proportion="0.0" vertical-offset="1206" max-vertical-offset="2880">
-          <folding>
-            <marker date="1450272765840" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-          </folding>
-        </state>
+        <state line="67" column="0" selection-start="1775" selection-end="1775" vertical-scroll-proportion="0.0" vertical-offset="1206" max-vertical-offset="2880" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/pembayaran_detail.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="176" column="98" selection-start="6265" selection-end="6265" vertical-scroll-proportion="-113.333336" vertical-offset="0" max-vertical-offset="3888">
-          <folding>
-            <marker date="1448513352604" expanded="true" signature="-1:-1" placeholder="UPDATE pemba..." />
-            <marker date="1448513352604" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1448513352604" expanded="true" signature="-1:-1" placeholder="SELECT siswa..transaksi..." />
-          </folding>
-        </state>
+        <state line="176" column="98" selection-start="6265" selection-end="6265" vertical-scroll-proportion="-113.333336" vertical-offset="0" max-vertical-offset="3888" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/siswa.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="23" selection-start="598" selection-end="859" vertical-scroll-proportion="-21.074074" vertical-offset="43" max-vertical-offset="1746">
-          <folding />
-        </state>
+        <state line="34" column="23" selection-start="598" selection-end="859" vertical-scroll-proportion="-21.074074" vertical-offset="43" max-vertical-offset="1746" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/transaksi.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="120" column="33" selection-start="3059" selection-end="3964" vertical-scroll-proportion="-19.407408" vertical-offset="1636" max-vertical-offset="3510">
-          <folding>
-            <marker date="1450356761018" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1450356761018" expanded="true" signature="-1:-1" placeholder="SELECT trans..transaksi..." />
-          </folding>
-        </state>
+        <state line="120" column="33" selection-start="3059" selection-end="3964" vertical-scroll-proportion="-19.407408" vertical-offset="1636" max-vertical-offset="3510" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/pembayaran.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="76" column="91" selection-start="2719" selection-end="2719" vertical-scroll-proportion="-8.666667" vertical-offset="1134" max-vertical-offset="2682">
-          <folding>
-            <marker date="1448349478912" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1448349478912" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..pembayaran..." />
-          </folding>
-        </state>
+        <state line="76" column="91" selection-start="2719" selection-end="2719" vertical-scroll-proportion="-8.666667" vertical-offset="1134" max-vertical-offset="2682" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/administrator/transaksi_export_excel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="74" selection-start="1096" selection-end="1096" vertical-scroll-proportion="13.333333" vertical-offset="918" max-vertical-offset="1530">
-          <folding>
-            <marker date="1449464346927" expanded="true" signature="-1:-1" placeholder="SELECT trans..transaksi..." />
-          </folding>
-        </state>
+        <state line="36" column="74" selection-start="1096" selection-end="1096" vertical-scroll-proportion="13.333333" vertical-offset="918" max-vertical-offset="1530" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/guru/absensi.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="163" column="146" selection-start="8576" selection-end="8576" vertical-scroll-proportion="-12.074074" vertical-offset="2608" max-vertical-offset="4446">
-          <folding>
-            <marker date="1450359490734" expanded="true" signature="543:642" placeholder="SELECT * FRO..absensi..." />
-            <marker date="1450359490734" expanded="true" signature="889:1057" placeholder="INSERT INTO ..." />
-            <marker date="1450359490734" expanded="true" signature="4029:4571" placeholder="SELECT absen..absensi..." />
-            <marker date="1450359490734" expanded="true" signature="6864:7572" placeholder="SELECT absen..absensi..." />
-            <marker date="1450359490734" expanded="true" signature="10671:10712" placeholder="SELECT * FRO..pelajaran..." />
-            <marker date="1450359490734" expanded="true" signature="11641:11678" placeholder="SELECT * FRO..kelas..." />
-          </folding>
+        <state line="163" column="146" selection-start="8576" selection-end="8576" vertical-scroll-proportion="0.0" vertical-offset="2608" max-vertical-offset="4446">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/guru/absensi_perbulan_export_excel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="100" selection-start="1044" selection-end="1044" vertical-scroll-proportion="0.4083045" vertical-offset="196" max-vertical-offset="1854">
+        <state line="81" column="81" selection-start="3337" selection-end="3337" vertical-scroll-proportion="0.5294118" vertical-offset="1062" max-vertical-offset="1854">
           <folding>
-            <marker date="1450362209610" expanded="true" signature="460:856" placeholder="SELECT absen..absensi..." />
-            <marker date="1450362209610" expanded="true" signature="1783:1965" placeholder="SELECT tangg..absensi..." />
-            <marker date="1450362209610" expanded="true" signature="2328:2363" placeholder="SELECT * FRO..siswa..." />
-            <marker date="1450362209610" expanded="true" signature="2328:2374" placeholder="SELECT * FRO..siswa..." />
-            <marker date="1450362209610" expanded="true" signature="2795:2972" placeholder="SELECT id FR..absensi..." />
-            <marker date="1450362209610" expanded="true" signature="3121:3221" placeholder="SELECT * FRO..absensi_detail..." />
+            <marker date="1450362499856" expanded="true" signature="460:856" placeholder="SELECT absen..absensi..." />
+            <marker date="1450362499856" expanded="true" signature="1783:1965" placeholder="SELECT tangg..absensi..." />
+            <marker date="1450362499856" expanded="true" signature="2328:2363" placeholder="SELECT * FRO..siswa..." />
+            <marker date="1450362499856" expanded="true" signature="2328:2374" placeholder="SELECT * FRO..siswa..." />
+            <marker date="1450362499856" expanded="true" signature="2795:2972" placeholder="SELECT id FR..absensi..." />
+            <marker date="1450362499856" expanded="true" signature="3121:3221" placeholder="SELECT * FRO..absensi_detail..." />
           </folding>
         </state>
       </provider>

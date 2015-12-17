@@ -79,7 +79,7 @@ if(!empty($_POST['id_kelas']) && !empty($_POST['id_pelajaran']))
                             while($d_absensi_2 = mysql_fetch_object($q_absensi_2)):
                                     $q_hadir = mysql_query("SELECT * FROM absensi_detail WHERE id_absensi='$d_absensi_2->id' AND id_siswa='$d_siswa->id' LIMIT 1");
                             ?>
-                                <td><?php echo mysql_num_rows($q_hadir) == 1 ? "YA" : "X"; ?></td>
+                                <td><?php echo mysql_num_rows($q_hadir) == 1 ? "O" : "-"; ?></td>
                             <?php endwhile; ?>
                         </tr>
                     <?php
