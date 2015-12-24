@@ -354,3 +354,22 @@ function set_active_class($key, $value)
 {
     echo $key == $value ? '  active' : '';
 }
+
+/**
+ * @return array
+ */
+function tahun_ajaran_aktif()
+{
+    $id = 0;
+    $tahun = "";
+    $q_tahun_ajaran_aktif = mysql_query("SELECT * FROM tahun_ajaran WHERE is_aktif='1' LIMIT 1");
+
+    if(mysql_num_rows($q_tahun_ajaran_aktif) == 1)
+    {
+        $r_tahun_ajaran_aktif = mysql_fetch_object($q_tahun_ajaran_aktif);
+        $id = $r_tahun_ajaran_aktif->id;
+        $tahun = $r_tahun_ajaran_aktif->tahun;
+    }
+
+    return array($id, $tahun);
+}

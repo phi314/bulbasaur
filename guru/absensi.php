@@ -27,14 +27,15 @@
                 }
                 else
                 {
-                    $q_t_event = sprintf("INSERT INTO absensi(id_guru, id_pelajaran, id_kelas, tanggal, keterangan, created_at)
+                    $q_t_event = sprintf("INSERT INTO absensi(id_guru, id_pelajaran, id_kelas, tanggal, keterangan, id_tahun_ajaran)
                                         VALUES('%s', '%s', '%s', '%s', '%s', '%s')",
                         $_SESSION['logged_id'],
                         escape($_POST['pelajaran']),
                         escape($_POST['kelas']),
                         now(),
                         $keterangan,
-                        now()
+                        $tahun_ajaran_aktif[0]
+
                     );
 
                     $r_t_event = mysql_query($q_t_event);
@@ -59,7 +60,7 @@
     <!-- Content Header (Page header) -->
                 <section class="content-header">
                     <h1>
-                        Absensi
+                        Absensi <span class="text-muted"><?php echo $tahun_ajaran_aktif[1]; ?></span>
                     </h1>
                     <ol class="breadcrumb">
                         <li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>
@@ -109,6 +110,7 @@
                                                                     FROM absensi
                                                                     JOIN pelajaran ON pelajaran.id = absensi.id_pelajaran
                                                                     JOIN kelas ON kelas.id = absensi.id_kelas
+                                                                    WHERE id_tahun_ajaran='$tahun_ajaran_aktif[0]'
                                                                     ORDER BY created_at DESC");
 
                                         while($d_absensi = mysql_fetch_object($q_absensi)):
@@ -151,6 +153,7 @@
                                                                                         JOIN pelajaran ON pelajaran.id=absensi.id_pelajaran
                                                                                         JOIN kelas ON kelas.id=absensi.id_kelas
                                                                                         WHERE absensi.id_guru='$user_id'
+                                                                                        AND id_tahun_ajaran='$tahun_ajaran_aktif[0]'
                                                                                         GROUP BY absensi.id_kelas");
 
                                             while($d_absensi_pelajaran_guru = mysql_fetch_object($q_absensi_pelajaran_guru)):

@@ -16,6 +16,9 @@
         // get from guru
         $user = get_row_by_id('guru', 'id', $logged_id);
 
+        $tahun_ajaran_aktif = tahun_ajaran_aktif();
+
+
         /**
          * apakah user adalah admin ?
          * @return bool

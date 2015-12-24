@@ -55,17 +55,15 @@ if(array_key_exists('key', $_POST))
 
                 $saldo_akhir = $siswa->saldo - $jumlah;
 
-                $q_t_pembayaran = sprintf("INSERT INTO transaksi(kode, tipe, jumlah, id_siswa, id_pembayaran, saldo_akhir, id_guru, sms_notification, tanggal, created_at)
-                                        VALUES('%s', '%s', '%d', '%s','%s', '%s', '%s', '%s', '%s')",
+                $q_t_pembayaran = sprintf("INSERT INTO transaksi(kode, tipe, jumlah, id_siswa, id_pembayaran, saldo_akhir, sms_notification, tanggal)
+                                        VALUES('%s', '%s', '%d', '%s','%s', '%s', '%s', '%s')",
                     $kode,
                     'out',
                     $jumlah,
                     $id_siswa,
                     $id_pembayaran,
                     $saldo_akhir,
-                    $_SESSION['logged_id'],
                     0,
-                    now(),
                     now()
                 );
 

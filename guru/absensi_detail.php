@@ -8,7 +8,7 @@
     if(isset($_GET['id']))
     {
         $id = escape($_GET['id']);
-        $q = mysql_query("SELECT *, pelajaran.nama as nama_pelajaran, kelas.nama as nama_kelas, kelas.tingkat as tingkat_kelas, kelas.tahun as tahun_kelas FROM absensi
+        $q = mysql_query("SELECT absensi.*, absensi.created_at as tanggal_absen, pelajaran.nama as nama_pelajaran, kelas.nama as nama_kelas, kelas.tingkat as tingkat_kelas, kelas.tahun as tahun_kelas FROM absensi
                             JOIN pelajaran ON pelajaran.id=absensi.id_pelajaran
                             JOIN kelas ON kelas.id=absensi.id_kelas
                             WHERE absensi.id='$id' LIMIT 1");
@@ -126,8 +126,12 @@
                                             <li id="sec"></li>
                                         </ul>
                                     </div>
-                                    <input type="text" name="rfid" class="form-control input-lg" placeholder="Tap Kartu" readonly id="home-rfid">
-                                    <input type="hidden" name="id_absensi" id="id_absensi" value="<?php echo $absensi->id; ?>">
+                                    <?php
+                                        if(strtotime($absensi->tanggal_absen." +3 hours ") > strtotime(now())):
+                                    ?>
+                                        <input type="text" name="rfid" class="form-control input-lg" placeholder="Tap Kartu" readonly id="home-rfid">
+                                        <input type="hidden" name="id_absensi" id="id_absensi" value="<?php echo $absensi->id; ?>">
+                                    <?php endif; ?>
                                     <div class="list-group-item">
                                         <h3>Detail Siswa</h3>
                                     </div>

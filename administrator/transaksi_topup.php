@@ -109,15 +109,6 @@ if(array_key_exists('key', $_POST))
                     </div><!-- /.distro -->
                 </div>
 
-                <div class="box box-primary">
-                    <div class="box-header">
-                        <i class="fa fa-database"></i>
-                        <h3 class="box-title">Data Transaksi Siswa</h3>
-                    </div>
-                    <div class="box-body">
-
-                    </div><!-- /.distro -->
-                </div>
             </section><!-- /.Left col -->
 
             <!-- right col (We are only adding the ID to make the widgets sortable)-->

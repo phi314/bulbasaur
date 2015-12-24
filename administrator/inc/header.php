@@ -135,6 +135,11 @@
                         <i class="fa fa-building"></i> <span>Kelas</span>
                     </a>
                 </li>
+                <li>
+                    <a href="tahun_ajaran.php">
+                        <i class="fa fa-calendar"></i> <span>Tahun Ajaran</span>
+                    </a>
+                </li>
                 <?php elseif($_SESSION['logged_user_level'] == '2'): ?>
                 <li>
                     <a href="transaksi.php">

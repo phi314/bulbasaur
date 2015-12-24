@@ -21,7 +21,7 @@ if(!empty($_POST['id_kelas']) && !empty($_POST['id_pelajaran']))
     $q = mysql_query("SELECT absensi.*, pelajaran.nama as nama_pelajaran, kelas.tingkat, kelas.nama as nama_kelas, kelas.tahun FROM absensi
                         JOIN pelajaran ON pelajaran.id=absensi.id_pelajaran
                         JOIN kelas ON kelas.id=absensi.id_kelas
-                        WHERE absensi.id_kelas='$id_kelas' AND absensi.id_pelajaran='$id_pelajaran' AND absensi.id_guru='$id_guru' LIMIT 1");
+                        WHERE absensi.id_kelas='$id_kelas' AND absensi.id_pelajaran='$id_pelajaran' AND absensi.id_guru='$id_guru' AND absensi.id_tahun_ajaran='$tahun_ajaran_aktif[0]' LIMIT 1");
 
 
     if(mysql_num_rows($q) != 0)
@@ -51,7 +51,7 @@ if(!empty($_POST['id_kelas']) && !empty($_POST['id_pelajaran']))
                 <th>Nama Siswa</th>
                 <?php
                     $q_absensi = mysql_query("SELECT tanggal FROM absensi
-                                                WHERE absensi.id_kelas='$id_kelas' AND absensi.id_pelajaran='$id_pelajaran' AND absensi.id_guru='$id_guru'");
+                                                WHERE absensi.id_kelas='$id_kelas' AND absensi.id_pelajaran='$id_pelajaran' AND absensi.id_guru='$id_guru' AND absensi.id_tahun_ajaran='$tahun_ajaran_aktif[0]'");
 
                     while($d_absensi = mysql_fetch_object($q_absensi)):
                 ?>
@@ -74,7 +74,7 @@ if(!empty($_POST['id_kelas']) && !empty($_POST['id_pelajaran']))
                             <td><?php echo $d_siswa->nama; ?></td>
                             <?php
                             $q_absensi_2 = mysql_query("SELECT id FROM absensi
-                                                WHERE absensi.id_kelas='$id_kelas' AND absensi.id_pelajaran='$id_pelajaran' AND absensi.id_guru='$id_guru'");
+                                                WHERE absensi.id_kelas='$id_kelas' AND absensi.id_pelajaran='$id_pelajaran' AND absensi.id_guru='$id_guru' AND absensi.id_tahun_ajaran='$tahun_ajaran_aktif[0]'");
 
                             while($d_absensi_2 = mysql_fetch_object($q_absensi_2)):
                                     $q_hadir = mysql_query("SELECT * FROM absensi_detail WHERE id_absensi='$d_absensi_2->id' AND id_siswa='$d_siswa->id' LIMIT 1");
@@ -93,11 +93,10 @@ if(!empty($_POST['id_kelas']) && !empty($_POST['id_pelajaran']))
     }
     else
     {
-//        redirect("transaksi.php?info=transaksi-kosong");
-        var_dump($_GET['bulan']);
+        redirect("absensi.php?info=absensi-kosong");
     }
 }
 else
 {
-    redirect("transaksi.php?info=silahkan-pilih-bulan");
+    redirect("absensi.php?info=silahkan-pilih-absensi");
 }

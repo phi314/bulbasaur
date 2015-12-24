@@ -31,6 +31,24 @@ require_once('inc/header.php');
             }
             else
             {
+                $insert = TRUE;
+                $rfid = escape($_POST['rfid']);
+                $nis = escape($_POST['nis']);
+
+                $q_cek_rfid = mysql_query("SELECT rfid FROM siswa WHERE rfid='$rfid'");
+                if(mysql_num_rows($q_cek_rfid) > 0)
+                {
+                    $insert = FALSE;
+                    $error = "RFID ".$rfid." sudah terdaftar";
+                }
+
+                $q_cek_nis = mysql_query("SELECT nis FROM siswa WHERE nis='$nis'");
+                if(mysql_num_rows($q_cek_nis) > 0)
+                {
+                    $insert = FALSE;
+                    $error = "NIS ".$nis." sudah terdaftar";
+                }
+
                 // simpan data ke database
                 $q = sprintf("INSERT INTO siswa (
                     rfid,
@@ -49,20 +67,20 @@ require_once('inc/header.php');
                     now()
                 );
 
-                // jalankan query
-                $r = mysql_query($q);
 
-                if(!$q)
+                // jalankan query
+                if($insert == TRUE)
                 {
-                    $error = 'Kesalahan Server';
-                }
-                elseif(mysql_errno() == 1062)
-                {
-                    $error = "Data siswa ini sudah ada sebelumnya. Mohon cek ulang nis atau RFID.";
-                }
-                else
-                {
-                    redirect('siswa.php?info=berhasil-tambah-siswa');
+                    $r = mysql_query($q);
+
+                    if(!$q)
+                    {
+                        $error = 'Kesalahan Server';
+                    }
+                    else
+                    {
+                        redirect('siswa.php?info=berhasil-tambah-siswa');
+                    }
                 }
             }
         }

@@ -75,8 +75,7 @@ if(!empty($_GET['bulan']))
     }
     else
     {
-//        redirect("transaksi.php?info=transaksi-kosong");
-        var_dump($_GET['bulan']);
+        redirect("transaksi.php?info=transaksi-kosong");
     }
 }
 else
