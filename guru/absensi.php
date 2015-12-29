@@ -195,6 +195,10 @@
                                             <div class="form-control-static"><?php echo tanggal_format_indonesia(now()); ?></div>
                                         </div>
                                         <div class="form-group">
+                                            <label>Tahun Ajaran</label>
+                                            <div class="form-control-static"><?php echo $tahun_ajaran_aktif[1]; ?></div>
+                                        </div>
+                                        <div class="form-group">
                                             <label>Pelajaran</label>
                                             <select name="pelajaran" class="form-control" required="">
                                                 <option value="">--Silahkan Pilih Pelajaran--</option>

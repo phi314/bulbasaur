@@ -36,7 +36,7 @@
             $_SESSION['logged_nama'] = $user->nama;
             $_SESSION['logged_username'] = $user->username;
             $_SESSION['logged_in'] = TRUE;
-            $_SESSION['logged_is_admin'] = $user->is_admin;
+            $_SESSION['logged_user_level'] = $user->user_level;
 
             redirect('home.php');
         }

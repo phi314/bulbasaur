@@ -38,7 +38,7 @@ if(!empty($_POST['id_kelas']) && !empty($_POST['id_pelajaran']))
         <table>
             <thead>
             <tr>
-                <th colspan="6">Absensi <?php echo $d_detail->nama_pelajaran; ?> Kelas <?php echo $d_detail->tingkat.'-'.$d_detail->nama_kelas.' ('.$d_detail->tahun.')'; ?></th>
+                <th colspan="6">Absensi <?php echo $d_detail->nama_pelajaran; ?> Kelas <?php echo $d_detail->tingkat.'-'.$d_detail->nama_kelas.' ('.$d_detail->tahun.')'; ?> Tahun Ajaran <?php echo $tahun_ajaran_aktif[1]; ?></th>
             </tr>
             </thead>
         </table>
