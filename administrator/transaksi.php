@@ -12,51 +12,48 @@ $status = FALSE;
 $success = '';
 $error = '';
 
-// post tambah
-if(array_key_exists('key', $_POST))
-{
-    $submit_type = $_POST['submit_type'];
-    // Ajax Add
-    if($submit_type == 'add_facility')
+$id = '';
+$filter_string = '';
+$dual_table = FALSE;
+
+if(isset($_GET['filter'])){
+    $filter = $_GET['filter'];
+    $filter_exp = explode('-', $filter);
+    $filter = $filter_exp[0];
+    $id = !empty($filter_exp[1]) ? $filter_exp[1] : 0;
+    $filter_string = !empty($filter_exp[2]) ? $filter_exp[2] : "";
+
+    switch($filter)
     {
-        $nama = escape($_POST['nama']); // nama fasilitas
-        $cek1 = get_row_by_id('fasilitas', 'nama', $nama);
-        // jika belum ada fasilitas dengan nama yg diinputkan
-        if($cek1 == FALSE)
-        {
-            // simpan data ke database
-            $q = sprintf("INSERT INTO fasilitas(
-                        nama,
-                        created_date
-                        )
-                        VALUES(UPPER('%s'),'%s')",
-                $nama,
-                now()
-            );
+        case 'topup':
+            $query = "SELECT transaksi.*, siswa.nama as nama_siswa, pembayaran.nama as nama_pembayaran
+                                                            FROM transaksi
+                                                            JOIN siswa ON siswa.id=transaksi.id_siswa
+                                                            JOIN pembayaran ON pembayaran.id=transaksi.id_pembayaran
+                                                            WHERE pembayaran.id = '1'
+                                                            ORDER BY transaksi.created_at DESC";
+            break;
+        case 'already':
+            $query = "SELECT transaksi.*, siswa.nama as nama_siswa, pembayaran.nama as nama_pembayaran
+                                                            FROM transaksi
+                                                            JOIN siswa ON siswa.id=transaksi.id_siswa
+                                                            JOIN pembayaran ON pembayaran.id=transaksi.id_pembayaran
+                                                            WHERE pembayaran.id = '$id'
+                                                            ORDER BY transaksi.created_at DESC";
 
-            // jalankan query
-            $r = mysql_query($q);
+            $dual_table = TRUE;
+            break;
+        default:
+            $query = "SELECT transaksi.*, siswa.nama as nama_siswa, pembayaran.nama as nama_pembayaran
+                                                            FROM transaksi
+                                                            JOIN siswa ON siswa.id=transaksi.id_siswa
+                                                            JOIN pembayaran ON pembayaran.id=transaksi.id_pembayaran
+                                                            ORDER BY transaksi.created_at DESC";
 
-            // jika kesalahan query atau database
-            if(!$q)
-            {
-                $status = FALSE;
-                $error = 'Kesalahan Database';
-            }
-            else
-            {
-                $status = TRUE;
-                $error = '';
-                $id = mysql_insert_id();
-                redirect('fasilitas.php?add=true&nama='.$nama.'&id='.$id);
-            }
-        }
-        else
-        {
-            $status = FALSE;
-            $error = 'Fasilitas '.$nama.', sudah ada';
-        }
     }
+
+
+    $q_transaksi = mysql_query($query);
 }
 
 ?>
@@ -128,6 +125,31 @@ if(array_key_exists('key', $_POST))
 
         <div class="h3"></div>
 
+        <div class="row">
+            <div class="col-md-12">
+                <form action="" class="form-inline">
+                    <label>Filter:</label>
+                    <?php
+                    $q_pembayaran = mysql_query("SELECT * FROM pembayaran WHERE id != '1' ORDER BY tanggal DESC");
+
+                    ?>
+                    <select name="filter" class="form-control">
+                        <option value=""></option>
+                        <option value="topup-1-Top Up">Top Up</option>
+                        <optgroup label="Siswa telah melakukan pembayaran">
+                            <?php while($data_pembayaran_telah = mysql_fetch_object($q_pembayaran)): ?>
+                                <option value="already-<?php echo $data_pembayaran_telah->id; ?>-<?php echo $data_pembayaran_telah->nama; ?>"><?php echo $data_pembayaran_telah->nama; ?> - <?php echo tanggal_format_indonesia($data_pembayaran_telah->tanggal); ?></option>
+                            <?php endwhile; ?>
+                        </optgroup>
+                    </select>
+                    <button class="btn btn-success">Apply</button>
+                    <?php echo $filter_string; ?>
+                </form>
+            </div>
+        </div>
+
+        <div class="h3"></div>
+
         <!-- Main row -->
         <div class="row">
             <!-- Left col -->
@@ -151,11 +173,7 @@ if(array_key_exists('key', $_POST))
                             </thead>
                             <tbody>
                             <?php
-                                $q_transaksi = mysql_query("SELECT transaksi.*, siswa.nama as nama_siswa, pembayaran.nama as nama_pembayaran
-                                                            FROM transaksi
-                                                            JOIN siswa ON siswa.id=transaksi.id_siswa
-                                                            JOIN pembayaran ON pembayaran.id=transaksi.id_pembayaran
-                                                            ORDER BY created_at DESC");
+
                                 while($transaksi = mysql_fetch_object($q_transaksi)):
                             ?>
                             <tr class="<?php echo $transaksi->tipe == 'in' ? 'success' : 'danger' ?>">
@@ -173,6 +191,47 @@ if(array_key_exists('key', $_POST))
                 </div>
             </section><!-- /.Left col -->
         </div>
+
+        <?php if($dual_table): ?>
+        <!-- Main row -->
+        <div class="row">
+            <!-- Left col -->
+            <section class="col-lg-12">
+                <div class="box box-success">
+                    <div class="box-header">
+                        <i class="fa fa-tree"></i>
+                        <h3 class="box-title"> Siswa yg Belum melakukan Transaksi</h3>
+                    </div>
+                    <div class="box-body">
+                        <table class="table datatable-simple">
+                            <thead>
+                            <tr>
+                                <th>NIS</th>
+                                <th>Nama Siswa</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php
+
+                            $q_transaksi_notyet = mysql_query("SELECT siswa.id, siswa.nama as nama_siswa, siswa.nis
+                                                                    FROM siswa
+                                                                    LEFT JOIN transaksi ON siswa.id=transaksi.id_siswa AND id_pembayaran='$id'
+                                                                    WHERE transaksi.id_siswa IS NULL ");
+
+                            while($transaksi_notyet = mysql_fetch_object($q_transaksi_notyet)):
+                                ?>
+                                <tr>
+                                    <td><?php echo $transaksi_notyet->nis; ?></td>
+                                    <td><a href="siswa_detail.php?id=<?php echo $transaksi_notyet->id; ?>"><?php echo $transaksi_notyet->nama_siswa; ?></a></td>
+                                </tr>
+                            <?php endwhile; ?>
+                            </tbody>
+                        </table>
+                    </div><!-- /.distro -->
+                </div>
+            </section><!-- /.Left col -->
+        </div>
+        <?php endif; ?>
     </section>
 
 <?php include('inc/footer.php'); ?>
